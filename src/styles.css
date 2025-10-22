@@ -1,4 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
     min-height: max(884px, 100dvh);
 }
@@ -12,3 +15,4 @@ body {
 .gradient-bg {
     background: linear-gradient(135deg, hsla(187, 49%, 52%, 1) 20%, hsla(267, 36%, 39%, 1) 73%);
 }
+
