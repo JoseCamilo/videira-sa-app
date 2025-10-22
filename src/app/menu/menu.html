@@ -1,0 +1,55 @@
+<nav
+    class="fixed bottom-0 left-0 right-0 z-30 bg-surface-light dark:bg-surface-dark border-t border-gray-200 dark:border-gray-700 flex justify-around items-center h-20 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] dark:shadow-[0_-2px_10px_rgba(0,0,0,0.2)]">
+    <a class="flex flex-col items-center justify-center text-center text-text-muted-light dark:text-text-muted-dark hover:text-cyan-500 dark:hover:text-cyan-400 transition w-full"
+        href="#" (click)="itemActive=1">
+        <span class="material-icons text-3xl" [ngClass]="{ 'gradient-text': itemActive==1 }">event</span>
+        <span class="text-xs font-medium" [ngClass]="{ 'gradient-text': itemActive==1 }">Eventos</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-center text-text-muted-light dark:text-text-muted-dark hover:text-cyan-500 dark:hover:text-cyan-400 transition w-full"
+        href="#" (click)="itemActive=2">
+        <span class="material-icons text-3xl" [ngClass]="{ 'gradient-text': itemActive==2 }">confirmation_number</span>
+        <span class="text-xs font-medium" [ngClass]="{ 'gradient-text': itemActive==2 }">Meus Tickets</span>
+    </a>
+    <button
+        class="flex flex-col items-center justify-center text-center text-text-muted-light dark:text-text-muted-dark hover:text-cyan-500 dark:hover:text-cyan-400 transition w-full"
+        (click)="isShownMoremodal=true">
+        <span class="material-icons text-3xl" [ngClass]="{ 'gradient-text': itemActive==3 }">more_horiz</span>
+        <span class="text-xs font-medium" [ngClass]="{ 'gradient-text': itemActive==3 }">Mais</span>
+    </button>
+</nav>
+
+@if (isShownMoremodal) {
+<div #moremodal class="fixed inset-0 z-40 bg-black/50" (click)="isShownMoremodal=!isShownMoremodal"></div>
+}
+
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-surface-light dark:bg-surface-dark rounded-t-2xl p-4 transform translate-y-full transition-transform duration-300 ease-in-out"
+    #moremodalcontent [ngClass]="{ 'translate-y-full': !isShownMoremodal, 'translate-y-0': isShownMoremodal }">
+    <div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full mx-auto mb-4"></div>
+    <ul class="space-y-2">
+        <li>
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" href="#" (click)="itemActive=3">
+                <span class="material-icons text-text-muted-light dark:text-text-muted-dark mr-4">person</span>
+                <span class="text-text-light dark:text-text-dark font-medium">Perfil</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" href="#" (click)="itemActive=2">
+                <span
+                    class="material-icons text-text-muted-light dark:text-text-muted-dark mr-4">admin_panel_settings</span>
+                <span class="text-text-light dark:text-text-dark font-medium">Hostess (Admin)</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" href="#" (click)="itemActive=2">
+                <span class="material-icons text-text-muted-light dark:text-text-muted-dark mr-4">info</span>
+                <span class="text-text-light dark:text-text-dark font-medium">Sobre Nós</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition" href="#" (click)="itemActive=2">
+                <span class="material-icons text-text-muted-light dark:text-text-muted-dark mr-4">contact_support</span>
+                <span class="text-text-light dark:text-text-dark font-medium">Contato</span>
+            </a>
+        </li>
+    </ul>
+</div>
