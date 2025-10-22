@@ -1,0 +1,20 @@
+<div class="bg-surface-light dark:bg-surface-dark rounded-lg shadow-md overflow-hidden flex flex-col">
+    <img alt="Conferência Profética" class="w-full h-40 object-cover" [src]="imagem" />
+    <div class="p-4 flex-grow">
+        <h3 class="text-xl font-bold text-text-light dark:text-text-dark">{{titulo}}
+        </h3>
+        <div class="flex items-center text-text-muted-light dark:text-text-muted-dark text-sm mt-2">
+            <span class="material-icons text-base mr-2">calendar_today</span>
+            <span>{{data}}</span>
+        </div>
+        <div class="flex items-center text-text-muted-light dark:text-text-muted-dark text-sm mt-1">
+            <span class="material-icons text-base mr-2">location_on</span>
+            <span>{{local}}</span>
+        </div>
+    </div>
+    <div class="p-4 pt-0">
+        <button class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition">
+            Ver Detalhes
+        </button>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="p-4 space-y-6 -mt-8 relative z-10 bg-background-light dark:bg-background-dark rounded-t-2xl">
+    <h3 class="text-2xl font-bold text-text-light dark:text-text-dark pt-4">Próximos Eventos</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="relative">
+            <span
+                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">calendar_today</span>
+            <input
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark focus:ring-2 focus:ring-cyan-500"
+                type="date" />
+        </div>
+        <div class="relative">
+            <span
+                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">category</span>
+            <select
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark focus:ring-2 focus:ring-cyan-500 appearance-none">
+                <option>Tipo de Evento</option>
+                <option>Culto</option>
+                <option>Conferência</option>
+                <option>Workshop</option>
+            </select>
+
+
+        </div>
+        <div class="relative">
+            <span
+                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">location_on</span>
+            <select
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark focus:ring-2 focus:ring-cyan-500 appearance-none">
+                <option>Localização</option>
+                <option>Sede</option>
+                <option>Online</option>
+                <option>Célula Centro</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="pt-1">
+        @if (eventos.length > 0) {
+        @for (item of eventos; track $index) {
+        <div class="pt-4">
+            <app-evento [titulo]="item.titulo" [data]="item.data" [local]="item.local" [imagem]="item.imagem">
+            </app-evento>
+        </div>
+        }
+        } @else {
+        <span>Não temos eventos nos próximos dias</span>
+        }
+    </div>
+</div>
