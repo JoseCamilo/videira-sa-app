@@ -1,0 +1,15 @@
+@if (showInstallBanner) {
+    <div class="pwa-banner">
+      <div class="pwa-header">
+        <img src="/icons/icon-192x192.png" alt="Igreja Videira" class="pwa-icon">
+        <h3 class="pwa-title">Instalar Videira SA</h3>
+      </div>
+      <p class="pwa-message">
+        Instale agora e fique por dentro das novidades!
+      </p>
+      <div class="pwa-actions">
+        <button class="pwa-button" (click)="installApp()">Instalar</button>
+        <button class="pwa-button" (click)="closeBanner()">Fechar</button>
+      </div>
+    </div>
+}
