@@ -1,16 +1,21 @@
-.pwa-banner {
+.pwa-banner-wrapper {
   position: fixed;
-  bottom: 20px;
+  bottom: 80px;
   right: 20px;
   max-width: 340px;
-  background-color: #ffffff;
-  border: 2px solid #6e3a8c;
+  background: linear-gradient(135deg, hsla(187, 49%, 52%, 1) 20%, hsla(267, 36%, 39%, 1) 73%);
   border-radius: 4px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   font-family: 'Segoe UI', sans-serif;
-  padding: 16px;
+  padding: 2px;
   animation: slideUp 0.5s ease;
   z-index: 1000;
+}
+
+.pwa-banner {
+  background-color: white;
+  padding: 16px;
+  border-radius: 4px;
 }
 
 .pwa-header {
@@ -28,7 +33,7 @@
 
 .pwa-title {
   font-size: 16px;
-  color: #6e3a8c;
+  color: #604187;
   margin: 0;
 }
 
@@ -47,7 +52,7 @@
 .pwa-button {
   background-color: transparent;
   border: none;
-  color: #6e3a8c;
+  color: #604187;
   font-weight: bold;
   cursor: pointer;
   font-size: 14px;

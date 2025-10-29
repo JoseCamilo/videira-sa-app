@@ -19,6 +19,10 @@ export class Instalacao implements OnInit {
       this.deferredPrompt = e;
       this.showInstallBanner = true;
     });
+
+    setTimeout(() => {
+      this.closeBanner();
+    }, 10000);
   }
 
   installApp() {
