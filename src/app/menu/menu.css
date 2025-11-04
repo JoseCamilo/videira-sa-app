@@ -1,3 +1,4 @@
-nav > a {
+a {
     cursor: pointer;
+    user-select: none;
 }

@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Menu } from "./menu/menu";
 import { collection, Firestore, getDocs } from '@angular/fire/firestore';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,15 @@ import { collection, Firestore, getDocs } from '@angular/fire/firestore';
 export class App implements OnInit {
 
   firestore = inject(Firestore);
+
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo({ top: 0});
+    });
+  }
+
 
   ngOnInit(): void {
     

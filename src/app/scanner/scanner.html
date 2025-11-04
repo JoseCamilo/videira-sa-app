@@ -1,23 +1,25 @@
-<p>scanner works!</p>
+<div
+    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Scanner de Ingressos
+    </h2>
+</div>
 
-
-@if (hasDevices) {
-<label for="deviceSelect">Alterar Camera:</label>
-<select id="deviceSelect" (change)="onDeviceSelectChange($event)">
-    @for (device of availableDevices; track $index) {
-    <option [value]="device.deviceId">
-        {{ device.label || 'Camera Desconhecida' }}
-    </option>
-    }
-</select>
-}
+<div class="flex items-center mb-8">
+    <h2 class="text-xl text-text-light font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+        {{ title }}
+    </h2>
+</div>
 
 <div class="qr-scanner-container">
-    
+
     <!-- Barcode scanner component -->
     <zxing-scanner class="qr-scanner-video" [formats]="allowedFormats" [autostart]="true" [device]="selectedDevice"
-        (scanSuccess)="onCodeResult($event)" (camerasFound)="onDevicesFound($event)"
-        (camerasNotFound)="onHasDevices(false)" (scanError)="onError($event)"></zxing-scanner>
+        (scanSuccess)="onCodeResult($event)" (camerasFound)="onDevicesFound($event)" (camerasNotFound)="onHasDevices()"
+        (scanError)="onError($event)"></zxing-scanner>
 
     <!-- Moldura de escaneamento -->
     <div class="qr-scanner-frame"></div>
@@ -31,7 +33,21 @@
 
 <!-- Display scanned result -->
 @if (scannedResult) {
-<p>
-    <strong>Scanned Code:</strong> {{ scannedResult }}
+<p class="p-4">
+    <strong>Scanned Code: </strong> {{ scannedResult }}
 </p>
 }
+
+<div class="px-4 py-2 mt-[128px]">
+    <div class="text-text-muted-light text-sm font-medium mb-2 flex justify-between">
+        <span>Progressão do Evento</span>
+        <span id="scan-count">{{progresso}} / 100 ingressos</span>
+    </div>
+    <div class="w-full bg-gray-300 rounded-full h-4 relative overflow-hidden">
+        <div class="bg-[var(--success-color)] h-4 rounded-full transition-all duration-500 ease-out" id="progress-bar"
+            [style.width]="progresso + '%'" style="width: 20%;"></div>
+        <span
+            class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs font-bold text-white text-shadow-sm">{{progresso}}%
+            Completo</span>
+    </div>
+</div>
