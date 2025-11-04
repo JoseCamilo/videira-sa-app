@@ -1,0 +1,26 @@
+<div
+    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Hostess Dashboard
+    </h2>
+</div>
+
+<div class="p-4 space-y-4">
+    @if (eventos.length > 0) {
+    @for (item of eventos; track $index) {
+    <div>
+        <app-hostess-evento [titulo]="item.titulo" [data]="item.data" [imagem]="item.imagem"
+            [presentesCount]="item.presentes.count" [presentesTotal]="item.presentes.total"
+            [vendidosCount]="item.vendidos.count" [vendidosTotal]="item.vendidos.total">
+        </app-hostess-evento>
+    </div>
+
+    }
+    } @else {
+    <span>Não temos eventos nos próximos dias</span>
+    }
+
+</div>
