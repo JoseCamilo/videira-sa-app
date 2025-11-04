@@ -1,0 +1,128 @@
+// zxing-scanner {
+//   display: block;
+//   width: 90%;
+//   max-width: 500px;
+//   margin: 2rem auto;
+//   border-radius: 12px;
+//   overflow: hidden;
+//   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+//   position: relative;
+
+//   video {
+//     width: 100%;
+//     height: auto;
+//     border-radius: inherit;
+//     object-fit: cover;
+//   }
+
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     top: 10%;
+//     left: 10%;
+//     width: 80%;
+//     height: 80%;
+//     border: 3px dashed #000;
+//     pointer-events: none;
+//     animation: pulse-border 2s infinite;
+//   }
+// }
+
+@keyframes pulse-border {
+  0% {
+    border-color: #000;
+    opacity: 1;
+  }
+  50% {
+    border-color: #000;
+    opacity: 0.1;
+  }
+  100% {
+    border-color: #000;
+    opacity: 1;
+  }
+}
+
+/* Container principal do scanner */
+.qr-scanner-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  min-height: 250px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #1e1e1e;
+}
+
+/* Estilo do vídeo da câmera */
+.qr-scanner-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Moldura de escaneamento */
+.qr-scanner-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  border: 2px dashed #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 40px #fff;
+  animation: pulse-border 2s infinite;
+}
+
+/* Animação de pulsação */
+// @keyframes pulse {
+//   0% {
+//     box-shadow: 0 0 5px #000;
+//   }
+//   50% {
+//     box-shadow: 0 0 30px #000;
+//   }
+//   100% {
+//     box-shadow: 0 0 5px #000;
+//   }
+// }
+
+/* Mensagem de status */
+.qr-scanner-status {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Botão de alternar câmera */
+.qr-scanner-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+}
+
+.qr-scanner-toggle:hover {
+  background-color: #604187;
+}

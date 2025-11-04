@@ -1,10 +1,11 @@
 {
-  "name": "myapp",
-  "short_name": "myapp",
-  "description": "Aplicativo para realizar pontuações de demandas em cerimônias de refinamento técnico.",
-  "theme_color": "#604187",
-  "background_color": "#604187",
+  "name": "Videira SA",
+  "short_name": "Videira SA",
+  "description": "Aplicativo da Igreja Videira SA",
+  "theme_color": "#FFF",
+  "background_color": "#FFF",
   "display": "standalone",
+  "orientation": "portrait",
   "scope": "./",
   "start_url": "./",
   "icons": [

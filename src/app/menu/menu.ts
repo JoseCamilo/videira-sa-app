@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +9,14 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrl: './menu.css'
 })
 export class Menu {
-
+  
+  router: Router = inject(Router);
+  
   isShownMoremodal = false;
   itemActive = 1;
-  constructor() {}
+  
+  openLink(link: string) {
+    this.router.navigate([link]);
+  }
 }
  
