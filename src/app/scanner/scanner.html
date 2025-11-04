@@ -1,0 +1,37 @@
+<p>scanner works!</p>
+
+
+@if (hasDevices) {
+<label for="deviceSelect">Alterar Camera:</label>
+<select id="deviceSelect" (change)="onDeviceSelectChange($event)">
+    @for (device of availableDevices; track $index) {
+    <option [value]="device.deviceId">
+        {{ device.label || 'Camera Desconhecida' }}
+    </option>
+    }
+</select>
+}
+
+<div class="qr-scanner-container">
+    
+    <!-- Barcode scanner component -->
+    <zxing-scanner class="qr-scanner-video" [formats]="allowedFormats" [autostart]="true" [device]="selectedDevice"
+        (scanSuccess)="onCodeResult($event)" (camerasFound)="onDevicesFound($event)"
+        (camerasNotFound)="onHasDevices(false)" (scanError)="onError($event)"></zxing-scanner>
+
+    <!-- Moldura de escaneamento -->
+    <div class="qr-scanner-frame"></div>
+
+    <!-- Mensagem de status -->
+    <div class="qr-scanner-status">{{statusScanner}}</div>
+
+    <!-- Botão para alternar câmera -->
+    <button class="qr-scanner-toggle material-icons" (click)="toggleCamera()">flip_camera_android</button>
+</div>
+
+<!-- Display scanned result -->
+@if (scannedResult) {
+<p>
+    <strong>Scanned Code:</strong> {{ scannedResult }}
+</p>
+}
