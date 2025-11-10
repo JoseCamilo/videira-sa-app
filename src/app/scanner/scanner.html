@@ -19,7 +19,7 @@
     <!-- Barcode scanner component -->
     <zxing-scanner class="qr-scanner-video" [formats]="allowedFormats" [autostart]="true" [device]="selectedDevice"
         (scanSuccess)="onCodeResult($event)" (camerasFound)="onDevicesFound($event)" (camerasNotFound)="onHasDevices()"
-        (scanError)="onError($event)"></zxing-scanner>
+        (scanError)="onError($event)" [torch]="true" [autofocusEnabled]="false" previewFitMode="fill"></zxing-scanner>
 
     <!-- Moldura de escaneamento -->
     <div class="qr-scanner-frame"></div>
