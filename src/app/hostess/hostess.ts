@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HostessEvento } from '../hostess-evento/hostess-evento';
+import { HostessEvento } from './hostess-evento/hostess-evento';
 
 @Component({
   selector: 'app-hostess',

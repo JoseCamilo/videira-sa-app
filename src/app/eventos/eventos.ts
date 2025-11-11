@@ -1,27 +1,113 @@
-import { Component } from '@angular/core';
-import { Evento } from '../evento/evento';
+import { Component, inject, OnInit } from '@angular/core';
+import { Evento } from './evento/evento';
+import { EventoService } from './evento.service';
+import { FormsModule } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
+import { Observable, Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-eventos',
-  imports: [Evento],
+  imports: [Evento, FormsModule],
   templateUrl: './eventos.html',
   styleUrl: './eventos.css'
 })
-export class Eventos {
+export class Eventos implements OnInit {
 
-  eventos = [
-    {
-      titulo: 'Conferência Profética 2025',
-      data: '25-28 de Julho, 2025',
-      local: 'Igreja Videira - Sede',
-      imagem: 'https://lh3.googleusercontent.com/aida-public/AB6AXuChBZ9u-L6M5yZ5ISreokbwAmiPF1eRasNH2yCxqvGdnCXRfso1YTt8mb_GnxXEQU-7fPtqvE6xzHQW0_-dw_fzFCy2NPcsD_qgYCxYzOmj20j4L3NClGyhWhbrHJnmg2Dk7EKl1nWcKN5PiCsqqRusNMYRESEzzz7BqOey7Iwm_Ju-jdLlFCTnPCYcLcrxGCPgLscBIsNogtTWabgoHh_nc8ArHnJwMdEQ4FASGOjUokDyugfUrunZjbfgeI2q0LTRqoUilezXwqA'
-    },
-    {
-      titulo: 'Acampamento Radicais Livres',
-      data: '15 de Agosto, 2025',
-      local: 'Chácara Videira',
-      imagem: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDdBEhHIW3R57clCt7mTXB5MGBcxOCL0lrqLGnfkRyolmls2Rp0MdTnJlEN8QBDu_6_5qFJC3PaPVC6sldZ9XhC6OY9Zz626Id0trG7mnVRNAz6rEl9VABHkhrsPO3t88AjCbKpkeePuN-FYNqt4WK6n-eNivRlxrLAhnoIbuEdZW5_9oHIFJTN_vEgpzA59l0whU2Vf42cHiiAwuX4mjfKbGnWlpJrq1VuOTrYTxQbN6kUnlnA4vWpA0kq3IVKMp5A7bl_9FQNxOc'
+  eventoService = inject(EventoService);
+  eventos$!: Observable<Evento[]>;
+  lastDocFilter: any;
+  dateFilter: any;
+  typeFilter: any;
+  localFilter: any;
+
+  date: string = '';
+  type: string = 'Tipo de Evento';
+  local: string = 'Localização';
+
+  eventos: Evento[] = [];
+
+  ngOnInit(): void {
+    this.carregarMais()
+  }
+
+  carregarMais() {
+    this.eventoService.getEventosAtivos(20, this.lastDocFilter, this.dateFilter, this.typeFilter, this.localFilter)
+      .pipe(take(1))
+      .subscribe(novosEventos => {
+        console.log(novosEventos);
+
+        this.eventos = [...this.eventos, ...novosEventos];
+        if (novosEventos.length > 0) {
+          this.lastDocFilter = novosEventos[novosEventos.length - 1];
+        }
+      });
+  }
+
+  onDateChange(event: any) {
+
+    if (!event) {
+      this.eventos = []
+      this.lastDocFilter = null;
+      this.dateFilter = null;
+      this.carregarMais();
+      return
     }
-  ]
+
+    const inicio = new Date('2000-01-01T00:00:00');
+    const fim = new Date('2050-12-31T00:00:00');
+    const data = new Date(event + 'T00:00:00');
+
+    if (data < fim && data > inicio) {
+      this.eventos = []
+      this.lastDocFilter = null;
+      this.dateFilter = event;
+      this.carregarMais();
+    }
+  }
+  
+  onTypeChange(event: any) {
+
+    if (!event || event == 'Tipo de Evento') {
+      this.eventos = []
+      this.lastDocFilter = null;
+      this.typeFilter = null;
+      this.carregarMais();
+      return
+    }
+
+    if (event != 'Tipo de Evento') {
+      this.eventos = []
+      this.lastDocFilter = null;
+      this.typeFilter = event;
+      this.carregarMais();
+    }
+  }
+  
+  onLocalChange(event: any) {
+
+    if (!event || event == 'Localização') {
+      this.eventos = []
+      this.lastDocFilter = null;
+      this.localFilter = null;
+      this.carregarMais();
+      return
+    }
+
+    if (event != 'Localização') {
+      this.eventos = []
+      this.lastDocFilter = null;
+      this.localFilter = event;
+      this.carregarMais();
+    }
+  }
+
+  limparFiltro() {
+    this.eventos = [];
+    this.lastDocFilter = null;
+    this.dateFilter = null;
+    this.typeFilter = null;
+    this.localFilter = null;
+    this.carregarMais();
+  }
 
 }

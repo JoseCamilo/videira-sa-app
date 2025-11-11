@@ -1,37 +1,50 @@
-<div class="p-4 space-y-6 -mt-8 relative z-10 bg-background-light dark:bg-background-dark rounded-t-2xl">
-    <h3 class="text-2xl font-bold text-text-light dark:text-text-dark pt-4">Próximos Eventos</h3>
+<div class="p-4 space-y-6 -mt-8 relative z-10 bg-background-light rounded-t-2xl">
+    <h3 class="text-2xl font-bold text-text-light pt-4">Próximos Eventos</h3>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="relative">
             <span
-                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">calendar_today</span>
+                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">calendar_today</span>
             <input
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark focus:ring-2 focus:ring-cyan-500"
-                type="date" />
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light focus:ring-2 focus:ring-cyan-500"
+                type="date" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" />
         </div>
         <div class="relative">
             <span
-                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">category</span>
+                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">category</span>
             <select
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark focus:ring-2 focus:ring-cyan-500 appearance-none">
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
+                [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
                 <option>Tipo de Evento</option>
                 <option>Culto</option>
                 <option>Conferência</option>
                 <option>Workshop</option>
+                <option>Experiência</option>
             </select>
-
-
+            <span
+                class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light pointer-events-none">expand_more</span>
         </div>
         <div class="relative">
             <span
-                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light dark:text-text-muted-dark">location_on</span>
+                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">location_on</span>
             <select
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light dark:text-text-dark focus:ring-2 focus:ring-cyan-500 appearance-none">
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
+                [(ngModel)]="local" (ngModelChange)="onLocalChange($event)">
                 <option>Localização</option>
-                <option>Sede</option>
-                <option>Online</option>
-                <option>Célula Centro</option>
+                <option>Videira Santo André</option>
+                <option>Chácara Videira</option>
             </select>
+            <span
+                class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light pointer-events-none">expand_more</span>
         </div>
+
+        @if (dateFilter || typeFilter || localFilter) {
+
+        <button
+            class="w-full bg-surface-light border border-gray-300 text-text-muted-light py-2 rounded-lg hover:underline"
+            (click)="limparFiltro()">
+            Limpar filtros
+        </button>
+        }
     </div>
 
     <div class="pt-1">
@@ -43,7 +56,9 @@
         </div>
         }
         } @else {
-        <span>Não temos eventos nos próximos dias</span>
+        <div class="text-center">
+            <span>Não encontramos eventos</span>
+        </div>
         }
     </div>
 </div>
