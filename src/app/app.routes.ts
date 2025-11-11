@@ -9,17 +9,22 @@ export const routes: Routes = [
             {
                 path: '',
                 loadComponent: () =>
-                    import('./home/home').then(m => m.Home),
+                    import('./home/home').then(c => c.Home),
+            },
+            {
+                path: 'evento/:id',
+                loadComponent: () =>
+                    import('./eventos/detalhes-evento/detalhes-evento').then(c => c.DetalhesEvento),
             },
             {
                 path: 'hostess',
                 loadComponent: () =>
-                    import('./hostess/hostess').then(m => m.Hostess),
+                    import('./hostess/hostess').then(c => c.Hostess),
             },
             {
                 path: 'scanner',
                 loadComponent: () =>
-                    import('./scanner/scanner').then(m => m.Scanner),
+                    import('./scanner/scanner').then(c => c.Scanner),
             }
 
         ]

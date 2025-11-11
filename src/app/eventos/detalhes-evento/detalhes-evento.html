@@ -1,0 +1,83 @@
+<div
+    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Detalhes do Evento
+    </h2>
+</div>
+
+@if (carregando) {
+<app-loading></app-loading>
+
+} @else if (evento?.id) {
+
+<div class="relative h-96">
+    <img class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" [src]="evento?.imagem" loading="lazy" (load)="loaded = true" [class.opacity-100]="loaded"/>
+</div>
+
+<div class="bg-white/90 p-4 rounded-t-xl shadow-lg mt-[-20px] pb-[20px] relative z-20">
+    <h1 class="text-text-light text-[26px] font-bold leading-tight tracking-[-0.015em] text-center pb-3 pt-2">
+        {{evento?.titulo}}</h1>
+    <p class="text-text-light text-base font-normal leading-relaxed pb-3 pt-1 text-center"
+        [innerText]="evento?.descricao"></p>
+    <div class="p-4 grid grid-cols-1 gap-y-4">
+        @if (evento?.data) {
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+            <div class="flex items-center gap-4">
+                <span class="material-icons gradient-text text-2xl"> calendar_month </span>
+                <div>
+                    <p class="text-text-light text-base font-medium leading-normal">Data do Evento</p>
+                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{evento?.data}}</p>
+                </div>
+            </div>
+        </div>
+        }
+        @if (evento?.hora) {
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+            <div class="flex items-center gap-4">
+                <span class="material-icons gradient-text text-2xl"> schedule </span>
+                <div>
+                    <p class="text-text-light text-base font-medium leading-normal">Horário</p>
+                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{evento?.hora}}</p>
+                </div>
+            </div>
+        </div>
+        }
+        @if (evento?.local) {
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+            <div class="flex items-center gap-4">
+                <span class="material-icons gradient-text text-2xl"> location_on </span>
+                <div>
+                    <p class="text-text-light text-base font-medium leading-normal">Local do Encontro</p>
+                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{evento?.local}}</p>
+                </div>
+            </div>
+        </div>
+        }
+        @if (evento?.valor) {
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+            <div class="flex items-center gap-4">
+                <span class="material-icons gradient-text text-2xl"> monetization_on </span>
+                <div>
+                    <p class="text-text-light text-base font-medium leading-normal">Investimento</p>
+                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{evento?.valor}}</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+    <div class="p-4 pt-8">
+        <button
+            class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md">
+            Fazer inscrição
+        </button>
+    </div>
+</div>
+} @else {
+<div class="text-center">
+    <span>Não encontramos o evento</span>
+</div>
+}

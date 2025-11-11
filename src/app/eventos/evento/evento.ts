@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-evento',
@@ -8,10 +9,18 @@ import { Component, Input } from '@angular/core';
 })
 export class Evento {
 
+  router: Router = inject(Router);
+
+  @Input() id!: string;
   @Input() titulo!: string;
   @Input() data!: string;
   @Input() local!: string;
   @Input() imagem!: string;
 
+  loaded = false;
+
+  openDetalhes() {
+    this.router.navigate(['evento', this.id]);
+  }
 
 }

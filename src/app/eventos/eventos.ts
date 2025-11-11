@@ -1,20 +1,20 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Evento } from './evento/evento';
 import { EventoService } from './evento.service';
 import { FormsModule } from '@angular/forms';
 import { Timestamp } from '@angular/fire/firestore';
 import { Observable, Subscription, take } from 'rxjs';
+import { Loading } from '../loading/loading';
 
 @Component({
   selector: 'app-eventos',
-  imports: [Evento, FormsModule],
+  imports: [Evento, FormsModule, Loading],
   templateUrl: './eventos.html',
   styleUrl: './eventos.css'
 })
-export class Eventos implements OnInit {
-
+export class Eventos implements OnInit, OnDestroy {
+  
   eventoService = inject(EventoService);
-  eventos$!: Observable<Evento[]>;
   lastDocFilter: any;
   dateFilter: any;
   typeFilter: any;
@@ -26,27 +26,36 @@ export class Eventos implements OnInit {
 
   eventos: Evento[] = [];
 
-  ngOnInit(): void {
+  carregando = true;
+
+  ngOnInit(): void {    
     this.carregarMais()
+  }
+
+  ngOnDestroy(): void {
+    this.eventos = [];
+    this.lastDocFilter = null;
+    this.dateFilter = null;
+    this.typeFilter = null;
+    this.localFilter = null;
   }
 
   carregarMais() {
     this.eventoService.getEventosAtivos(20, this.lastDocFilter, this.dateFilter, this.typeFilter, this.localFilter)
       .pipe(take(1))
       .subscribe(novosEventos => {
-        console.log(novosEventos);
-
-        this.eventos = [...this.eventos, ...novosEventos];
+        this.eventos = [...this.eventos, ...novosEventos] as Evento[];
         if (novosEventos.length > 0) {
           this.lastDocFilter = novosEventos[novosEventos.length - 1];
         }
+        this.carregando = false;
       });
   }
 
   onDateChange(event: any) {
 
     if (!event) {
-      this.eventos = []
+      this.eventos = [];
       this.lastDocFilter = null;
       this.dateFilter = null;
       this.carregarMais();
@@ -58,7 +67,7 @@ export class Eventos implements OnInit {
     const data = new Date(event + 'T00:00:00');
 
     if (data < fim && data > inicio) {
-      this.eventos = []
+      this.eventos = [];
       this.lastDocFilter = null;
       this.dateFilter = event;
       this.carregarMais();
@@ -68,7 +77,7 @@ export class Eventos implements OnInit {
   onTypeChange(event: any) {
 
     if (!event || event == 'Tipo de Evento') {
-      this.eventos = []
+      this.eventos = [];
       this.lastDocFilter = null;
       this.typeFilter = null;
       this.carregarMais();
@@ -76,7 +85,7 @@ export class Eventos implements OnInit {
     }
 
     if (event != 'Tipo de Evento') {
-      this.eventos = []
+      this.eventos = [];
       this.lastDocFilter = null;
       this.typeFilter = event;
       this.carregarMais();
@@ -86,7 +95,7 @@ export class Eventos implements OnInit {
   onLocalChange(event: any) {
 
     if (!event || event == 'Localização') {
-      this.eventos = []
+      this.eventos = [];
       this.lastDocFilter = null;
       this.localFilter = null;
       this.carregarMais();
@@ -94,7 +103,7 @@ export class Eventos implements OnInit {
     }
 
     if (event != 'Localização') {
-      this.eventos = []
+      this.eventos = [];
       this.lastDocFilter = null;
       this.localFilter = event;
       this.carregarMais();
@@ -107,6 +116,9 @@ export class Eventos implements OnInit {
     this.dateFilter = null;
     this.typeFilter = null;
     this.localFilter = null;
+    this.date = '';
+    this.type = 'Tipo de Evento';
+    this.local = 'Localização';
     this.carregarMais();
   }
 
