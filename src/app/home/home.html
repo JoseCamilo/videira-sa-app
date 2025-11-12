@@ -4,12 +4,29 @@
             src="imagens/fundo.jpg" />
         <div
             class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-between p-6">
-            <div class="flex">
-                <img alt="Logo Videira" class="h-8" src="imagens/icon.png" />
-                <div class="flex flex-col items-start pl-2">
-                    <h1 class="text-xl font-semibold text-white drop-shadow-lg">Igreja Videira</h1>
-                    <p class="text-sm text-gray-200 drop-shadow-md">Santo André</p>
+            <div class="flex justify-between">
+                <div class="flex">
+                    <img alt="Logo Videira" class="h-8" src="imagens/icon.png" />
+                    <div class="flex flex-col items-start pl-2">
+                        <h1 class="text-xl font-semibold text-white drop-shadow-lg">Igreja Videira</h1>
+                        <p class="text-sm text-gray-200 drop-shadow-md">Santo André</p>
+                    </div>
                 </div>
+                @if (nome) {
+                    <button
+                        class="flex items-center space-x-2 px-4 rounded-full text-sm border border-gray-300/50 text-white bg-black/20 backdrop-blur-sm hover:bg-black/40 transition"
+                        (click)="perfil()">
+                        <span>{{nome}}</span>
+                        <img class="h-8 w-8" [src]="foto" />
+                    </button>
+                }@else {
+                    <button
+                        class="flex items-center space-x-2 px-4 rounded-full text-sm border border-gray-300/50 text-white bg-black/20 backdrop-blur-sm hover:bg-black/40 transition"
+                        (click)="login()">
+                        <span>Login</span>
+                        <span class="material-icons text-lg">person_outline</span>
+                    </button>
+                }
             </div>
             <div class="flex justify-end items-end">
                 <h2 class="text-gray-300 text-lg font-serif italic text-right drop-shadow-lg pr-2 pb-8">Uma

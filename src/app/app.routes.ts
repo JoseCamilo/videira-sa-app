@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { App } from './app';
+import { AuthGuardADM } from './auth/auth.guard';
 
 export const routes: Routes = [
     {
@@ -18,6 +19,7 @@ export const routes: Routes = [
             },
             {
                 path: 'hostess',
+                canActivate: [AuthGuardADM],
                 loadComponent: () =>
                     import('./hostess/hostess').then(c => c.Hostess),
             },

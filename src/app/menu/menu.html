@@ -32,13 +32,15 @@
                 <span class="text-text-light font-medium">Perfil</span>
             </a>
         </li>
-        <li>
-            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition" (click)="itemActive=3;openLink('/hostess');isShownMoremodal=false">
-                <span
-                    class="material-icons gradient-text text-text-muted-light mr-4">admin_panel_settings</span>
-                <span class="text-text-light font-medium">Hostess (Admin)</span>
-            </a>
-        </li>
+        @if (isADM) {
+            <li>
+                <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition" (click)="itemActive=3;openLink('/hostess');isShownMoremodal=false">
+                    <span
+                        class="material-icons gradient-text text-text-muted-light mr-4">admin_panel_settings</span>
+                    <span class="text-text-light font-medium">Hostess (Admin)</span>
+                </a>
+            </li>
+        }
         <li>
             <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition" (click)="itemActive=3">
                 <span class="material-icons gradient-text text-text-muted-light mr-4">info</span>
