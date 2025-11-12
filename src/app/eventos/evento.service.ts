@@ -1,15 +1,32 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp, updateDoc, increment } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 export interface Evento {
-  id?: string;       // ID do documento
+  id: string;       // ID do documento
   titulo: string;
   data: string;
   date: Date;
   local: string;
   imagem: string;
+  ativo: boolean;
+  vendidos: {
+    count: number;
+    total: number;
+  };
+  presentes: {
+    count: number;
+    total: number;
+  };
+}
+
+export interface Ticket {
+  id: string;
+  evento: string;
+  titulo: string;
+  nome: string;
+  email: string;
   ativo: boolean;
 }
 
@@ -34,11 +51,11 @@ export class EventoService {
       constraints.push(where('date', '>=', inicio));
       constraints.push(where('date', '<=', fim));
     }
-    
+
     if (type) {
       constraints.push(where('type', '==', type));
     }
-    
+
     if (local) {
       constraints.push(where('local', '==', local));
     }
@@ -59,7 +76,7 @@ export class EventoService {
       })
     );
   }
-  
+
   getEventoById(id: string): Observable<Evento | null> {
     const eventoRef = doc(this.firestore, `eventos/${id}`);
     return (docData(eventoRef, { idField: 'id' }) as Observable<Evento | null>).pipe(
@@ -91,5 +108,30 @@ export class EventoService {
       })
     );
   }
- 
+
+  confirmTicketInEvento(id: string): Promise<any> {
+    const eventoRef = doc(this.firestore, `eventos/${id}`);
+
+    return updateDoc(eventoRef, {
+      'presentes.count': increment(1)
+    });
+  }
+
+  confirmTicketAcesso(id: string): Promise<any> {
+    const eventoRef = doc(this.firestore, `tickets/${id}`);
+
+    return updateDoc(eventoRef, {
+      ativo: false
+    });
+  }
+
+  getTicketById(id: string): Observable<Ticket | null> {
+    const eventoRef = doc(this.firestore, `tickets/${id}`);
+    return (docData(eventoRef, { idField: 'id' }) as Observable<Ticket | null>).pipe(
+      catchError(err => {
+        console.error(`Erro ao buscar ticket com ID ${id}:`, err);
+        return of(null);
+      })
+    );
+  }
 }

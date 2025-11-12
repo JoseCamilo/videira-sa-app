@@ -5,13 +5,13 @@
             <span
                 class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">calendar_today</span>
             <input
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light focus:ring-2 focus:ring-cyan-500"
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500"
                 type="date" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" />
         </div>
         <div class="relative">
             <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">category</span>
             <select
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
                 [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
                 <option>Tipo de Evento</option>
                 <option>Culto</option>
@@ -26,7 +26,7 @@
             <span
                 class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">location_on</span>
             <select
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-gray-300 dark:border-gray-700 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
+                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
                 [(ngModel)]="local" (ngModelChange)="onLocalChange($event)">
                 <option>Localização</option>
                 <option>Videira Santo André</option>

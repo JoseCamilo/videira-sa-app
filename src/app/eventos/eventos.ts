@@ -13,7 +13,7 @@ import { Loading } from '../loading/loading';
   styleUrl: './eventos.css'
 })
 export class Eventos implements OnInit, OnDestroy {
-  
+
   eventoService = inject(EventoService);
   lastDocFilter: any;
   dateFilter: any;
@@ -28,7 +28,7 @@ export class Eventos implements OnInit, OnDestroy {
 
   carregando = true;
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.carregarMais()
   }
 
@@ -43,12 +43,15 @@ export class Eventos implements OnInit, OnDestroy {
   carregarMais() {
     this.eventoService.getEventosAtivos(20, this.lastDocFilter, this.dateFilter, this.typeFilter, this.localFilter)
       .pipe(take(1))
-      .subscribe(novosEventos => {
-        this.eventos = [...this.eventos, ...novosEventos] as Evento[];
-        if (novosEventos.length > 0) {
-          this.lastDocFilter = novosEventos[novosEventos.length - 1];
-        }
-        this.carregando = false;
+      .subscribe({
+        next: (novosEventos) => {
+          this.eventos = [...this.eventos, ...novosEventos] as Evento[];
+          if (novosEventos.length > 0) {
+            this.lastDocFilter = novosEventos[novosEventos.length - 1];
+          }
+          this.carregando = false;
+        },
+        error: () => this.carregando = false
       });
   }
 
@@ -73,7 +76,7 @@ export class Eventos implements OnInit, OnDestroy {
       this.carregarMais();
     }
   }
-  
+
   onTypeChange(event: any) {
 
     if (!event || event == 'Tipo de Evento') {
@@ -91,7 +94,7 @@ export class Eventos implements OnInit, OnDestroy {
       this.carregarMais();
     }
   }
-  
+
   onLocalChange(event: any) {
 
     if (!event || event == 'Localização') {

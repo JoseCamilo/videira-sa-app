@@ -12,7 +12,7 @@ import { Loading } from '../../loading/loading';
   styleUrl: './detalhes-evento.scss',
 })
 export class DetalhesEvento implements OnInit, OnDestroy {
-  
+
   router: Router = inject(Router);
   route = inject(ActivatedRoute);
   id = this.route.snapshot.paramMap.get('id') || '';
@@ -23,7 +23,7 @@ export class DetalhesEvento implements OnInit, OnDestroy {
 
   carregando = true;
   loaded = false;
-  
+
   ngOnInit(): void {
     this.carregarEvento();
   }
@@ -35,9 +35,12 @@ export class DetalhesEvento implements OnInit, OnDestroy {
   carregarEvento() {
     this.eventoService.getEventoById(this.id)
       .pipe(take(1))
-      .subscribe(item => {
-        this.evento = item;
-        this.carregando = false;
+      .subscribe({
+        next: (item) => {
+          this.evento = item;
+          this.carregando = false;
+        },
+        error: () => this.carregando = false
       });
   }
 

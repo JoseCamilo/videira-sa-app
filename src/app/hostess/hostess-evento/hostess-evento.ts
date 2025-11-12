@@ -11,16 +11,17 @@ export class HostessEvento {
 
   router: Router = inject(Router);
 
-  @Input() titulo = '';
-  @Input() data = '';
-  @Input() imagem = '';
-  @Input() vendidosCount = 0;
-  @Input() vendidosTotal = 0;
-  @Input() presentesCount = 0;
-  @Input() presentesTotal = 0;
+  @Input() id!: string;
+  @Input() titulo!: string;
+  @Input() data!: string;
+  @Input() imagem!: string;
+  @Input() vendidosCount!: number;
+  @Input() vendidosTotal!: number;
+  @Input() presentesCount!: number;
+  @Input() presentesTotal!: number;
 
-  openLink(link: string) {
-    this.router.navigate([link]);
+  openScanner() {
+    this.router.navigate(['scanner', this.id]);
   }
 
 }

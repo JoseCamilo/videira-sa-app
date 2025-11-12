@@ -13,20 +13,20 @@
             <span class="text-text-muted-light">Tickets Vendidos</span>
             <span class="text-text-light text-base">{{vendidosCount}} / {{vendidosTotal}}</span>
             <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                <div class="bg-[#19a2e6] h-1.5 rounded-full" style="width: 75%"></div>
+                <div class="bg-[#19a2e6] h-1.5 rounded-full" [style.width]="vendidosCount / vendidosTotal * 100 + '%'"></div>
             </div>
         </div>
         <div class="flex flex-col">
             <span class="text-text-muted-light">Presentes</span>
             <span class="text-text-light text-base">{{presentesCount}} / {{presentesTotal}}</span>
             <div class="w-full bg-gray-200 rounded-full h-1.5 mt-1">
-                <div class="bg-green-500 h-1.5 rounded-full" style="width: 53%"></div>
+                <div class="bg-green-500 h-1.5 rounded-full" [style.width]="presentesCount / presentesTotal * 100 + '%'"></div>
             </div>
         </div>
     </div>
     <button
         class="flex items-center justify-center gap-2 gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
-        (click)="openLink('/scanner')">
+        (click)="openScanner()">
         <span class="material-icons text-base">qr_code</span>
         Escanear Ingressos
     </button>

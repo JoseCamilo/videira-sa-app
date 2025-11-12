@@ -22,9 +22,9 @@ export const routes: Routes = [
                     import('./hostess/hostess').then(c => c.Hostess),
             },
             {
-                path: 'scanner',
+                path: 'scanner/:id',
                 loadComponent: () =>
-                    import('./scanner/scanner').then(c => c.Scanner),
+                    import('./hostess/scanner/scanner').then(c => c.Scanner),
             }
 
         ]
