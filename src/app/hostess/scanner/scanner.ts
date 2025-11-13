@@ -2,10 +2,11 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BarcodeFormat } from '@zxing/library';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Evento, EventoService, Ticket } from '../../eventos/evento.service';
+import { Evento, EventoService } from '../../eventos/evento.service';
 import { take } from 'rxjs';
 import { Loading } from '../../loading/loading';
 import { CommonModule, DecimalPipe } from '@angular/common';
+import { Ticket, TicketService } from '../../tickets/tickets.service';
 
 @Component({
   selector: 'app-scanner',
@@ -19,6 +20,7 @@ export class Scanner implements OnInit, OnDestroy {
   route = inject(ActivatedRoute);
   id = this.route.snapshot.paramMap.get('id') || '';
 
+  ticketService = inject(TicketService);
   eventoService = inject(EventoService);
   evento: Evento | any;
 
@@ -69,10 +71,10 @@ export class Scanner implements OnInit, OnDestroy {
     this.confirmando = true;
     this.statusScanner = 'Escaneando QR Code...';
 
-    this.eventoService.confirmTicketAcesso(this.scannedResult.id)
+    this.ticketService.confirmTicketAcesso(this.scannedResult.id)
       .then(() => {
 
-        this.eventoService.confirmTicketInEvento(this.scannedResult.evento)
+        this.eventoService.confirmConvidadoPresenteInEvento(this.scannedResult.evento)
           .then(() => {
             this.isShowResultModal = false;
             this.confirmando = false;
@@ -104,7 +106,7 @@ export class Scanner implements OnInit, OnDestroy {
       this.isShowResultModal = true;
 
       if (this.evento.id === this.scannedResult.evento) {
-        this.eventoService.getTicketById(this.scannedResult.id)
+        this.ticketService.getTicketById(this.scannedResult.id)
           .pipe(take(1))
           .subscribe({
             next: (item) => {

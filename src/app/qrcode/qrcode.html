@@ -1,0 +1,27 @@
+<div
+    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Gerador de Tickets
+    </h2>
+</div>
+
+<div class="p-4 space-y-4">
+
+    <div class="text-xl font-bold text-text-light">Arquivo JSON com array:</div>
+
+    <input type="file" (change)="onFileSelected($event)" />
+
+    <div class="text-xl font-bold text-text-light">QRCode:</div>
+    
+    @if (myTextQrCode) {
+        <qrcode #qrcode [qrdata]="myTextQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+    }
+
+
+</div>
+
+
+
+<!-- Download local -->
+<!-- <qrcode #qrcode (qrCodeURL)="onChangeURL($event)" [qrdata]="myTextQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode> -->
+<!-- <a [href]="qrCodeDownloadLink" download="qrcode">Download</a> -->

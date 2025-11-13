@@ -6,7 +6,7 @@
         <span class="text-xs font-medium" [ngClass]="{ 'gradient-text': itemActive==1 }">Eventos</span>
     </a>
     <a class="flex flex-col items-center justify-center text-center text-text-muted-light hover:text-cyan-500 transition w-full"
-        (click)="itemActive=2">
+        (click)="itemActive=2;openLink('/tickets')">
         <span class="material-icons text-3xl" [ngClass]="{ 'gradient-text': itemActive==2 }">confirmation_number</span>
         <span class="text-xs font-medium" [ngClass]="{ 'gradient-text': itemActive==2 }">Meus Tickets</span>
     </a>

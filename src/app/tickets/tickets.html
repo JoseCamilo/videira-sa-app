@@ -4,7 +4,7 @@
         <button class="material-icons" (click)="goBack()">arrow_back</button>
     </div>
     <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
-        Hostess Dashboard
+        Meus Tickets
     </h2>
 </div>
 
@@ -12,19 +12,18 @@
     @if (carregando) {
     <app-loading></app-loading>
 
-    } @else if (eventos.length > 0) {
-    @for (item of eventos; track $index) {
+    } @else if (tickets.length > 0) {
+    @for (item of tickets; track $index) {
     <div>
-        <app-hostess-evento [id]="item.id" [titulo]="item.titulo" [data]="item.data" [imagem]="item.imagem"
-            [presentesCount]="item.presentes.count" [presentesTotal]="item.presentes.total"
-            [vendidosCount]="item.vendidos.count" [vendidosTotal]="item.vendidos.total">
-        </app-hostess-evento>
+        <app-ticket-evento [id]="item.id" [titulo]="item.titulo" [data]="item.data" [imagem]="item.imagem"
+            [qrcode]="item.qrcode" [nome]="item.nome">
+        </app-ticket-evento>
     </div>
 
     }
     } @else {
     <div class="text-center">
-        <p>Não temos eventos nos próximos dias</p>
+        <p>Você não possui tickets ativos</p>
     </div>
 
     }

@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp, updateDoc, increment } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Ticket } from '../tickets/tickets.service';
 
 export interface Evento {
   id: string;       // ID do documento
@@ -9,6 +10,7 @@ export interface Evento {
   data: string;
   date: Date;
   local: string;
+  hora: string;
   imagem: string;
   ativo: boolean;
   vendidos: {
@@ -19,15 +21,6 @@ export interface Evento {
     count: number;
     total: number;
   };
-}
-
-export interface Ticket {
-  id: string;
-  evento: string;
-  titulo: string;
-  nome: string;
-  email: string;
-  ativo: boolean;
 }
 
 @Injectable({
@@ -109,7 +102,7 @@ export class EventoService {
     );
   }
 
-  confirmTicketInEvento(id: string): Promise<any> {
+  confirmConvidadoPresenteInEvento(id: string): Promise<any> {
     const eventoRef = doc(this.firestore, `eventos/${id}`);
 
     return updateDoc(eventoRef, {
@@ -117,21 +110,11 @@ export class EventoService {
     });
   }
 
-  confirmTicketAcesso(id: string): Promise<any> {
-    const eventoRef = doc(this.firestore, `tickets/${id}`);
+  confirmTicketVendidoInEvento(id: string): Promise<any> {
+    const eventoRef = doc(this.firestore, `eventos/${id}`);
 
     return updateDoc(eventoRef, {
-      ativo: false
+      'vendidos.count': increment(1)
     });
-  }
-
-  getTicketById(id: string): Observable<Ticket | null> {
-    const eventoRef = doc(this.firestore, `tickets/${id}`);
-    return (docData(eventoRef, { idField: 'id' }) as Observable<Ticket | null>).pipe(
-      catchError(err => {
-        console.error(`Erro ao buscar ticket com ID ${id}:`, err);
-        return of(null);
-      })
-    );
   }
 }
