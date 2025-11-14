@@ -1,5 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
-import { SafeUrl } from '@angular/platform-browser';
+import { ChangeDetectorRef, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { StorageService } from '../storage/storage.service';
 import { Ticket, TicketService } from '../tickets/tickets.service';
@@ -13,6 +12,8 @@ import { take } from 'rxjs';
   styleUrl: './qrcode.scss',
 })
 export class Qrcode {
+
+  cdr = inject(ChangeDetectorRef);
 
   myTextQrCode: string = "";
 
@@ -70,9 +71,10 @@ export class Qrcode {
             
             // gerar qrcode
             this.myTextQrCode = `{"id":"${ticket.id}","evento":"${ticket.evento}","titulo":"${ticket.titulo}","nome":"${ticket.nome}"}`;
+            this.cdr.detectChanges();
             this.tarefaComSleep().then(() => {
 
-              const base64 = this.geraQRCode(ticket);
+              const base64 = this.geraQRCode();
         
               // salvar a imagem no storage
               const nomeArquivo = `${ticket.evento}/qr-${ticket.id}.png`;
@@ -117,9 +119,7 @@ export class Qrcode {
     });
   }
   
-  geraQRCode(ticket: Ticket) {
-    
-
+  geraQRCode() {
     const canvas: HTMLCanvasElement = this.qrcodeinput.qrcElement.nativeElement.querySelector('canvas');
     return canvas.toDataURL('image/png');   
   }
