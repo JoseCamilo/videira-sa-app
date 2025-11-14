@@ -15,6 +15,7 @@
     
     @if (myTextQrCode) {
         <qrcode #qrcode [qrdata]="myTextQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        {{myTextQrCode}}
     }
 
 
