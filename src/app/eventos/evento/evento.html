@@ -1,8 +1,7 @@
 <div class="bg-surface-light rounded-lg shadow-md overflow-hidden flex flex-col">
     <img class="w-full h-80 object-cover transition-opacity duration-500 opacity-0" [src]="imagem" loading="lazy" (load)="loaded = true" [class.opacity-100]="loaded"/>
     <div class="p-4 flex-grow">
-        <h3 class="text-xl font-bold text-text-light">{{titulo}}
-        </h3>
+        <h3 class="text-xl font-bold text-text-light">{{titulo}}</h3>
         <div class="flex items-center text-text-muted-light text-sm mt-2">
             <span class="material-icons gradient-text text-base mr-2">calendar_today</span>
             <span>{{data}}</span>

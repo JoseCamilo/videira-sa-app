@@ -13,6 +13,11 @@ export const routes: Routes = [
                     import('./home/home').then(c => c.Home),
             },
             {
+                path: 'perfil',
+                loadComponent: () =>
+                    import('./perfil/perfil').then(c => c.Perfil),
+            },
+            {
                 path: 'evento/:id',
                 loadComponent: () =>
                     import('./eventos/detalhes-evento/detalhes-evento').then(c => c.DetalhesEvento),
@@ -41,5 +46,6 @@ export const routes: Routes = [
             },
 
         ]
-    }
+    },
+    { path: '**', redirectTo: '/' }
 ];

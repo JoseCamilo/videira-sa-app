@@ -1,0 +1,66 @@
+<div
+    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Meus dados
+    </h2>
+</div>
+
+<div class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="flex items-center justify-center px-6 py-4">
+        @if (user.foto) {
+        <img class="w-50 h-50 rounded-full border-2 border-blue-500 object-cover transition-opacity duration-500 opacity-0"
+            [src]="user.foto" loading="lazy" (load)="loaded = true" [class.opacity-100]="loaded">
+        } @else {
+        <span class="w-50 h-50 rounded-full border-2 border-blue-500 material-icons"
+            [style.font-size.px]="96">person_outline</span>
+        }
+    </div>
+    <div class="flex items-center justify-center px-6 py-4">
+        <div>
+            <h2 class="text-center text-xl font-semibold text-gray-800">{{ user.nome }}</h2>
+            <p class="text-center text-gray-600">{{ user.email }}</p>
+            <!-- <p class="text-gray-500 text-sm">{{ user.location }}</p> -->
+        </div>
+    </div>
+
+    <div class="px-6 py-4 border-t">
+
+        @if (user.email) {
+
+        <button
+            class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+            (click)="logout()">
+            Desconectar
+        </button>
+        }@else {
+        <div class="p-4 pt-0">
+            <button
+                class="flex items-center justify-center gap-2 w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                (click)="loginWithGoogle()">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
+                <span class="text-gray-700 font-medium">Entrar com Google</span>
+            </button>
+        </div>
+        <div class="p-4 pt-0">
+            <button
+                class="flex items-center justify-center gap-2 w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                (click)="loginWithFacebook()">
+                <img src="https://www.svgrepo.com/show/475647/facebook-color.svg" alt="Facebook" class="w-5 h-5">
+                <span class="text-gray-700 font-medium">Entrar com Facebook</span>
+            </button>
+        </div>
+        }
+
+    </div>
+
+    @if (accountExistsWithDifferentCredential) {
+    <div class=" px-6 py-4 mx-6 my-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded mb-4">
+        <p class="font-semibold">Conta já existente!</p>
+        <p>Este e-mail já foi usado para login com Google. Por favor, entre usando o Google.</p>
+    </div>
+    }
+
+</div>

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Eventos } from '../eventos/eventos';
 import { Instalacao } from '../instalacao/instalacao';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class Home implements OnInit {
 
+  router = inject(Router);
   authService = inject(AuthService);
   nome = '';
   foto = 'imagens/icon.png';
@@ -20,16 +22,8 @@ export class Home implements OnInit {
     this.foto = this.authService.getFoto();
   }
 
-  login(): void {
-    this.authService.loginComGoogle()
-    .then(() => {
-      this.nome = this.authService.getNome();
-      this.foto = this.authService.getFoto();
-    });
-  }
-
   perfil() {
-
+    this.router.navigate(['perfil']);
   }
 
 }

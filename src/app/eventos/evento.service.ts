@@ -114,7 +114,8 @@ export class EventoService {
     const eventoRef = doc(this.firestore, `eventos/${id}`);
 
     return updateDoc(eventoRef, {
-      'vendidos.count': increment(1)
+      'vendidos.count': increment(1),
+      'presentes.total': increment(1)
     });
   }
 }

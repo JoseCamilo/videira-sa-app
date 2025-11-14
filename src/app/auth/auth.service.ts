@@ -1,20 +1,42 @@
 
 import { inject, Injectable } from '@angular/core';
-import { Auth, signInWithPopup, GoogleAuthProvider, signOut } from '@angular/fire/auth';
+import { Auth, signInWithPopup, GoogleAuthProvider, signOut, OAuthProvider, linkWithCredential, fetchSignInMethodsForEmail, FacebookAuthProvider } from '@angular/fire/auth';
 import { collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
 import { BehaviorSubject, catchError, map, Observable, of, take } from 'rxjs';
 
 export interface User {
   id: string;
+  nome: string;
   email: string;
+  foto: string;
   adm: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
+  user: User = {
+    id: '',
+    nome: 'Desconectado',
+    email: '',
+    foto: '',
+    adm: false
+  };
+
+  constructor() {
+    this.user.nome = this.getNome() || 'Desconectado';
+    this.user.email = this.getEmail() || '';
+    this.user.foto = this.getFoto() || '';
+
+    this.loginSubject.next(this.user);
+    this.validUserADM();
+  }
+
   auth = inject(Auth);
   firestore = inject(Firestore)
+
+  private loginSubject = new BehaviorSubject<User>(this.user);
+  login$ = this.loginSubject.asObservable();
 
   private admSubject = new BehaviorSubject<boolean>(false);
   adm$ = this.admSubject.asObservable();
@@ -22,7 +44,7 @@ export class AuthService {
     this.admSubject.next(is);
   }
 
-  loginComGoogle() {
+  loginWithGoogle() {
     const provider = new GoogleAuthProvider();
     return signInWithPopup(this.auth, provider)
       .then((result) => {
@@ -32,6 +54,11 @@ export class AuthService {
         localStorage.setItem(btoa('email'), btoa(user.email || ''));
         localStorage.setItem(btoa('foto'), btoa(user.photoURL || ''));
 
+        this.user.nome = user.displayName || '';
+        this.user.email = user.email || '';
+        this.user.foto = user.photoURL || '';
+
+        this.loginSubject.next(this.user);
         this.validUserADM();
 
       })
@@ -40,7 +67,45 @@ export class AuthService {
       });
   }
 
+  loginWithFacebook() {
+    const provider = new OAuthProvider('facebook.com');
+    provider.addScope('email');
+    provider.addScope('public_profile');
+
+    return signInWithPopup(this.auth, provider)
+      .then((result) => {
+        const user = result.user;
+
+        localStorage.setItem(btoa('nome'), btoa(user.displayName || ''));
+        localStorage.setItem(btoa('email'), btoa(user.email || ''));
+        localStorage.setItem(btoa('foto'), btoa(user.photoURL || ''));
+
+        this.user.nome = user.displayName || '';
+        this.user.email = user.email || '';
+        this.user.foto = user.photoURL || '';
+
+        this.loginSubject.next(this.user);
+        this.validUserADM();
+
+        console.log('Usuário Facebook logado:', result.user);
+      });
+  }
+
+
   logout() {
+    localStorage.setItem(btoa('nome'), '');
+    localStorage.setItem(btoa('email'), '');
+    localStorage.setItem(btoa('foto'), '');
+
+    this.user = {
+      id: '',
+      nome: 'Desconectado',
+      email: '',
+      foto: '',
+      adm: false
+    };
+
+    this.loginSubject.next(this.user);
     return signOut(this.auth);
   }
 
@@ -67,7 +132,7 @@ export class AuthService {
     )
   }
 
-  validUserADM():Promise<boolean> {
+  validUserADM(): Promise<boolean> {
     return new Promise(resolve => {
       const email = this.getEmail();
       if (email) {
@@ -76,6 +141,8 @@ export class AuthService {
           .subscribe({
             next: (item) => {
               this.atualizarUsuarioADM(item?.adm || false);
+              this.user.adm = item?.adm || false;
+              this.loginSubject.next(this.user);
               resolve(item?.adm || false)
             },
             error: () => resolve(false)
