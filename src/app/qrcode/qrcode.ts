@@ -113,9 +113,6 @@ export class Qrcode {
             return resolve();
           });
         },
-        complete: () => {
-          return resolve();
-        },
         error: (erro) => {
           console.error('Erro ao consultar ticket:', erro);
           return resolve();
