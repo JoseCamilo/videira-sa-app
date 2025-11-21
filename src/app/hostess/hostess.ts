@@ -42,6 +42,7 @@ export class Hostess implements OnInit, OnDestroy {
           }
           this.carregando = false;
         },
+        complete: () => this.carregando = false,
         error: () => this.carregando = false
       });
   }

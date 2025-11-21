@@ -51,6 +51,7 @@ export class Eventos implements OnInit, OnDestroy {
           }
           this.carregando = false;
         },
+        complete: () => this.carregando = false,
         error: () => this.carregando = false
       });
   }

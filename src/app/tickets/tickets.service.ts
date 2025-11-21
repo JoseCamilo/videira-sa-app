@@ -16,6 +16,7 @@ export interface Ticket {
   date: Date;
   local: string;
   hora: string;
+  telefone: string;
 }
 
 @Injectable({

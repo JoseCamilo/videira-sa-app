@@ -52,7 +52,8 @@ export class Scanner implements OnInit, OnDestroy {
           this.evento = item;
           this.carregando = false;
         },
-        error: () => this.carregando = false
+        error: () => this.carregando = false,
+        complete: () => this.carregando = false
       });
   }
 
@@ -118,6 +119,7 @@ export class Scanner implements OnInit, OnDestroy {
               }
               this.validando = false;
             },
+            complete: () => this.validando = false,
             error: () => this.validando = false
           });
       } else {

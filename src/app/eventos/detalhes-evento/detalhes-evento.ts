@@ -40,6 +40,7 @@ export class DetalhesEvento implements OnInit, OnDestroy {
           this.evento = item;
           this.carregando = false;
         },
+        complete: () => this.carregando = false,
         error: () => this.carregando = false
       });
   }

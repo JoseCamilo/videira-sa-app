@@ -40,9 +40,6 @@ export class AuthService {
 
   private admSubject = new BehaviorSubject<boolean>(false);
   adm$ = this.admSubject.asObservable();
-  atualizarUsuarioADM(is: boolean) {
-    this.admSubject.next(is);
-  }
 
   loginWithGoogle() {
     const provider = new GoogleAuthProvider();
@@ -140,11 +137,12 @@ export class AuthService {
           .pipe(take(1))
           .subscribe({
             next: (item) => {
-              this.atualizarUsuarioADM(item?.adm || false);
               this.user.adm = item?.adm || false;
+              this.admSubject.next(this.user.adm);
               this.loginSubject.next(this.user);
-              resolve(item?.adm || false)
+              resolve(this.user.adm);
             },
+            complete: () => resolve(this.user.adm),
             error: () => resolve(false)
           });
       } else {

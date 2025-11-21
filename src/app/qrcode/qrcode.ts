@@ -90,7 +90,9 @@ export class Qrcode {
                   // incrementar ticket vendido no evento
                   this.eventoService.confirmTicketVendidoInEvento(ticket.evento);
 
-                  this.ticketService.sendEmailTicket(ticket);
+                  if (ticket['email'] && ticket['email'].length > 0) {
+                    this.ticketService.sendEmailTicket(ticket);
+                  }
       
                   console.log('Sucesso ticket:', ticket);
                   return resolve();
@@ -110,6 +112,9 @@ export class Qrcode {
             console.error('Erro ao adicionar ticket:', erro);
             return resolve();
           });
+        },
+        complete: () => {
+          return resolve();
         },
         error: (erro) => {
           console.error('Erro ao consultar ticket:', erro);

@@ -19,6 +19,21 @@
     </h2>
 </div>
 
+<div class="px-4 py-2 mb-6">
+    <div class="text-text-muted-light text-sm font-medium mb-2 flex justify-between">
+        <span>Progressão do Evento</span>
+        <span id="scan-count">{{evento?.presentes?.count || 0}} / {{evento?.presentes?.total || 0}} ingressos</span>
+    </div>
+    <div class="w-full bg-gray-300 rounded-full h-4 relative overflow-hidden">
+        <div class="bg-[var(--success-color)] h-4 rounded-full transition-all duration-500 ease-out" id="progress-bar"
+            [style.width]="evento?.presentes?.count / evento?.presentes?.total * 100 + '%'"></div>
+        <span
+            class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs font-bold text-white text-shadow-sm">{{evento?.presentes?.count
+            / evento?.presentes?.total * 100 || 0 | number:'1.0-0'}}%
+            Completo</span>
+    </div>
+</div>
+
 <div class="qr-scanner-container">
 
     <!-- Barcode scanner component -->
@@ -36,20 +51,7 @@
     <button class="qr-scanner-toggle material-icons" (click)="toggleCamera()">flip_camera_android</button>
 </div>
 
-<div class="px-4 py-2 mt-[128px]">
-    <div class="text-text-muted-light text-sm font-medium mb-2 flex justify-between">
-        <span>Progressão do Evento</span>
-        <span id="scan-count">{{evento?.presentes?.count || 0}} / {{evento?.presentes?.total || 0}} ingressos</span>
-    </div>
-    <div class="w-full bg-gray-300 rounded-full h-4 relative overflow-hidden">
-        <div class="bg-[var(--success-color)] h-4 rounded-full transition-all duration-500 ease-out" id="progress-bar"
-            [style.width]="evento?.presentes?.count / evento?.presentes?.total * 100 + '%'"></div>
-        <span
-            class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs font-bold text-white text-shadow-sm">{{evento?.presentes?.count
-            / evento?.presentes?.total * 100 || 0 | number:'1.0-0'}}%
-            Completo</span>
-    </div>
-</div>
+
 }
 
 @if (isShowResultModal) {
