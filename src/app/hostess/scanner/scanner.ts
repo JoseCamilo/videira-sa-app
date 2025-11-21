@@ -114,7 +114,7 @@ export class Scanner implements OnInit, OnDestroy {
               if (item?.ativo) {
                 this.isTicketValidado = true;
 
-                this.scannedResult['tipo'] = item?.tipo || '';
+                this.scannedResult['tipo'] = item?.tipo || '1° LOTE';
               } else {
                 this.isTicketInvalidado = true;
                 this.textErroTicket = 'Parece que este ticket já foi utilizado ou esta inativo';
