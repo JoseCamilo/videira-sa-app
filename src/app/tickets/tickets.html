@@ -23,11 +23,21 @@
     </div>
 
     }
-    } @else {
+    } @else if (user) {
     <div class="text-center">
         <p>Você não possui tickets ativos</p>
     </div>
-
+    } @else {
+    <div class="text-center">
+        <p>Faça login para ver seus tickets</p>
+    </div>
+    <div>
+        <button
+            class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+            (click)="perfil()">
+            Login
+        </button>
+    </div>
     }
 
 </div>

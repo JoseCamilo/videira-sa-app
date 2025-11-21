@@ -51,4 +51,8 @@ export class Tickets implements OnInit, OnDestroy {
   goBack() {
     this.router.navigate(['']);
   }
+
+  perfil() {
+    this.router.navigate(['perfil']);
+  }
 }
