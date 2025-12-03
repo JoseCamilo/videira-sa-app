@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +13,7 @@ import { AuthService } from '../auth/auth.service';
 export class Menu implements OnInit {
   
   router: Router = inject(Router);
+  activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   authService = inject(AuthService);
   
   isShownMoremodal = false;
@@ -27,6 +29,38 @@ export class Menu implements OnInit {
     this.authService.validUserADM();
     this.nome = this.authService.getNome();
     this.foto = this.authService.getFoto();
+    
+    // Detectar rota e destacar item do menu correspondente
+    this.setActiveMenuItemByRoute();
+    
+    // Atualizar item ativo quando a rota mudar
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.setActiveMenuItemByRoute();
+      });
+  }
+
+  setActiveMenuItemByRoute() {
+    const currentRoute = this.router.url;
+    
+    if (currentRoute === '/' || currentRoute.includes('/evento')) {
+      this.itemActive = 1; // Eventos
+    } else if (currentRoute.includes('/tickets')) {
+      this.itemActive = 2; // Meus Tickets
+    } else if (
+      currentRoute.includes('/perfil') ||
+      currentRoute.includes('/hostess') ||
+      currentRoute.includes('/sobre-nos') ||
+      currentRoute.includes('/politica-privacidade') ||
+      currentRoute.includes('/termos-servico') ||
+      currentRoute.includes('/exclusao-dados') ||
+      currentRoute.includes('/contato')
+    ) {
+      this.itemActive = 3; // Mais
+    } else {
+      this.itemActive = 1; // Padrão para Eventos
+    }
   }
   
   openLink(link: string) {
@@ -37,4 +71,3 @@ export class Menu implements OnInit {
     this.router.navigate(['perfil']);
   }
 }
- 

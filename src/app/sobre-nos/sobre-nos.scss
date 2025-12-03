@@ -1,0 +1,77 @@
+// Sobre Nós Styles
+
+section {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Títulos com gradiente
+h1, h2 {
+  background: linear-gradient(135deg, #06b6d4, #00d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Cards dos valores
+.bg-surface-light {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(6, 182, 212, 0.1);
+    border-left-width: 6px;
+  }
+}
+
+// Lista com hover
+ul li {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #06b6d4;
+    margin-left: 5px;
+  }
+}
+
+// Gradiente do encargo
+section.bg-gradient-to-r {
+  box-shadow: 0 8px 32px rgba(6, 182, 212, 0.2);
+  border-radius: 0.5rem;
+}
+
+// Responsivo
+@media (max-width: 640px) {
+  section {
+    padding: 1rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .text-3xl {
+    font-size: 1.875rem;
+  }
+  
+  .text-4xl {
+    font-size: 2rem;
+  }
+}
+
+// Grid responsivo
+.grid {
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}

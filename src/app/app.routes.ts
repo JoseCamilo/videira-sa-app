@@ -64,6 +64,11 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./termos-servico/termos-servico').then(c => c.TermosServico),
             },
+            {
+                path: 'sobre-nos',
+                loadComponent: () =>
+                    import('./sobre-nos/sobre-nos').then(c => c.SobreNos),
+            },
 
         ]
     },

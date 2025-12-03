@@ -44,15 +44,10 @@
         </li>
         }
         <li>
-            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition" (click)="itemActive=3">
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition"
+                (click)="itemActive=3;openLink('/sobre-nos');isShownMoremodal=false">
                 <span class="material-icons gradient-text text-text-muted-light mr-4">info</span>
                 <span class="text-text-light font-medium">Sobre Nós</span>
-            </a>
-        </li>
-        <li>
-            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition" (click)="itemActive=3">
-                <span class="material-icons gradient-text text-text-muted-light mr-4">contact_support</span>
-                <span class="text-text-light font-medium">Contato</span>
             </a>
         </li>
     </ul>
@@ -78,30 +73,32 @@
             (click)="itemActive=2;openLink('/tickets')" [ngClass]="{ 'gradient-text': itemActive==2 }">
             Meus Tickets
         </a>
-        @if (isADM) {
-        <a class="text-text-light hover:text-cyan-500 transition font-medium"
-            (click)="itemActive=4;openLink('/hostess')" [ngClass]="{ 'gradient-text': itemActive==4 }">
-            Hostess (Admin)
-        </a>
-        }
 
         <!-- Dropdown Menu -->
         <div class="relative group">
             <button class="text-text-light hover:text-cyan-500 transition font-medium flex items-center gap-1"
-                [ngClass]="{ 'gradient-text': itemActive==5 }">
+                [ngClass]="{ 'gradient-text': itemActive==3 }">
                 <span>Mais</span>
                 <span class="material-icons text-xl">expand_more</span>
             </button>
             <div
-                class="absolute right-0 mt-0 w-48 bg-surface-light border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light" (click)="itemActive=5">
+                class="absolute right-0 mt-0 w-56 bg-surface-light border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"
+                    (click)="itemActive=3;openLink('/perfil')">
+                    <span class="material-icons text-sm mr-2">person</span>
+                    <span class="text-sm">Perfil</span>
+                </a>
+                @if (isADM) {
+                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"
+                    (click)="itemActive=3;openLink('/hostess')">
+                    <span class="material-icons text-sm mr-2">admin_panel_settings</span>
+                    <span class="text-sm">Hostess (Admin)</span>
+                </a>
+                }
+                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"
+                    (click)="itemActive=3;openLink('/sobre-nos')">
                     <span class="material-icons text-sm mr-2">info</span>
                     <span class="text-sm">Sobre Nós</span>
-                </a>
-                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light border-t border-gray-200"
-                    (click)="itemActive=5">
-                    <span class="material-icons text-sm mr-2">contact_support</span>
-                    <span class="text-sm">Contato</span>
                 </a>
             </div>
         </div>
