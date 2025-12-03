@@ -33,7 +33,7 @@ export class Tickets implements OnInit, OnDestroy {
   }
 
   carregarMais() {
-    this.ticketService.getMeusTicketsAtivos(this.user, 20, this.lastDocFilter)
+    this.ticketService.getMeusTicketsAtivos(this.user, 100, this.lastDocFilter)
       .pipe(take(1))
       .subscribe({
         next: (novos) => {

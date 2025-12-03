@@ -15,10 +15,10 @@ export class HostessEvento {
   @Input() titulo!: string;
   @Input() data!: string;
   @Input() imagem!: string;
-  @Input() vendidosCount!: number;
-  @Input() vendidosTotal!: number;
-  @Input() presentesCount!: number;
-  @Input() presentesTotal!: number;
+  @Input() vendidosCount: number = 0;
+  @Input() vendidosTotal: number = 0;
+  @Input() presentesCount: number = 0;
+  @Input() presentesTotal: number = 0;
 
   openScanner() {
     this.router.navigate(['scanner', this.id]);

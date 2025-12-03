@@ -44,6 +44,11 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./qrcode/qrcode').then(c => c.Qrcode),
             },
+            {
+                path: 'checkout',
+                loadComponent: () =>
+                    import('./checkout/checkout').then(c => c.Checkout),
+            },
 
         ]
     },

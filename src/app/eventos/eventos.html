@@ -1,68 +1,71 @@
-<div class="p-4 space-y-6 -mt-8 relative z-10 bg-background-light rounded-t-2xl">
-    <h3 class="text-2xl font-bold text-text-light pt-4">Próximos Eventos</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="relative">
-            <span
-                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">calendar_today</span>
-            <input
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500"
-                type="date" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" />
-        </div>
-        <div class="relative">
-            <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">category</span>
-            <select
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
-                [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
-                <option>Tipo de Evento</option>
-                <option>Culto</option>
-                <option>Conferência</option>
-                <option>Workshop</option>
-                <option>Experiência</option>
-            </select>
-            <span
-                class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light pointer-events-none">expand_more</span>
-        </div>
-        <div class="relative">
-            <span
-                class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">location_on</span>
-            <select
-                class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
-                [(ngModel)]="local" (ngModelChange)="onLocalChange($event)">
-                <option>Localização</option>
-                <option>Videira Santo André</option>
-                <option>Chácara Videira</option>
-            </select>
-            <span
-                class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light pointer-events-none">expand_more</span>
-        </div>
+<div class="p-4 space-y-6 -mt-8 relative bg-background-light rounded-t-2xl">
+    <div class="max-w-xl mx-auto">
 
-        @if (dateFilter || typeFilter || localFilter) {
-
-        <button
-            class="w-full bg-surface-light border border-gray-300 text-text-muted-light py-2 rounded-lg hover:underline"
-            (click)="limparFiltro()">
-            Limpar filtros
-        </button>
-        }
-    </div>
-
-    <div class="pt-1">
-        @if (carregando) {
-            <app-loading></app-loading>
-
-        } @else if (eventos.length > 0) {
-            
-        @for (item of eventos; track $index) {
-        <div class="pt-4">
-            <app-evento [id]="item.id" [titulo]="item.titulo" [data]="item.data" [local]="item.local"
-                [imagem]="item.imagem">
-            </app-evento>
+        <h3 class="text-2xl font-bold text-text-light pt-4 pb-2">Próximos Eventos</h3>
+        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="relative">
+                <span
+                    class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">calendar_today</span>
+                <input
+                    class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500"
+                    type="date" [(ngModel)]="date" (ngModelChange)="onDateChange($event)" />
+            </div>
+            <div class="relative">
+                <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">category</span>
+                <select
+                    class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
+                    [(ngModel)]="type" (ngModelChange)="onTypeChange($event)">
+                    <option>Tipo de Evento</option>
+                    <option>Culto</option>
+                    <option>Conferência</option>
+                    <option>Workshop</option>
+                    <option>Experiência</option>
+                </select>
+                <span
+                    class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light pointer-events-none">expand_more</span>
+            </div>
+            <div class="relative">
+                <span
+                    class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light">location_on</span>
+                <select
+                    class="w-full pl-10 pr-4 py-2 rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 appearance-none"
+                    [(ngModel)]="local" (ngModelChange)="onLocalChange($event)">
+                    <option>Localização</option>
+                    <option>Videira Santo André</option>
+                    <option>Chácara Videira</option>
+                </select>
+                <span
+                    class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-text-muted-light pointer-events-none">expand_more</span>
+            </div>
+    
+            @if (dateFilter || typeFilter || localFilter) {
+    
+            <button
+                class="w-full bg-surface-light border border-gray-300 text-text-muted-light py-2 rounded-lg hover:underline"
+                (click)="limparFiltro()">
+                Limpar filtros
+            </button>
+            }
         </div>
-        }
-        } @else {
-        <div class="text-center">
-            <span>Não encontramos eventos</span>
+    
+        <div class="pt-6 flex flex-col gap-6">
+            @if (carregando) {
+                <app-loading></app-loading>
+    
+            } @else if (eventos.length > 0) {
+                
+            @for (item of eventos; track $index) {
+            <div>
+                <app-evento [id]="item.id" [titulo]="item.titulo" [data]="item.data" [local]="item.local"
+                    [imagem]="item.imagem">
+                </app-evento>
+            </div>
+            }
+            } @else {
+            <div class="text-center">
+                <span>Não encontramos eventos</span>
+            </div>
+            }
         </div>
-        }
     </div>
 </div>

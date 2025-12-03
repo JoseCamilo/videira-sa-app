@@ -41,7 +41,7 @@ export class Eventos implements OnInit, OnDestroy {
   }
 
   carregarMais() {
-    this.eventoService.getEventosAtivos(20, this.lastDocFilter, this.dateFilter, this.typeFilter, this.localFilter)
+    this.eventoService.getEventosAtivos(50, this.lastDocFilter, this.dateFilter, this.typeFilter, this.localFilter)
       .pipe(take(1))
       .subscribe({
         next: (novosEventos) => {

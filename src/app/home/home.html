@@ -1,10 +1,16 @@
 <main class="pt-0">
     <div class="relative h-96">
-        <img alt="Igreja Videira" class="absolute inset-0 w-full h-full object-cover"
+        <!-- Background desfocado -->
+        <div class="absolute inset-0 w-full h-full">
+            <img alt="Igreja Videira Background" class="w-full h-full object-cover blur-lg"
+                src="imagens/fundo.jpg" />
+        </div>
+        <!-- Imagem principal -->
+        <img alt="Igreja Videira" class="absolute inset-0 w-full h-full object-cover max-w-6xl mx-auto"
             src="imagens/fundo.jpg" />
         <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col justify-between p-6">
-            <div class="flex justify-between">
+            class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent flex flex-col justify-between p-6">
+            <div class="md:hidden flex justify-between">
                 <div class="flex">
                     <img alt="Logo Videira" class="h-8" src="imagens/icon.png" />
                     <div class="flex flex-col items-start pl-2">
@@ -28,7 +34,7 @@
                     </button>
                 }
             </div>
-            <div class="flex justify-end items-end">
+            <div class="md:hidden flex justify-end items-end">
                 <h2 class="text-gray-300 text-lg font-serif italic text-right drop-shadow-lg pr-2 pb-8">Uma
                     Igreja de Vencedores</h2>
             </div>

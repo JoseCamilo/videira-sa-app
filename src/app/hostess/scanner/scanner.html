@@ -1,5 +1,5 @@
 <div
-    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
     <div class="flex shrink-0 items-center">
         <button class="material-icons" (click)="goBack()">arrow_back</button>
     </div>
@@ -8,151 +8,153 @@
     </h2>
 </div>
 
-@if (carregando) {
-<app-loading></app-loading>
-
-} @else {
-
-<div class="flex items-center mb-8">
-    <h2 class="text-xl text-text-light font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
-        {{ evento?.titulo }}
-    </h2>
-</div>
-
-<div class="px-4 py-2 mb-6">
-    <div class="text-text-muted-light text-sm font-medium mb-2 flex justify-between">
-        <span>Progressão do Evento</span>
-        <span id="scan-count">{{evento?.presentes?.count || 0}} / {{evento?.presentes?.total || 0}} ingressos</span>
+<!-- <div class="p-4 space-y-4 max-w-xl mx-auto"> -->
+    <!-- @if (carregando) {
+    <app-loading></app-loading>
+    
+    } @else { -->
+    
+    <div class="flex items-center mb-8">
+        <h2 class="text-xl text-text-light font-bold leading-tight tracking-[-0.015em] flex-1 text-center">
+            {{ evento?.titulo }}
+        </h2>
     </div>
-    <div class="w-full bg-gray-300 rounded-full h-4 relative overflow-hidden">
-        <div class="bg-[var(--success-color)] h-4 rounded-full transition-all duration-500 ease-out" id="progress-bar"
-            [style.width]="evento?.presentes?.count / evento?.presentes?.total * 100 + '%'"></div>
-        <span
-            class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs font-bold text-white text-shadow-sm">{{evento?.presentes?.count
-            / evento?.presentes?.total * 100 || 0 | number:'1.0-0'}}%
-            Completo</span>
+    
+    <div class="px-4 py-2 mb-6">
+        <div class="text-text-muted-light text-sm font-medium mb-2 flex justify-between">
+            <span>Progressão do Evento</span>
+            <span id="scan-count">{{evento?.presentes?.count || 0}} / {{evento?.presentes?.total || 0}} ingressos</span>
+        </div>
+        <div class="w-full bg-gray-300 rounded-full h-4 relative overflow-hidden">
+            <div class="bg-[var(--success-color)] h-4 rounded-full transition-all duration-500 ease-out" id="progress-bar"
+                [style.width]="evento?.presentes?.count / evento?.presentes?.total * 100 + '%'"></div>
+            <span
+                class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-xs font-bold text-white text-shadow-sm">{{evento?.presentes?.count
+                / evento?.presentes?.total * 100 || 0 | number:'1.0-0'}}%
+                Completo</span>
+        </div>
     </div>
-</div>
-
-<div class="qr-scanner-container">
-
-    <!-- Barcode scanner component -->
-    <zxing-scanner class="qr-scanner-video" [formats]="allowedFormats" [autostart]="true" [device]="selectedDevice"
-        (scanSuccess)="onCodeResult($event)" (camerasFound)="onDevicesFound($event)" (camerasNotFound)="onHasDevices()"
-        (scanError)="onError($event)"></zxing-scanner>
-
-    <!-- Moldura de escaneamento -->
-    <div class="qr-scanner-frame"></div>
-
-    <!-- Mensagem de status -->
-    <div class="qr-scanner-status">{{statusScanner}}</div>
-
-    <!-- Botão para alternar câmera -->
-    <button class="qr-scanner-toggle material-icons" (click)="toggleCamera()">flip_camera_android</button>
-</div>
-
-
-}
-
-@if (isShowResultModal) {
-<div #moremodal class="fixed inset-0 z-40 bg-black/50"></div>
-}
-
-<div class="fixed bottom-0 left-0 right-0 z-50 bg-surface-light rounded-t-2xl p-4 transform translate-y-full transition-transform duration-300 ease-in-out"
-    #moremodalcontent [ngClass]="{ 'translate-y-full': !isShowResultModal, 'translate-y-0': isShowResultModal }">
-    <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4"></div>
-    <div class="space-y-2">
-        <h1 class="text-text-light text-[26px] font-bold leading-tight tracking-[-0.015em] text-center pb-3 pt-2">
-            Dados do Ticket</h1>
+    
+    <div class="qr-scanner-container">
+    
+        <!-- Barcode scanner component -->
+        <zxing-scanner class="qr-scanner-video" [formats]="allowedFormats" [autostart]="true" [device]="selectedDevice"
+            (scanSuccess)="onCodeResult($event)" (camerasFound)="onDevicesFound($event)" (camerasNotFound)="onHasDevices()"
+            (scanError)="onError($event)"></zxing-scanner>
+    
+        <!-- Moldura de escaneamento -->
+        <div class="qr-scanner-frame"></div>
+    
+        <!-- Mensagem de status -->
+        <div class="qr-scanner-status">{{statusScanner}}</div>
+    
+        <!-- Botão para alternar câmera -->
+        <button class="qr-scanner-toggle material-icons" (click)="toggleCamera()">flip_camera_android</button>
     </div>
-
-    <div class="p-4 grid grid-cols-1 gap-y-4">
-        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
-            <div class="flex items-center gap-4">
-                <span class="material-icons gradient-text text-2xl"> calendar_month </span>
-                <div>
-                    <p class="text-text-light text-base font-medium leading-normal">Evento</p>
-                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{scannedResult?.titulo}}</p>
+    
+    
+    <!-- } -->
+    
+    @if (isShowResultModal) {
+    <div #moremodal class="fixed inset-0 z-40 bg-black/50"></div>
+    }
+    
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-surface-light rounded-t-2xl p-4 transform translate-y-full transition-transform duration-300 ease-in-out"
+        #moremodalcontent [ngClass]="{ 'translate-y-full': !isShowResultModal, 'translate-y-0': isShowResultModal }">
+        <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-4"></div>
+        <div class="space-y-2">
+            <h1 class="text-text-light text-[26px] font-bold leading-tight tracking-[-0.015em] text-center pb-3 pt-2">
+                Dados do Ticket</h1>
+        </div>
+    
+        <div class="p-4 grid grid-cols-1 gap-y-4">
+            <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <span class="material-icons gradient-text text-2xl"> calendar_month </span>
+                    <div>
+                        <p class="text-text-light text-base font-medium leading-normal">Evento</p>
+                        <p class="text-text-muted-light text-sm font-normal leading-normal">{{scannedResult?.titulo}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
-            <div class="flex items-center gap-4">
-                <span class="material-icons gradient-text text-2xl"> person </span>
-                <div>
-                    <p class="text-text-light text-base font-medium leading-normal">Convidado</p>
-                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{scannedResult?.nome ||
-                        scannedResult?.email}}</p>
+            <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <span class="material-icons gradient-text text-2xl"> person </span>
+                    <div>
+                        <p class="text-text-light text-base font-medium leading-normal">Convidado</p>
+                        <p class="text-text-muted-light text-sm font-normal leading-normal">{{scannedResult?.nome ||
+                            scannedResult?.email}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
-            <div class="flex items-center gap-4">
-                <span class="material-icons gradient-text text-2xl"> confirmation_number </span>
-                <div>
-                    <p class="text-text-light text-base font-medium leading-normal">Tipo de Ingresso</p>
-                    <p class="text-text-muted-light text-sm font-normal leading-normal">{{scannedResult?.tipo ||
-                        '-'}}</p>
+            <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <span class="material-icons gradient-text text-2xl"> confirmation_number </span>
+                    <div>
+                        <p class="text-text-light text-base font-medium leading-normal">Tipo de Ingresso</p>
+                        <p class="text-text-muted-light text-sm font-normal leading-normal">{{scannedResult?.tipo ||
+                            '-'}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        @if (validando) {
-        <app-loading message="Validando ticket..."></app-loading>
-        }@else if (isTicketValidado) {
-        <div class="rounded-lg border border-green-300 bg-green-100 p-4 shadow-sm mb-[120px]">
-            <div class="flex items-center gap-4">
-                <span class="material-icons text-2xl text-green-400"> check </span>
-                <div>
-                    <p class="text-sm font-medium text-green-800">Ticket válido! Confirme o acesso e libere a entrada para o convidado.</p>
+            @if (validando) {
+            <app-loading message="Validando ticket..."></app-loading>
+            }@else if (isTicketValidado) {
+            <div class="rounded-lg border border-green-300 bg-green-100 p-4 shadow-sm mb-[120px]">
+                <div class="flex items-center gap-4">
+                    <span class="material-icons text-2xl text-green-400"> check </span>
+                    <div>
+                        <p class="text-sm font-medium text-green-800">Ticket válido! Confirme o acesso e libere a entrada para o convidado.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        }@else if (isTicketInvalidado) {
-        <div class="rounded-lg border border-red-300 bg-red-100 p-4 shadow-sm mb-[120px]">
-            <div class="flex items-center gap-4">
-                <span class="material-icons text-2xl text-red-400"> close </span>
-                <div>
-                    <p class="text-sm font-medium text-red-800"> O Ticket NÃO é válido! {{textErroTicket}}</p>
+            }@else if (isTicketInvalidado) {
+            <div class="rounded-lg border border-red-300 bg-red-100 p-4 shadow-sm mb-[120px]">
+                <div class="flex items-center gap-4">
+                    <span class="material-icons text-2xl text-red-400"> close </span>
+                    <div>
+                        <p class="text-sm font-medium text-red-800"> O Ticket NÃO é válido! {{textErroTicket}}</p>
+                    </div>
                 </div>
             </div>
+            }
         </div>
-        }
-    </div>
-
-    <div class="p-4 pt-0 mt-[20px]">
-        @if (validando) {
-        <button
-            class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
-            Validando ticket...
-        </button>
-        }@else if (confirmando) {
-        <button
-            class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
-            Confirmando ticket...
-        </button>
-        }@else if (isTicketValidado) {
-        <button
-            class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
-            (click)="confirmTicket()">
-            Confirmar acesso
-        </button>
-        }@else if (isTicketInvalidado) {
-           <button
-            class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
-            Ticket inválido...
-        </button> 
-        }@else {
-           <button
-            class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
-            Confirmar acesso
-        </button> 
-        }
-    </div>
-    <div class="p-4 pt-0">
-        <button
-            class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
-            (click)="cancelTicket()">
-            Cancelar
-        </button>
+    
+        <div class="p-4 pt-0 mt-[20px]">
+            @if (validando) {
+            <button
+                class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
+                Validando ticket...
+            </button>
+            }@else if (confirmando) {
+            <button
+                class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
+                Confirmando ticket...
+            </button>
+            }@else if (isTicketValidado) {
+            <button
+                class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                (click)="confirmTicket()">
+                Confirmar acesso
+            </button>
+            }@else if (isTicketInvalidado) {
+               <button
+                class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
+                Ticket inválido...
+            </button> 
+            }@else {
+               <button
+                class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg shadow-md">
+                Confirmar acesso
+            </button> 
+            }
+        </div>
+        <div class="p-4 pt-0">
+            <button
+                class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                (click)="cancelTicket()">
+                Cancelar
+            </button>
+        <!-- </div> -->
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div
-    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
     <div class="flex shrink-0 items-center">
         <button class="material-icons" (click)="goBack()">arrow_back</button>
     </div>
@@ -8,7 +8,7 @@
     </h2>
 </div>
 
-<div class="p-4 space-y-4">
+<div class="p-4 space-y-4 max-w-xl mx-auto">
     @if (carregando) {
     <app-loading></app-loading>
 
@@ -16,8 +16,8 @@
     @for (item of eventos; track $index) {
     <div>
         <app-hostess-evento [id]="item.id" [titulo]="item.titulo" [data]="item.data" [imagem]="item.imagem"
-            [presentesCount]="item.presentes.count" [presentesTotal]="item.presentes.total"
-            [vendidosCount]="item.vendidos.count" [vendidosTotal]="item.vendidos.total">
+            [presentesCount]="item.presentes?.count || 0" [presentesTotal]="item.presentes?.total || 0"
+            [vendidosCount]="item.vendidos?.count || 0" [vendidosTotal]="item.vendidos?.total || 0">
         </app-hostess-evento>
     </div>
 

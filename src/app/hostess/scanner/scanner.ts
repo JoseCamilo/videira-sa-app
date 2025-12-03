@@ -114,7 +114,7 @@ export class Scanner implements OnInit, OnDestroy {
               if (item?.ativo) {
                 this.isTicketValidado = true;
 
-                this.scannedResult['tipo'] = item?.tipo || '1° LOTE';
+                this.scannedResult['tipo'] = item?.tipo || '-';
               } else {
                 this.isTicketInvalidado = true;
                 this.textErroTicket = 'Parece que este ticket já foi utilizado ou esta inativo';
@@ -145,6 +145,16 @@ export class Scanner implements OnInit, OnDestroy {
 
   onError(error: any) {
     console.error('Erro ao escanear:', error);
+    
+    if (error.name === 'NotReadableError') {
+      this.statusScanner = 'Câmera indisponível. Verifique se outro app está usando a câmera.';
+    } else if (error.name === 'NotAllowedError' || error.message?.includes('Permission')) {
+      this.statusScanner = 'Permissão de câmera negada. Ative nas configurações.';
+    } else if (error.name === 'NotFoundError') {
+      this.statusScanner = 'Nenhuma câmera encontrada no dispositivo.';
+    } else {
+      this.statusScanner = 'Erro ao acessar câmera. Tente novamente.';
+    }
   }
 
   toggleCamera() {
