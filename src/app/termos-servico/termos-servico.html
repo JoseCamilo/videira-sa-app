@@ -1,0 +1,327 @@
+<div class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Termos de Serviço
+    </h2>
+</div>
+
+<div class="p-4 space-y-6 max-w-4xl mx-auto pb-32 md:pb-6">
+    <div class="space-y-6">
+        <h1 class="text-3xl font-bold text-text-light">Termos de Serviço</h1>
+        
+        <p class="text-text-muted-light">Última atualização: {{ dataAtualizacao }}</p>
+
+        <p class="text-text-muted-light leading-relaxed italic">
+            Ao acessar e usar este aplicativo, você concorda em estar vinculado por estes termos de serviço.
+        </p>
+
+        <!-- 1. Aceitação dos Termos -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">1. Aceitação dos Termos</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Ao utilizar o aplicativo da Igreja Videira ("Serviço"), você aceita estar vinculado por estes Termos de Serviço. 
+                Se você não concorda com qualquer parte destes termos, não deve usar nosso serviço.
+            </p>
+        </section>
+
+        <!-- 2. Descrição do Serviço -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">2. Descrição do Serviço</h2>
+            <p class="text-text-muted-light leading-relaxed mb-3">
+                O aplicativo da Igreja Videira fornece:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li>Informações sobre eventos e cultos</li>
+                <li>Sistema de venda de ingressos para eventos</li>
+                <li>Gerenciamento de tickets e confirmação de presença</li>
+                <li>Processamento de pagamentos via Mercado Pago</li>
+                <li>Perfil do usuário e histórico de eventos</li>
+                <li>Funcionalidades administrativas para gestores</li>
+            </ul>
+        </section>
+
+        <!-- 3. Elegibilidade do Usuário -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">3. Elegibilidade do Usuário</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Para usar nosso serviço, você deve:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li>Ter pelo menos 13 anos de idade (ou equivalente em sua jurisdição)</li>
+                <li>Ter capacidade legal para estabelecer contratos vinculativos</li>
+                <li>Possuir uma conta válida com informações precisas</li>
+                <li>Ser responsável por manter a confidencialidade de sua senha</li>
+                <li>Aceitar nossa Política de Privacidade</li>
+            </ul>
+        </section>
+
+        <!-- 4. Conta do Usuário -->
+        <section class="space-y-3 bg-surface-light p-4 rounded-lg">
+            <h2 class="text-2xl font-semibold text-text-light">4. Criação e Responsabilidade da Conta</h2>
+            <div class="space-y-3 mt-3">
+                <div>
+                    <h3 class="font-semibold text-cyan-600 mb-2">4.1 Informações Precisas</h3>
+                    <p class="text-text-muted-light text-sm">
+                        Você concorda em fornecer informações precisas, atuais e completas durante o registro 
+                        e manter suas informações atualizadas.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-cyan-600 mb-2">4.2 Responsabilidade</h3>
+                    <p class="text-text-muted-light text-sm">
+                        Você é inteiramente responsável por todas as atividades que ocorrem em sua conta. 
+                        Você concorda em notificar-nos imediatamente de qualquer acesso não autorizado.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-cyan-600 mb-2">4.3 Segurança de Senha</h3>
+                    <p class="text-text-muted-light text-sm">
+                        Você é responsável por manter a confidencialidade de sua senha e por restringir 
+                        o acesso ao seu dispositivo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Transações e Pagamentos -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">5. Transações e Pagamentos</h2>
+            <div class="space-y-3">
+                <div>
+                    <h3 class="font-semibold text-text-light mb-2">5.1 Processamento de Pagamentos</h3>
+                    <p class="text-text-muted-light leading-relaxed text-sm">
+                        Os pagamentos de ingressos são processados pelo Mercado Pago. Ao realizar uma compra, 
+                        você concorda em:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 text-text-muted-light text-sm mt-2">
+                        <li>Fornecer informações de pagamento precisas</li>
+                        <li>Aceitar os Termos de Serviço do Mercado Pago</li>
+                        <li>Respeitar os limites de transação estabelecidos</li>
+                    </ul>
+                </div>
+                <div class="border-l-4 border-blue-500 pl-4">
+                    <h3 class="font-semibold text-text-light mb-2">5.2 Não Armazenamento de Cartões</h3>
+                    <p class="text-text-muted-light leading-relaxed text-sm">
+                        <strong>Importante:</strong> Nós NÃO armazenamos dados de cartão de crédito ou débito. 
+                        Todos os pagamentos são processados de forma segura pelo Mercado Pago.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-text-light mb-2">5.3 Recibos e Confirmações</h3>
+                    <p class="text-text-muted-light leading-relaxed text-sm">
+                        Você receberá confirmações de compra e ingressos no seu email. 
+                        É sua responsabilidade manter estes registros.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-text-light mb-2">5.4 Reembolsos</h3>
+                    <p class="text-text-muted-light leading-relaxed text-sm">
+                        Reembolsos são processados conforme a política de cancelamento de eventos. 
+                        Solicitações devem ser feitas via email ou no aplicativo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Ingressos e Acesso a Eventos -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">6. Ingressos e Acesso a Eventos</h2>
+            <div class="space-y-2 text-text-muted-light text-sm">
+                <p>
+                    <strong>6.1 Propriedade do Ingresso:</strong> Os ingressos são não-transferíveis 
+                    e permanecem propriedade da Igreja Videira. Você recebe uma licença para usar o ingresso 
+                    para acessar o evento especificado.
+                </p>
+                <p>
+                    <strong>6.2 Uso Único:</strong> Cada ingresso é válido apenas uma única vez. 
+                    O ingresso será marcado como "utilizado" após o acesso ao evento.
+                </p>
+                <p>
+                    <strong>6.3 Qualificações:</strong> Você pode ser negado acesso se: (a) o ingresso for inválido, 
+                    (b) houver suspeita de fraude, (c) você violar nossos termos, ou (d) você estiver impedido legalmente.
+                </p>
+                <p>
+                    <strong>6.4 Cancelamento de Eventos:</strong> Se um evento for cancelado, ofereceremos reembolso 
+                    ou mudança de data, conforme permitido por lei.
+                </p>
+                <p>
+                    <strong>6.5 Código QR:</strong> Seu ingresso pode conter um código QR único. 
+                    Você é responsável por não compartilhá-lo com terceiros não autorizados.
+                </p>
+            </div>
+        </section>
+
+        <!-- 7. Uso Aceitável -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">7. Uso Aceitável</h2>
+            <p class="text-text-muted-light leading-relaxed mb-3">
+                Você concorda em não usar o aplicativo para:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light text-sm">
+                <li>Violar qualquer lei, regulamento ou direito de terceiros</li>
+                <li>Enviar spam, malware ou conteúdo prejudicial</li>
+                <li>Realizar engenharia reversa ou tentar acessar sistemas não autorizados</li>
+                <li>Criar contas falsas ou representar-se como outro usuário</li>
+                <li>Fraude, phishing ou roubo de identidade</li>
+                <li>Revender ingressos sem autorização</li>
+                <li>Assédio, intimidação ou ameaças contra outros usuários</li>
+                <li>Compartilhar código QR ou ingressos com terceiros não autorizados</li>
+                <li>Interferir com a operação ou segurança do serviço</li>
+            </ul>
+        </section>
+
+        <!-- 8. Propriedade Intelectual -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">8. Propriedade Intelectual</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Todo conteúdo do aplicativo, incluindo textos, imagens, logotipos, código e design, 
+                é propriedade intelectual da Igreja Videira ou de seus licenciadores. Você não pode 
+                reproduzir, modificar ou distribuir este conteúdo sem permissão escrita.
+            </p>
+        </section>
+
+        <!-- 9. Limitação de Responsabilidade -->
+        <section class="space-y-3 bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-500">
+            <h2 class="text-2xl font-semibold text-text-light">9. Limitação de Responsabilidade</h2>
+            <div class="space-y-3 mt-3">
+                <div>
+                    <h3 class="font-semibold text-yellow-700 mb-2">9.1 Serviço "Tal Qual"</h3>
+                    <p class="text-text-muted-light text-sm">
+                        O serviço é fornecido "como está" e "conforme disponível". Não garantimos que o serviço 
+                        será ininterrupto ou livre de erros.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-yellow-700 mb-2">9.2 Isenção de Garantias</h3>
+                    <p class="text-text-muted-light text-sm">
+                        Isentamo-nos de todas as garantias explícitas ou implícitas, incluindo garantias de 
+                        comercialização, adequação ou não violação.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-yellow-700 mb-2">9.3 Danos Indiretos</h3>
+                    <p class="text-text-muted-light text-sm">
+                        Em nenhum caso seremos responsáveis por danos indiretos, incidentais ou consequentes 
+                        decorrentes do uso ou impossibilidade de usar o serviço.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Indenização -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">10. Indenização</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Você concorda em indenizar, defender e manter isenta a Igreja Videira de qualquer reclamação, 
+                dano, perda, responsabilidade ou despesa (incluindo honorários advocatícios) decorrentes de:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light text-sm mt-3">
+                <li>Sua violação destes Termos de Serviço</li>
+                <li>Seu uso impróprio do aplicativo</li>
+                <li>Qualquer conteúdo que você enviar ou compartilhar</li>
+                <li>Sua violação de direitos de terceiros</li>
+            </ul>
+        </section>
+
+        <!-- 11. Alterações nos Termos -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">11. Alterações nos Termos</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Nos reservamos o direito de modificar estes Termos de Serviço a qualquer momento. 
+                Notificaremos você sobre mudanças significativas via email ou através do aplicativo. 
+                Seu uso continuado do serviço após as alterações constitui aceitação dos novos termos.
+            </p>
+        </section>
+
+        <!-- 12. Rescisão -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">12. Rescisão</h2>
+            <p class="text-text-muted-light leading-relaxed mb-3">
+                Podemos rescindir ou suspender sua conta e acesso ao serviço imediatamente, 
+                sem aviso prévio ou responsabilidade, por qualquer motivo, incluindo:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light text-sm">
+                <li>Violação dos Termos de Serviço</li>
+                <li>Comportamento fraudulento ou suspeito</li>
+                <li>Múltiplas violações de políticas</li>
+                <li>Cessação de operações da Igreja Videira</li>
+            </ul>
+        </section>
+
+        <!-- 13. Lei Aplicável -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">13. Lei Aplicável e Jurisdição</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Estes Termos de Serviço são regidos pelas leis da República Federativa do Brasil. 
+                Você concorda em submeter-se à jurisdição exclusiva dos tribunais brasileiros 
+                para qualquer disputa ou reclamação.
+            </p>
+        </section>
+
+        <!-- 14. Resolução de Disputas -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">14. Resolução de Disputas</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Antes de iniciar ações legais, você concorda em tentar resolver qualquer disputa 
+                através de negociação de boa fé. Você deve notificar-nos por escrito descrevendo 
+                a natureza da disputa.
+            </p>
+        </section>
+
+        <!-- 15. Privacidade e Dados -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">15. Privacidade e Proteção de Dados</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Seu uso do aplicativo está sujeito à nossa Política de Privacidade. 
+                Consulte nosso documento de Política de Privacidade para entender como coletamos, 
+                usamos e protegemos seus dados.
+            </p>
+        </section>
+
+        <!-- 16. Consentimento para Comunicações -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">16. Consentimento para Comunicações</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Ao criar uma conta, você concorda em receber comunicações por email sobre:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light text-sm mt-3">
+                <li>Confirmações de compra e ingressos</li>
+                <li>Lembretes de eventos</li>
+                <li>Atualizações e notificações importantes</li>
+                <li>Ofertas e promoções (você pode optar por não receber)</li>
+            </ul>
+        </section>
+
+        <!-- 17. Contato -->
+        <section class="space-y-3 bg-surface-light p-4 rounded-lg">
+            <h2 class="text-2xl font-semibold text-text-light">17. Contato</h2>
+            <p class="text-text-muted-light leading-relaxed mb-3">
+                Para dúvidas sobre estes Termos de Serviço, entre em contato conosco:
+            </p>
+            <div class="space-y-2 text-text-muted-light">
+                <p><strong>📧 Email:</strong> suporte@igrejaavideira.com.br</p>
+                <p><strong>🏢 Endereço:</strong> Igreja Videira - Santo André, SP</p>
+                <p><strong>📱 Suporte:</strong> Via aplicativo - Menu → Contato</p>
+            </div>
+        </section>
+
+        <!-- Seção Final -->
+        <section class="space-y-3 bg-gradient-to-r from-cyan-500 to-blue-500 p-6 rounded-lg text-white text-center mt-8">
+            <h2 class="text-2xl font-bold">Você Concorda com Estes Termos?</h2>
+            <p class="opacity-90">
+                Ao continuar usando este aplicativo, você confirma que leu, entendeu e concorda com todos estes termos.
+            </p>
+            <p class="text-sm opacity-75 mt-4">
+                Se você não concorda, por favor, não use nosso serviço.
+            </p>
+        </section>
+
+        <div class="text-center pt-6 border-t border-gray-300">
+            <p class="text-text-muted-light text-sm">
+                Termos de Serviço - Última atualização {{ dataAtualizacao }}
+            </p>
+        </div>
+    </div>
+</div>

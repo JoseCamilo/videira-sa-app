@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp, updateDoc, increment } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Ticket } from '../tickets/tickets.service';
+import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp, updateDoc, increment, getDocs } from '@angular/fire/firestore';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { ProdutoPedido } from '../checkout/checkout';
 
 export interface Evento {
   id: string;       // ID do documento
@@ -13,14 +13,15 @@ export interface Evento {
   hora: string;
   imagem: string;
   ativo: boolean;
-  vendidos: {
+  vendidos?: {
     count: number;
     total: number;
   };
-  presentes: {
+  presentes?: {
     count: number;
     total: number;
   };
+  ingressos: ProdutoPedido[];
 }
 
 @Injectable({
@@ -30,7 +31,7 @@ export class EventoService {
 
   firestore = inject(Firestore)
 
-  getEventosAtivos(pageSize = 10, lastDoc?: any, date?: any, type?: any, local?: any): Observable<Evento[]> {
+  getEventosAtivos(pageSize = 50, lastDoc?: any, date?: any, type?: any, local?: any): Observable<Evento[]> {
     const eventosRef = collection(this.firestore, 'eventos');
 
     const constraints: QueryConstraint[] = [
@@ -62,7 +63,19 @@ export class EventoService {
 
     const eventosQuery = query(eventosRef, ...constraints);
 
-    return (collectionData(eventosQuery, { idField: 'id' }) as Observable<Evento[]>).pipe(
+    return from(getDocs(eventosQuery)).pipe(
+      map(snapshot =>
+        snapshot.docs.map(doc => ({
+          id: doc.id,
+          titulo: doc.data()['titulo'],
+          imagem: doc.data()['imagem'],
+          data: doc.data()['data'],
+          local: doc.data()['local'],
+          presentes: doc.data()['presentes'],
+          vendidos: doc.data()['vendidos'],
+          date: doc.data()['date'].toDate(),
+        } as any))
+      ),
       catchError(err => {
         console.error('Erro ao buscar eventos:', err);
         return of([]);

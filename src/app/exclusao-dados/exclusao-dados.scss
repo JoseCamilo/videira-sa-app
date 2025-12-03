@@ -1,0 +1,75 @@
+// Exclusão de Dados Styles
+
+section {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Títulos com gradiente
+h1, h2 {
+  background: linear-gradient(135deg, #06b6d4, #00d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Timeline
+.flex-col {
+  &.items-center {
+    position: relative;
+  }
+}
+
+// Botões
+button {
+  transition: all 0.3s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Lista de perguntas
+.border-l-4 {
+  transition: all 0.2s ease;
+  
+  &:hover {
+    padding-left: 1.25rem;
+    border-color: #0ea5e9;
+  }
+}
+
+// Destaque para aviso
+.bg-red-50 {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+// Responsivo
+@media (max-width: 640px) {
+  section {
+    padding: 1rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+}

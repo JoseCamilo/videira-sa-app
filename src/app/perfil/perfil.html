@@ -1,5 +1,5 @@
 <div
-    class="flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
     <div class="flex shrink-0 items-center">
         <button class="material-icons" (click)="goBack()">arrow_back</button>
     </div>
@@ -8,7 +8,7 @@
     </h2>
 </div>
 
-<div class="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+<div class="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
     <div class="flex items-center justify-center px-6 py-4">
         @if (user.foto) {
         <img class="w-50 h-50 rounded-full border-2 border-blue-500 object-cover transition-opacity duration-500 opacity-0"

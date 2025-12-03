@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp, updateDoc, increment, addDoc } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Firestore, collection, collectionData, query, where, orderBy, limit, QueryConstraint, startAfter, doc, docData, Timestamp, updateDoc, increment, addDoc, getDocs } from '@angular/fire/firestore';
+import { Observable, of, from } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 export interface Ticket {
   id: string;
@@ -18,6 +18,8 @@ export interface Ticket {
   hora: string;
   telefone: string;
   tipo: string;
+  descricao: string;
+  status: string;
 }
 
 @Injectable({
@@ -50,7 +52,7 @@ export class TicketService {
     );
   }
 
-  getMeusTicketsAtivos(email: string, pageSize = 10, lastDoc?: any): Observable<Ticket[]> {
+  getMeusTicketsAtivos(email: string, pageSize = 100, lastDoc?: any): Observable<Ticket[]> {
     const ticketsRef = collection(this.firestore, 'tickets');
 
     const constraints: QueryConstraint[] = [
@@ -66,7 +68,13 @@ export class TicketService {
 
     const ticketsQuery = query(ticketsRef, ...constraints);
 
-    return (collectionData(ticketsQuery, { idField: 'id' }) as Observable<Ticket[]>).pipe(
+    return from(getDocs(ticketsQuery)).pipe(
+      map(snapshot =>
+        snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        } as Ticket))
+      ),
       catchError(err => {
         console.error('Erro ao buscar tickets:', err);
         return of([]);

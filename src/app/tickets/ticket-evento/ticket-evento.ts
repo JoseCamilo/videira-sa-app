@@ -14,6 +14,8 @@ export class TicketEvento {
   @Input() data!: string;
   @Input() imagem!: string;
   @Input() qrcode!: string;
+  @Input() descricao!: string;
+  @Input() status!: string;
 
   showQRCode = false;
   loaded = false;

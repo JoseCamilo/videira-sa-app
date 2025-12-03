@@ -7,5 +7,7 @@ export const environment = {
     storageBucket: "${{ secrets.STORAGEBUCKET }}",
     messagingSenderId: "${{ secrets.MESSAGINGSENDERID }}",
     appId: "${{ secrets.APPID }}",
-    measurementId: "${{ secrets.MEASUREMENTID }}"
+    measurementId: "${{ secrets.MEASUREMENTID }}",
+    mpPublicKey: "${{ secrets.MPPUBLICKEY }}",
+    urlBackendAPI: "${{ secrets.URLBACKENDAPI }}"
 };

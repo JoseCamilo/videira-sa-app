@@ -83,8 +83,6 @@ export class AuthService {
 
         this.loginSubject.next(this.user);
         this.validUserADM();
-
-        console.log('Usuário Facebook logado:', result.user);
       });
   }
 

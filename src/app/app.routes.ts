@@ -44,6 +44,26 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./qrcode/qrcode').then(c => c.Qrcode),
             },
+            {
+                path: 'checkout',
+                loadComponent: () =>
+                    import('./checkout/checkout').then(c => c.Checkout),
+            },
+            {
+                path: 'politica-privacidade',
+                loadComponent: () =>
+                    import('./politica-privacidade/politica-privacidade').then(c => c.PoliticaPrivacidade),
+            },
+            {
+                path: 'exclusao-dados',
+                loadComponent: () =>
+                    import('./exclusao-dados/exclusao-dados').then(c => c.ExclusaoDados),
+            },
+            {
+                path: 'termos-servico',
+                loadComponent: () =>
+                    import('./termos-servico/termos-servico').then(c => c.TermosServico),
+            },
 
         ]
     },

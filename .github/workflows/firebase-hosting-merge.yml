@@ -23,7 +23,9 @@ jobs:
           echo "  storageBucket: '${{ secrets.STORAGEBUCKET }}'," >> src/environments/environment.prod.ts
           echo "  messagingSenderId: '${{ secrets.MESSAGINGSENDERID }}'," >> src/environments/environment.prod.ts
           echo "  appId: '${{ secrets.APPID }}'," >> src/environments/environment.prod.ts
-          echo "  measurementId: '${{ secrets.MEASUREMENTID }}'" >> src/environments/environment.prod.ts
+          echo "  measurementId: '${{ secrets.MEASUREMENTID }}'," >> src/environments/environment.prod.ts
+          echo "  mpPublicKey: '${{ secrets.MPPUBLICKEY }}'," >> src/environments/environment.prod.ts
+          echo "  urlBackendAPI: '${{ secrets.URLBACKENDAPI }}'" >> src/environments/environment.prod.ts
           echo "};" >> src/environments/environment.prod.ts
 
       - run: npm ci && npm run build

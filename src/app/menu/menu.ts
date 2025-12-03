@@ -19,13 +19,22 @@ export class Menu implements OnInit {
 
   isADM = false;
 
+  nome = '';
+  foto = 'imagens/icon.png';
+
   ngOnInit(): void {
     this.authService.adm$.subscribe(b => this.isADM = b);
     this.authService.validUserADM();
+    this.nome = this.authService.getNome();
+    this.foto = this.authService.getFoto();
   }
   
   openLink(link: string) {
     this.router.navigate([link]);
+  }
+
+  perfil() {
+    this.router.navigate(['perfil']);
   }
 }
  
