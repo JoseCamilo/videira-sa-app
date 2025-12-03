@@ -1,0 +1,50 @@
+// Política de Privacidade Styles
+section {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Melhorias de legibilidade
+h1, h2 {
+  background: linear-gradient(135deg, #06b6d4, #00d9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+ul {
+  li {
+    &:hover {
+      color: #06b6d4;
+      transition: color 0.2s ease;
+      margin-left: 5px;
+    }
+  }
+}
+
+// Destaque para seções importantes
+section.bg-surface-light {
+  border-left: 4px solid #06b6d4;
+}
+
+section.bg-cyan-50 {
+  border-left: 4px solid #06b6d4;
+  
+  h2 {
+    color: #06b6d4;
+  }
+}

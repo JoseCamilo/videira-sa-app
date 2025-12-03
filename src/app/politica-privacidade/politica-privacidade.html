@@ -1,0 +1,207 @@
+<div class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Política de Privacidade
+    </h2>
+</div>
+
+<div class="p-4 space-y-6 max-w-4xl mx-auto pb-32 md:pb-6">
+    <div class="space-y-6">
+        <h1 class="text-3xl font-bold text-text-light">Política de Privacidade</h1>
+        
+        <p class="text-text-muted-light">Última atualização: {{ dataAtualizacao }}</p>
+
+        <!-- Introdução -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">1. Introdução</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                A Igreja Videira respeita sua privacidade e está comprometida em ser transparente sobre como processamos 
+                suas informações. Esta Política de Privacidade descreve como coletamos, usamos e protegemos seus dados.
+            </p>
+        </section>
+
+        <!-- Dados Coletados -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">2. Que Dados Coletamos</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Durante sua interação com nosso aplicativo, podemos coletar:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li><strong>Dados de Autenticação:</strong> Nome completo, email e informações de conta fornecidas durante o registro</li>
+                <li><strong>Dados de Eventos:</strong> Eventos que você visualiza, ingressos que você compra e informações de presença</li>
+                <li><strong>Dados de Pagamento:</strong> Processados exclusivamente pelo Mercado Pago (não armazenados por nós)</li>
+                <li><strong>Dados Técnicos:</strong> Endereço IP, tipo de navegador, idioma e informações de dispositivo</li>
+            </ul>
+        </section>
+
+        <!-- O que NÃO Coletamos -->
+        <section class="space-y-3 bg-surface-light p-4 rounded-lg border border-cyan-200">
+            <h2 class="text-2xl font-semibold text-cyan-600">3. O Que NÃO Coletamos</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Para sua tranquilidade, queremos esclarecer que <strong>NÃO armazenamos</strong>:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li>Informações de cartão de crédito ou débito</li>
+                <li>Dados de localização GPS sem seu consentimento explícito</li>
+                <li>Histórico de navegação ou cookies rastreadores</li>
+                <li>Biometria (exceto autenticação de impressão digital do dispositivo)</li>
+                <li>Dados sensíveis não fornecidos voluntariamente por você</li>
+            </ul>
+        </section>
+
+        <!-- Como Usamos Seus Dados -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">4. Como Usamos Seus Dados</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Usamos suas informações para:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li>Fornecer acesso à sua conta e aos eventos disponíveis</li>
+                <li>Processar suas compras de ingressos</li>
+                <li>Enviar confirmações de evento e atualizações importantes</li>
+                <li>Melhorar a qualidade do nosso aplicativo e serviços</li>
+                <li>Cumprir com obrigações legais e regulamentares</li>
+            </ul>
+        </section>
+
+        <!-- Compartilhamento de Dados -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">5. Compartilhamento de Dados</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Seus dados são compartilhados apenas com:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li><strong>Mercado Pago:</strong> Para processar pagamentos (vinculado por contrato de proteção de dados)</li>
+                <li><strong>Firebase/Google Cloud:</strong> Para armazenamento seguro de dados (vinculado por contrato de proteção de dados)</li>
+                <li><strong>Autoridades Legais:</strong> Quando obrigados por lei</li>
+            </ul>
+            <p class="text-text-muted-light leading-relaxed mt-3">
+                <strong>Nunca vendemos seus dados para terceiros.</strong>
+            </p>
+        </section>
+
+        <!-- Segurança -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">6. Segurança de Dados</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Implementamos medidas de segurança técnicas e organizacionais para proteger seus dados contra acesso não autorizado:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li>Criptografia SSL/TLS para transmissão de dados</li>
+                <li>Autenticação segura com Firebase Authentication</li>
+                <li>Acesso restrito apenas a funcionários autorizados</li>
+                <li>Backups regulares com criptografia</li>
+            </ul>
+        </section>
+
+        <!-- Retenção de Dados -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">7. Retenção de Dados</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Mantemos seus dados enquanto sua conta estiver ativa. Você pode solicitar a exclusão de sua conta e de todos 
+                os dados associados a qualquer momento. Os dados de transação podem ser retidos por período exigido por lei.
+            </p>
+        </section>
+
+        <!-- Seus Direitos -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">8. Seus Direitos</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Você tem direito a:
+            </p>
+            <ul class="list-disc list-inside space-y-2 text-text-muted-light">
+                <li>Acessar seus dados pessoais</li>
+                <li>Corrigir dados incorretos</li>
+                <li>Solicitar exclusão da sua conta e dados</li>
+                <li>Revogar consentimentos dados anteriormente</li>
+                <li>Exportar seus dados em formato legível</li>
+            </ul>
+        </section>
+
+        <!-- Cookies -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">9. Cookies</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Nosso aplicativo usa cookies funcionais apenas para manter sua sessão autenticada e lembrar suas preferências. 
+                Não usamos cookies rastreadores ou de publicidade.
+            </p>
+        </section>
+
+        <!-- LGPD e GDPR -->
+        <section class="space-y-3 bg-surface-light p-4 rounded-lg">
+            <h2 class="text-2xl font-semibold text-text-light">10. Conformidade com LGPD e GDPR</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Somos conformes com a Lei Geral de Proteção de Dados (LGPD) do Brasil e com o Regulamento Geral de Proteção 
+                de Dados (GDPR) da União Europeia. Se você é residente da UE ou Brasil, possui direitos específicos sob 
+                estas legislações que respeitamos integralmente.
+            </p>
+        </section>
+
+        <!-- Links Externos -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">11. Links Externos</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Nosso aplicativo pode conter links para sites de terceiros. Não somos responsáveis pelas práticas de 
+                privacidade desses sites. Recomendamos revisar suas políticas de privacidade.
+            </p>
+        </section>
+
+        <!-- Alterações -->
+        <section class="space-y-3">
+            <h2 class="text-2xl font-semibold text-text-light">12. Alterações nesta Política</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Podemos atualizar esta Política de Privacidade ocasionalmente. Notificaremos você sobre mudanças significativas 
+                via email ou através do aplicativo. Sua continuação do uso após as alterações constitui aceitação da nova política.
+            </p>
+        </section>
+
+        <!-- Contato -->
+        <section class="space-y-3 bg-cyan-50 dark:bg-cyan-900/20 p-4 rounded-lg border border-cyan-200">
+            <h2 class="text-2xl font-semibold text-text-light">13. Entre em Contato</h2>
+            <p class="text-text-muted-light leading-relaxed">
+                Se tiver dúvidas sobre nossa Política de Privacidade ou desejar exercer seus direitos, entre em contato conosco:
+            </p>
+            <div class="space-y-2 text-text-muted-light mt-4">
+                <p><strong>Email:</strong> privacidade@igrejaavideira.com.br</p>
+                <p><strong>Endereço:</strong> Igreja Videira - Santo André, SP</p>
+                <p><strong>Telefone:</strong> Entre em contato através do aplicativo</p>
+            </div>
+        </section>
+
+        <!-- Links Úteis -->
+        <section class="space-y-3 border-t pt-6">
+            <h2 class="text-lg font-semibold text-text-light">Documentos Relacionados</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <a routerLink="/exclusao-dados" 
+                   class="block p-4 bg-surface-light rounded-lg border border-cyan-200 hover:border-cyan-500 hover:shadow-lg transition">
+                    <h3 class="font-semibold text-cyan-600 flex items-center gap-2 mb-2">
+                        <span class="material-icons">delete_outline</span>
+                        Excluir Meus Dados
+                    </h3>
+                    <p class="text-text-muted-light text-sm">
+                        Instruções para solicitar a exclusão permanente de seus dados
+                    </p>
+                </a>
+                <a routerLink="/termos-servico" 
+                   class="block p-4 bg-surface-light rounded-lg border border-cyan-200 hover:border-cyan-500 hover:shadow-lg transition">
+                    <h3 class="font-semibold text-cyan-600 flex items-center gap-2 mb-2">
+                        <span class="material-icons">description</span>
+                        Termos de Serviço
+                    </h3>
+                    <p class="text-text-muted-light text-sm">
+                        Termos e condições de uso do aplicativo
+                    </p>
+                </a>
+            </div>
+        </section>
+
+        <div class="text-center pt-6">
+            <p class="text-text-muted-light text-sm">
+                Obrigado por confiar em nós com suas informações.
+            </p>
+        </div>
+    </div>
+</div>
+
