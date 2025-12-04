@@ -115,11 +115,13 @@ export class EventoService {
     );
   }
 
-  confirmConvidadoPresenteInEvento(id: string): Promise<any> {
+  confirmConvidadoPresenteInEvento(id: string, email: string, date: string): Promise<any> {
     const eventoRef = doc(this.firestore, `eventos/${id}`);
 
     return updateDoc(eventoRef, {
-      'presentes.count': increment(1)
+      'presentes.count': increment(1),
+      hostess: email,
+      dateHostess: date
     });
   }
 

@@ -7,6 +7,7 @@ import { take } from 'rxjs';
 import { Loading } from '../../loading/loading';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Ticket, TicketService } from '../../tickets/tickets.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-scanner',
@@ -18,6 +19,7 @@ export class Scanner implements OnInit, OnDestroy {
 
   router: Router = inject(Router);
   route = inject(ActivatedRoute);
+  authService = inject(AuthService);
   id = this.route.snapshot.paramMap.get('id') || '';
 
   ticketService = inject(TicketService);
@@ -75,7 +77,7 @@ export class Scanner implements OnInit, OnDestroy {
     this.ticketService.confirmTicketAcesso(this.scannedResult.id)
       .then(() => {
 
-        this.eventoService.confirmConvidadoPresenteInEvento(this.scannedResult.evento)
+        this.eventoService.confirmConvidadoPresenteInEvento(this.scannedResult.evento, this.authService.user.email, new Date().toLocaleDateString('pt-BR'))
           .then(() => {
             this.isShowResultModal = false;
             this.confirmando = false;
@@ -106,29 +108,28 @@ export class Scanner implements OnInit, OnDestroy {
       this.isTicketValidado = false;
       this.isShowResultModal = true;
 
-      if (this.evento.id === this.scannedResult.evento) {
-        this.ticketService.getTicketById(this.scannedResult.id)
-          .pipe(take(1))
-          .subscribe({
-            next: (item) => {
-              if (item?.ativo) {
-                this.isTicketValidado = true;
+      this.ticketService.getTicketById(this.scannedResult.id)
+        .pipe(take(1))
+        .subscribe({
+          next: (item) => {
+            this.scannedResult['tipo'] = item?.tipo || '-';
 
-                this.scannedResult['tipo'] = item?.tipo || '-';
-              } else {
-                this.isTicketInvalidado = true;
-                this.textErroTicket = 'Parece que este ticket já foi utilizado ou esta inativo';
-              }
-              this.validando = false;
-            },
-            complete: () => this.validando = false,
-            error: () => this.validando = false
-          });
-      } else {
-        this.validando = false;
-        this.isTicketInvalidado = true;
-        this.textErroTicket = 'Parece que este ticket é de outro Evento';
-      }
+            if (this.evento.id !== this.scannedResult.evento) {
+              this.isTicketInvalidado = true;
+              this.textErroTicket = 'Parece que este ticket é de outro Evento';
+            } else if (!(item?.ativo)) {
+              this.isTicketInvalidado = true;
+              this.textErroTicket = 'Parece que este ticket já foi utilizado ou esta inativo';
+            } else {
+              this.isTicketValidado = true;
+            }
+
+            this.validando = false;
+          },
+          complete: () => this.validando = false,
+          error: () => this.validando = false
+        });
+
     }
   }
 
@@ -145,7 +146,7 @@ export class Scanner implements OnInit, OnDestroy {
 
   onError(error: any) {
     console.error('Erro ao escanear:', error);
-    
+
     if (error.name === 'NotReadableError') {
       this.statusScanner = 'Câmera indisponível. Verifique se outro app está usando a câmera.';
     } else if (error.name === 'NotAllowedError' || error.message?.includes('Permission')) {
