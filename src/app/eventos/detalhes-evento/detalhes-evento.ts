@@ -60,8 +60,9 @@ export class DetalhesEvento implements OnInit, OnDestroy {
   }
 
   goCheckout() {
+    const ingressosSelecionados = this.evento.ingressos.filter((ingresso: any) => ingresso.quantidade > 0);
     this.router.navigate(['/checkout'], {
-      state: { produtos: this.evento.ingressos }
+      state: { produtos: ingressosSelecionados }
     });
   }
 }
