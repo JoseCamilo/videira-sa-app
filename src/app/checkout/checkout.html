@@ -1,5 +1,5 @@
 <div
-    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)] mb-8">
+    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
     <div class="flex shrink-0 items-center">
         <button class="material-icons" (click)="goBack()">arrow_back</button>
     </div>
@@ -8,84 +8,87 @@
     </h2>
 </div>
 
-@if (!statusScreen) {
-<div class="p-4 pt-0 space-y-2">
-    <h3 class="text-2xl font-bold text-text-light">Resumo do Pedido</h3>
+<div class="max-w-xl mx-auto">
 
-    <div class="p-4 flex flex-col gap-3 bg-white rounded-lg shadow-sm">
-        @for (item of pedido.produtos; track $index) {
-        <div class="flex items-center gap-3">
-            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0"
-                [style.background-image]="'url(' + item.imagem + ')'">
+    @if (!statusScreen) {
+    <div class="p-4 space-y-2">
+        <h3 class="text-2xl font-bold text-text-light">Resumo do Pedido</h3>
+
+        <div class="p-4 flex flex-col gap-3 bg-white rounded-lg shadow-sm">
+            @for (item of pedido.produtos; track $index) {
+            <div class="flex items-center gap-3">
+                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-16 shrink-0"
+                    [style.background-image]="'url(' + item.imagem + ')'">
+                </div>
+                <div class="flex flex-col justify-center flex-1">
+                    <p class="text-text-light text-base font-bold leading-normal line-clamp-1">{{item.titulo}}</p>
+                    <p class="text-text-muted-light text-sm font-normal leading-normal line-clamp-1">{{item.quantidade}}
+                        {{item.categoria}}{{item.quantidade > 1 ? 's' : ''}} {{item.tipo}}</p>
+                </div>
+                <span class="text-text-light">{{ (item.quantidade * item.precoUnitario) | currencyformat }}</span>
             </div>
-            <div class="flex flex-col justify-center flex-1">
-                <p class="text-text-light text-base font-bold leading-normal line-clamp-1">{{item.titulo}}</p>
-                <p class="text-text-muted-light text-sm font-normal leading-normal line-clamp-1">{{item.quantidade}}
-                    {{item.categoria}}{{item.quantidade > 1 ? 's' : ''}} {{item.tipo}}</p>
-            </div>
-            <span class="text-text-light">{{ (item.quantidade * item.precoUnitario) | currencyformat }}</span>
+            }
         </div>
+        <div class="border-t border-gray-200"></div>
+
+        <div class="flex justify-between p-4 bg-white rounded-lg shadow-sm">
+            <p class="text-lg font-bold text-text-light">Total</p>
+            <p class="text-lg font-bold text-text-light">{{ (pedido.valorTotal || 0) | currencyformat}}</p>
+        </div>
+    </div>
+
+    <div class="p-4 space-y-4">
+        <h3 class="text-2xl font-bold text-text-light">Método de Pagamento</h3>
+
+        @if (loading) {
+        <app-loading></app-loading>
         }
+        <div id="paymentBrick_container"></div>
     </div>
-    <div class="border-t border-gray-200"></div>
-
-    <div class="flex justify-between p-4 bg-white rounded-lg shadow-sm">
-        <p class="text-lg font-bold text-text-light">Total</p>
-        <p class="text-lg font-bold text-text-light">{{ (pedido.valorTotal || 0) | currencyformat}}</p>
+    } @else {
+    <div class="p-4 space-y-4">
+        @if (loading) {
+        <app-loading></app-loading>
+        }
+        <div id="statusScreenBrick_container"></div>
     </div>
-</div>
 
-<div class="p-4 space-y-4">
-    <h3 class="text-2xl font-bold text-text-light">Método de Pagamento</h3>
-
-    @if (loading) {
-    <app-loading></app-loading>
+    @if (isApproved) {
+    <div class="px-4 space-y-4">
+        <div class="rounded-lg border border-gray-300 bg-white p-6 shadow-sm text-center">
+            <p class="text-4xl mb-2">🎉</p>
+            <h3 class="text-2xl font-bold text-text-light mb-2">Parabéns!</h3>
+            <p class="text-text-muted-light text-base leading-relaxed">
+                Em breve seus tickets estarão disponíveis na aba "Meus Tickets".
+            </p>
+        </div>
+        <div>
+            <button
+                class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                (click)="goMeusTickets()">
+                Ver Meus Tickets
+            </button>
+        </div>
+    </div>
     }
-    <div id="paymentBrick_container"></div>
-</div>
-} @else {
-<div class="p-4 space-y-4">
-    @if (loading) {
-    <app-loading></app-loading>
+
+    @if (isPending) {
+    <div class="px-4 space-y-4">
+        <div class="rounded-lg border border-gray-300 bg-white p-6 shadow-sm text-center">
+            <p class="text-4xl mb-2">⏳</p>
+            <h3 class="text-2xl font-bold text-text-light mb-2">Pagamento Pendente</h3>
+            <p class="text-text-muted-light text-base leading-relaxed">
+                Você pode verificar o status do pagamento na aba "Meus Tickets".
+            </p>
+        </div>
+        <div>
+            <button
+                class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                (click)="goMeusTickets()">
+                Ver Meus Tickets
+            </button>
+        </div>
+    </div>
     }
-    <div id="statusScreenBrick_container"></div>
+    }
 </div>
-
-@if (isApproved) {
-<div class="px-4 space-y-4">
-    <div class="rounded-lg border border-gray-300 bg-white p-6 shadow-sm text-center">
-        <p class="text-4xl mb-2">🎉</p>
-        <h3 class="text-2xl font-bold text-text-light mb-2">Parabéns!</h3>
-        <p class="text-text-muted-light text-base leading-relaxed">
-            Em breve seus tickets estarão disponíveis na aba "Meus Tickets".
-        </p>
-    </div>
-    <div>
-        <button
-            class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
-            (click)="goMeusTickets()">
-            Ver Meus Tickets
-        </button>
-    </div>
-</div>
-}
-
-@if (isPending) {
-<div class="px-4 space-y-4">
-    <div class="rounded-lg border border-gray-300 bg-white p-6 shadow-sm text-center">
-        <p class="text-4xl mb-2">⏳</p>
-        <h3 class="text-2xl font-bold text-text-light mb-2">Pagamento Pendente</h3>
-        <p class="text-text-muted-light text-base leading-relaxed">
-            Você pode verificar o status do pagamento na aba "Meus Tickets".
-        </p>
-    </div>
-    <div>
-        <button
-            class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
-            (click)="goMeusTickets()">
-            Ver Meus Tickets
-        </button>
-    </div>
-</div>
-}
-}
