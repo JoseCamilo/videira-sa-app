@@ -1,4 +1,4 @@
-name: Deploy Manual
+name: Deploy to Firebase Hosting on Manual
 
 on:
   workflow_dispatch:
