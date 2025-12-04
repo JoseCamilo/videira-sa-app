@@ -2,19 +2,12 @@ name: Deploy Manual
 
 on:
   workflow_dispatch:
-    inputs:
-      branch:
-        description: 'Branch para deploy'
-        required: true
-        default: 'main'
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch }}
 
 
       - name: Generate environment.prod.ts
