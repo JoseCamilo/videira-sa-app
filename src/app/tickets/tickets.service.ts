@@ -35,6 +35,7 @@ export class TicketService {
     const constraints: QueryConstraint[] = [
       where('ativo', '==', true),
       orderBy('date'),
+      orderBy('descricao'),
       limit(pageSize)
     ];
 
@@ -59,6 +60,7 @@ export class TicketService {
       where('ativo', '==', true),
       where('email', '==', email),
       orderBy('date'),
+      orderBy('descricao'),
       limit(pageSize)
     ];
 

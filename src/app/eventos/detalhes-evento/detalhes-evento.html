@@ -92,20 +92,29 @@
                         <p class="text-text-light text-base font-medium leading-normal">{{ingresso.precoUnitario |
                             currencyformat}}
                         </p>
+                        @if (ingresso.total && (ingresso.total-ingresso.count) < 100 && (ingresso.total-ingresso.count)>
+                            0) {
+                            <p class="text-text-muted-light text-xs font-normal leading-normal mt-1">Somente
+                                {{ingresso.total-ingresso.count}} disponíveis!</p>
+                            }
                     </div>
                     <div class="text-right">
-                        <div class="shrink-0">
-                            <div class="flex items-center gap-2 text-[#131712]">
-                                <button
-                                    class="text-base font-medium leading-normal flex h-7 w-7 items-center justify-center rounded-full bg-[#f1f4f1] cursor-pointer"
-                                    (click)="ingresso.quantidade > 0 && (ingresso.quantidade-=1)">-</button>
-                                <span
-                                    class="text-base font-medium leading-normal w-4 p-0 text-center bg-transparent">{{ingresso.quantidade}}</span>
-                                <button
-                                    class="text-base font-medium leading-normal flex h-7 w-7 items-center justify-center rounded-full bg-[#f1f4f1] cursor-pointer"
-                                    (click)="ingresso.quantidade+=1">+</button>
+                        @if (ingresso.total && (ingresso.total-ingresso.count) <= 0) { <p
+                            class="text-red-600 text-xs font-normal leading-normal mt-1">Esgotado!</p>
+                            } @else {
+                            <div class="shrink-0">
+                                <div class="flex items-center gap-2 text-[#131712]">
+                                    <button
+                                        class="text-base font-medium leading-normal flex h-7 w-7 items-center justify-center rounded-full bg-[#f1f4f1] cursor-pointer"
+                                        (click)="ingresso.quantidade > 0 && (ingresso.quantidade-=1)">-</button>
+                                    <span
+                                        class="text-base font-medium leading-normal w-4 p-0 text-center bg-transparent">{{ingresso.quantidade}}</span>
+                                    <button
+                                        class="text-base font-medium leading-normal flex h-7 w-7 items-center justify-center rounded-full bg-[#f1f4f1] cursor-pointer"
+                                        (click)="ingresso.total-ingresso.count > ingresso.quantidade && (ingresso.quantidade+=1)">+</button>
+                                </div>
                             </div>
-                        </div>
+                            }
                     </div>
                 </div>
                 }

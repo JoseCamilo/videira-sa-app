@@ -21,7 +21,8 @@ export interface ProdutoPedido {
   quantidade: number,
   precoUnitario: number,
   tipo: string,
-  categoria: string
+  categoria: string,
+  evento?: string
 }
 
 export interface Pedido {
@@ -58,7 +59,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
       this.pedido.produtos = navigation.produtos;
     }
     this.nome = this.authService.getNome();
-    this.pedido.valorTotal = this.pedido.produtos.reduce((total, item) => total + item.precoUnitario * item.quantidade, 0);
+    this.pedido.valorTotal = Math.round(this.pedido.produtos.reduce((total, item) => total + item.precoUnitario * item.quantidade, 0) * 100) / 100;
   }
 
   ngAfterViewInit() {
@@ -118,10 +119,11 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
                 title: item.titulo,
                 description: item.descricao,
                 picture_url: item.imagem,
-                category_id: `${item.categoria}_${item.tipo}`,
+                category_id: `${item.categoria}`,
                 quantity: item.quantidade,
                 unit_price: item.precoUnitario,
-                type: item.tipo
+                type: item.tipo,
+                evento: item.evento || ''
               })),
               payer: {
                 first_name: this.nome.split(' ')[0] || '',

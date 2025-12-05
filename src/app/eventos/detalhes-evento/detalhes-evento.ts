@@ -43,11 +43,21 @@ export class DetalhesEvento implements OnInit, OnDestroy {
       .subscribe({
         next: (item) => {
           this.evento = item;
-          this.evento.ingressos = this.evento.ingressos?.map((ingresso: any) => {
-            ingresso['quantidade'] = 0;
-            ingresso['id'] = this.id;
-            return ingresso;
-          });
+          this.evento.ingressos = Object.entries(this.evento.ingressos)
+            .map(([id, item]) => (
+              {
+                id,
+                ...(item as object),
+                quantidade: 0,
+                evento: this.id
+              }
+            ))
+            .map((ingresso: any) => ({
+              ...ingresso,
+              total: ingresso.total || 0,
+              count: ingresso.count || 0
+            }));
+          console.log(this.evento.ingressos);
           this.carregando = false;
         },
         complete: () => this.carregando = false,
