@@ -5,8 +5,13 @@ import { Location } from '@angular/common';
 import { AuthService } from '../auth/auth.service';
 import { environment } from '../../environments/environment';
 import { Loading } from "../loading/loading";
+import { loadMercadoPago } from "@mercadopago/sdk-js";
 
-declare const MercadoPago: any;
+declare global {
+  interface Window {
+    MercadoPago: any;
+  }
+}
 
 export interface ProdutoPedido {
   id: string,
@@ -70,7 +75,9 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
   }
 
   renderPaymentBrick = async () => {
-    const mp = new MercadoPago(environment.mpPublicKey);
+    await loadMercadoPago();
+    const mp = new window.MercadoPago(environment.mpPublicKey);
+
     const bricksBuilder = mp.bricks();
 
     const settings = {
@@ -97,7 +104,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
             ...formData,
             description: this.pedido.produtos[0].titulo,
             statement_descriptor: 'IGREJAVIDEIRA',
-            callback_url: 'https://videira-sa.web.app/',
+            callback_url: 'https://videiraabc.com.br/tickets',
             additional_info: {
               ip_address: '',
               items: this.pedido.produtos.map(item => ({
@@ -154,14 +161,15 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
     );
   };
 
-  loadStatusScreen = (paymentId: string, externalResourceURL: string, creq: string) => {
+  loadStatusScreen = async (paymentId: string, externalResourceURL: string, creq: string) => {
     (window as any).paymentBrickController.unmount();
     this.statusScreen = true;
     this.loading = true;
     this.cdr.detectChanges();
     window.scrollTo(0, 0);
 
-    const mp = new MercadoPago(environment.mpPublicKey);
+    await loadMercadoPago();
+    const mp = new window.MercadoPago(environment.mpPublicKey);
     const bricksBuilder = mp.bricks();
 
     const renderStatusScreenBrick = async () => {

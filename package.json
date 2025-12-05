@@ -32,6 +32,7 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/service-worker": "^20.3.0",
+    "@mercadopago/sdk-js": "^0.0.3",
     "@zxing/ngx-scanner": "^20.0.0",
     "angularx-qrcode": "^20.0.0",
     "rxjs": "~7.8.0",
