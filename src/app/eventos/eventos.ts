@@ -19,6 +19,7 @@ export class Eventos implements OnInit, OnDestroy {
   dateFilter: any;
   typeFilter: any;
   localFilter: any;
+  viewFilter: boolean = false;
 
   date: string = '';
   type: string = 'Tipo de Evento';

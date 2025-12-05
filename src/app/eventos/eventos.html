@@ -1,7 +1,16 @@
-<div class="p-4 space-y-6 -mt-8 relative bg-background-light rounded-t-2xl">
+<div class="p-4 space-y-6 -mt-8 relative bg-background-light rounded-t-xl md:rounded-none">
     <div class="max-w-xl mx-auto">
 
-        <h3 class="text-2xl font-bold text-text-light pt-4 pb-2">Próximos Eventos</h3>
+        <div class="flex items-center justify-between gap-2">
+            <h3 class="text-2xl font-bold text-text-light pt-4 pb-2">Próximos Eventos</h3>
+            <button
+                class="text-text-muted-light hover:underline pt-1"
+                (click)="viewFilter = !viewFilter">
+                Filtrar
+            </button>
+        </div>
+
+        @if (viewFilter) {
         <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="relative">
                 <span
@@ -47,6 +56,7 @@
             </button>
             }
         </div>
+    }
     
         <div class="pt-6 flex flex-col gap-6">
             @if (carregando) {

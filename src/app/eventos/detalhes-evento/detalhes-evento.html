@@ -25,7 +25,7 @@
         [src]="evento?.imagem" loading="lazy" (load)="loaded = true" [class.opacity-100]="loaded" />
 </div>
 
-<div class="bg-white/90 p-4 rounded-t-xl shadow-lg mt-[-20px] pb-[20px] relative">
+<div class="bg-white/90 p-4 rounded-t-xl md:rounded-none shadow-lg mt-[-20px] pb-[20px] relative">
     <div class="max-w-xl mx-auto">
         <h1 class="text-text-light text-[26px] font-bold leading-tight tracking-[-0.015em] text-center pb-3 pt-2">
             {{evento?.titulo}}</h1>
@@ -116,6 +116,7 @@
                 <p class="text-lg font-bold text-text-light">{{ totalIngressos | currencyformat }}</p>
             </div>
         </div>
+        @if (totalIngressos > 0) {
         <div class="p-4 pt-4">
             <button
                 class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
@@ -123,6 +124,7 @@
                 Ir para o Pagamento
             </button>
         </div>
+        }
         }@else {
         @if (evento.ingressos?.length > 0) {
         <div class="p-4 pt-8">

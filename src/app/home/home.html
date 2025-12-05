@@ -1,5 +1,5 @@
 <main class="pt-0">
-    <div class="relative h-96">
+    <div class="relative h-96 lg:h-[32rem]">
         <!-- Background desfocado -->
         <div class="absolute inset-0 w-full h-full">
             <img alt="Igreja Videira Background" class="w-full h-full object-cover blur-lg"
@@ -9,15 +9,16 @@
         <img alt="Igreja Videira" class="absolute inset-0 w-full h-full object-cover max-w-6xl mx-auto"
             src="imagens/fundo.jpg" />
         <div
-            class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent flex flex-col justify-between p-6">
-            <div class="md:hidden flex justify-between">
-                <div class="flex">
-                    <img alt="Logo Videira" class="h-8" src="imagens/icon.png" />
-                    <div class="flex flex-col items-start pl-2">
-                        <h1 class="text-xl font-semibold text-white drop-shadow-lg">Igreja Videira</h1>
-                        <p class="text-sm text-gray-200 drop-shadow-md">Santo André</p>
-                    </div>
+            class="absolute inset-0 flex flex-col justify-center items-center p-6"
+            style="background: linear-gradient(135deg, hsla(187, 49%, 52%, 0.7) 20%, hsla(267, 36%, 39%, 0.7) 73%)">
+            <div class="md:hidden absolute top-6 left-6 flex">
+                <img alt="Logo Videira" class="h-8" src="imagens/icon.png" />
+                <div class="flex flex-col items-start pl-2">
+                    <h1 class="text-xl font-semibold text-white drop-shadow-lg">Igreja Videira</h1>
+                    <p class="text-sm text-gray-200 drop-shadow-md">Santo André</p>
                 </div>
+            </div>
+            <div class="md:hidden absolute top-6 right-6">
                 @if (nome) {
                     <button
                         class="flex items-center space-x-2 px-4 rounded-full text-sm border border-gray-300/50 text-white bg-black/20 backdrop-blur-sm hover:bg-black/40 transition"
@@ -27,16 +28,19 @@
                     </button>
                 }@else {
                     <button
-                        class="flex items-center space-x-2 px-4 rounded-full text-sm border border-gray-300/50 text-white bg-black/20 backdrop-blur-sm hover:bg-black/40 transition"
+                        class="flex items-center space-x-2 px-4 py-1 rounded-full text-sm border border-gray-300/50 text-white bg-black/20 backdrop-blur-sm hover:bg-black/40 transition"
                         (click)="perfil()">
                         <span>Login</span>
                         <span class="material-icons text-lg">person_outline</span>
                     </button>
                 }
             </div>
-            <div class="md:hidden flex justify-end items-end">
-                <h2 class="text-gray-300 text-lg font-serif italic text-right drop-shadow-lg pr-2 pb-8">Uma
-                    Igreja de Vencedores</h2>
+            <div class="flex flex-row items-center justify-center gap-6">
+                <img alt="Logo Rodapé" class="h-14 md:h-32 drop-shadow-lg animate-slide-in-right" src="imagens/logo_rodape.avif" />
+                <div class="flex flex-col items-end justify-center">
+                    <h2 class="text-white text-5sm md:text-3xl font-bold text-right drop-shadow-lg animate-slide-in-left">Bem-Vindo a Igreja Videira</h2>
+                    <p class="text-white text-sm md:text-lg drop-shadow-lg animate-slide-in-left mt-2">Uma Igreja de Vencedores</p>
+                </div>
             </div>
         </div>
     </div>
