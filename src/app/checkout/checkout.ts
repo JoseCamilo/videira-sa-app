@@ -82,13 +82,19 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
 
     const settings = {
       initialization: {
-        amount: this.pedido.valorTotal || 0
+        amount: this.pedido.valorTotal || 0,
+        payer: {
+          firstName: this.nome.split(' ')[0] || '',
+          lastName: this.nome.split(' ').slice(1).join(' ') || '',
+          email: this.authService.getEmail() || '',
+        }
       },
       customization: {
         paymentMethods: {
+          creditCard: "all",
           ticket: "all",
           bankTransfer: "all",
-          creditCard: "all"
+          maxInstallments: 1
         },
         visual: {
           hideFormTitle: true
@@ -119,7 +125,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
               })),
               payer: {
                 first_name: this.nome.split(' ')[0] || '',
-                last_name: this.nome || '',
+                last_name: this.nome.split(' ').slice(1).join(' ') || '',
                 authentication_type: 'Gmail',
                 email: this.authService.getEmail() || '',
               }
@@ -204,7 +210,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
           this.cdr.detectChanges();
         }
         if ((window as any).statusScreenBrickController?.target?.innerText?.toLowerCase().includes('via pix') ||
-            (window as any).statusScreenBrickController?.target?.innerText?.toLowerCase().includes('via boleto')) {
+          (window as any).statusScreenBrickController?.target?.innerText?.toLowerCase().includes('via boleto')) {
           this.isPending = true;
           this.cdr.detectChanges();
         }
