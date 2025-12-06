@@ -1,0 +1,89 @@
+/* Dashboard Vendas Styles */
+
+.material-icons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  user-select: none;
+  vertical-align: middle;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 640px) {
+  :host ::ng-deep {
+    .grid-cols-1 {
+      gap: 0.75rem;
+    }
+  }
+
+  .material-icons {
+    font-size: 2rem;
+  }
+}
+
+/* Animações de cards ao hover */
+.hover\:scale-105:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Estilos para tabelas responsivas */
+table {
+  border-collapse: collapse;
+}
+
+tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Animação para carregamento */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Gradientes de cor para cards */
+.bg-gradient-to-br {
+  background-image: linear-gradient(135deg, var(--tw-gradient-stops));
+}
+
+.from-cyan-50 {
+  --tw-gradient-from: #ecf9fd;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(236, 249, 253, 0));
+}
+
+.to-cyan-100 {
+  --tw-gradient-to: #cff0f8;
+}
+
+/* Sombras suaves */
+.shadow-md {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Transições suaves */
+button, select, input {
+  transition: all 0.2s ease;
+}
+
+button:hover, select:hover, input:hover {
+  transform: translateY(-1px);
+}
+
+/* Material icons customizados */
+.material-icons.large {
+  font-size: 3rem;
+}
+
+.material-icons.small {
+  font-size: 1rem;
+}

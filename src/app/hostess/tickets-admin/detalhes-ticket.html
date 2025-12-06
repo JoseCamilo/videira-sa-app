@@ -1,0 +1,135 @@
+<div
+    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons" (click)="voltar()">arrow_back</button>
+    </div>
+    <h2 class="text-md text-text-light leading-tight tracking-[-0.015em] flex-1 text-center">
+        Detalhes do Ticket
+    </h2>
+</div>
+
+<div class="p-4 space-y-6">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold text-text-light pt-4 pb-2">Detalhes do Ticket</h1>
+
+    @if (carregando) {
+      <div class="text-center py-8">
+        <app-loading></app-loading>
+      </div>
+    } @else if (ticket) {
+      <div class="space-y-6">
+        <!-- Informações Básicas -->
+        <div class="bg-surface-light rounded-lg p-6 border border-gray-200">
+          <h2 class="text-lg font-semibold text-text-light mb-4">Informações Básicas</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p class="text-xs text-text-muted-light font-semibold mb-1">ID</p>
+                <p class="text-text-light font-medium break-all">{{ ticket.id }}</p>
+              </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">NOME</p>
+              <p class="text-text-light font-medium">{{ ticket.nome }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">TÍTULO</p>
+              <p class="text-text-light font-medium">{{ ticket.titulo }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">DESCRIÇÃO</p>
+              <p class="text-text-light font-medium">{{ ticket.descricao }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">STATUS TICKET</p>
+              <span
+                [ngClass]="{
+                  'bg-green-100 text-green-800': ticket.ativo,
+                  'bg-red-100 text-red-800': !ticket.ativo
+                }"
+                class="px-3 py-1 rounded-full text-xs font-semibold">
+                {{ ticket.ativo ? 'Ativo' : 'Inativo' }}
+              </span>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">TIPO</p>
+              <p class="text-text-light font-medium">{{ ticket.tipo }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">DETALHE STATUS</p>
+              <p class="text-text-light font-medium">{{ ticket.status }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">STATUS PAGAMENTO</p>
+              <p class="text-text-light font-medium">{{ ticket.paymentStatus }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">DATA DE COMPRA</p>
+              <p class="text-text-light font-medium">{{ ticket.date | firestoreDate : 'dd/MM/yyyy HH:mm:ss' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações do Evento -->
+        <div class="bg-surface-light rounded-lg p-6 border border-gray-200">
+          <h2 class="text-lg font-semibold text-text-light mb-4">Evento</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">EVENTO ID</p>
+              <p class="text-text-light font-medium break-all">{{ ticket.evento }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">LOCAL</p>
+              <p class="text-text-light font-medium">{{ ticket.local }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">DATA</p>
+              <p class="text-text-light font-medium">{{ ticket.data }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">HORA</p>
+              <p class="text-text-light font-medium">{{ ticket.hora }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações do Participante -->
+        <div class="bg-surface-light rounded-lg p-6 border border-gray-200">
+          <h2 class="text-lg font-semibold text-text-light mb-4">Participante</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">EMAIL</p>
+              <p class="text-text-light font-medium break-all">{{ ticket.email }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">TELEFONE</p>
+              <p class="text-text-light font-medium">{{ ticket.telefone }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR Code -->
+        @if (ticket.qrcode) {
+          <div class="bg-surface-light rounded-lg p-6 border border-gray-200">
+            <h2 class="text-lg font-semibold text-text-light mb-4">QR Code</h2>
+            <div class="flex justify-center">
+              <img [src]="ticket.qrcode" alt="QR Code" class="w-32 h-32" />
+            </div>
+          </div>
+        }
+
+        <!-- Imagem -->
+        <!-- @if (ticket.imagem) {
+          <div class="bg-surface-light rounded-lg p-6 border border-gray-200">
+            <h2 class="text-lg font-semibold text-text-light mb-4">Imagem</h2>
+            <div class="flex justify-center">
+              <img [src]="ticket.imagem" alt="Ticket" class="max-w-full h-auto rounded" />
+            </div>
+          </div>
+        } -->
+      </div>
+    } @else {
+      <div class="text-center py-8 text-text-muted-light">
+        <p>Ticket não encontrado</p>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,216 @@
+<div
+    class="md:hidden flex items-center p-4 justify-between bg-surface-light border-t border-gray-200 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
+    <div class="flex shrink-0 items-center">
+        <button class="material-icons text-text-light hover:text-text-muted-light transition" (click)="goBack()">arrow_back</button>
+    </div>
+    <h2 class="text-base font-semibold text-text-light flex-1 text-center">
+        Pedidos
+    </h2>
+    <div class="w-8"></div>
+</div>
+
+<div class="p-4 space-y-6">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-2xl md:text-3xl font-bold text-text-light pt-4 pb-2">Pedidos de Compra</h1>
+
+    <!-- Filtros de Pesquisa -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 py-4 md:py-6">
+      <div class="relative">
+        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light text-sm">mail</span>
+        <input
+          class="w-full pl-10 pr-4 py-2 text-sm md:text-base rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 placeholder-text-muted-light"
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="searchEmail" />
+      </div>
+
+      <div class="relative">
+        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light text-sm">receipt</span>
+        <input
+          class="w-full pl-10 pr-4 py-2 text-sm md:text-base rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500 placeholder-text-muted-light"
+          type="text"
+          placeholder="Nº do pedido"
+          [(ngModel)]="searchPaymentId" />
+      </div>
+
+      <button
+        (click)="limparFiltros()"
+        class="w-full bg-surface-light border border-gray-300 text-text-muted-light py-2 rounded-lg hover:underline text-sm md:text-base transition">
+        Limpar filtros
+      </button>
+    </div>
+
+    <!-- Filtro de Data e Botão de Pesquisa -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 py-0 pb-4 md:pb-6">
+      <div class="relative">
+        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light text-sm">calendar_month</span>
+        <input
+          class="w-full pl-10 pr-4 py-2 text-sm md:text-base rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500"
+          type="datetime-local"
+          [(ngModel)]="filtroDataInicio" />
+      </div>
+
+      <div class="relative">
+        <span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-text-muted-light text-sm">calendar_month</span>
+        <input
+          class="w-full pl-10 pr-4 py-2 text-sm md:text-base rounded-lg bg-surface-light border border-gray-300 text-text-light focus:ring-2 focus:ring-cyan-500"
+          type="datetime-local"
+          [(ngModel)]="filtroDataFim" />
+      </div>
+
+      <button
+        (click)="executarFiltros()"
+        class="w-full bg-cyan-500 text-white py-2 rounded-lg hover:bg-cyan-600 text-sm md:text-base transition font-semibold">
+        Pesquisar
+      </button>
+    </div>
+
+    <!-- Tabela de Pedidos -->
+    <div class="overflow-x-auto">
+      @if (carregando) {
+        <div class="text-center py-8">
+          <app-loading></app-loading>
+        </div>
+      } @else if (pedidos.length > 0) {
+        <!-- Visualização em Tabela (md+) -->
+        <div class="hidden md:block">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-surface-light border-b border-gray-300">
+                <th class="px-4 py-3 text-left text-text-light font-semibold">Nº do Pedido</th>
+                <th class="px-4 py-3 text-left text-text-light font-semibold">Email</th>
+                <th class="px-4 py-3 text-left text-text-light font-semibold">Status</th>
+                <th class="px-4 py-3 text-right text-text-light font-semibold">Valor Total</th>
+                <th class="px-4 py-3 text-left text-text-light font-semibold">Data</th>
+                <th class="px-4 py-3 text-center text-text-light font-semibold">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (pedido of pedidos; track pedido.id) {
+                <tr class="border-b border-gray-200 hover:bg-surface-light/50 transition">
+                  <td class="px-4 py-3 text-text-light">{{ pedido.paymentId }}</td>
+                  <td class="px-4 py-3 text-text-muted-light">{{ pedido.payerEmail }}</td>
+                  <td class="px-4 py-3">
+                    <span
+                      [ngClass]="{
+                        'bg-green-100 text-green-800': pedido.status === 'approved',
+                        'bg-yellow-100 text-yellow-800': pedido.status === 'pending',
+                        'bg-red-100 text-red-800': pedido.status === 'rejected' || pedido.status === 'cancelled'
+                      }"
+                      class="px-3 py-1 rounded-full text-xs font-semibold">
+                      {{ pedido.status }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3 text-right text-text-light font-semibold">{{ pedido.transaction_amount | currencyformat }}</td>
+                  <td class="px-4 py-3 text-text-muted-light">{{ pedido.createdAt | firestoreDate: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td class="px-4 py-3 text-center">
+                    <button
+                      (click)="verDetalhes(pedido.paymentId)"
+                      class="bg-cyan-500 text-white px-3 py-1 rounded text-sm hover:bg-cyan-600 transition font-semibold">
+                      Ver
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Visualização em Cards (sm) -->
+        <div class="md:hidden space-y-3">
+          @for (pedido of pedidos; track pedido.id) {
+            <div class="bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition">
+              <!-- Header do Card -->
+              <div class="flex justify-between items-start mb-3">
+                <div class="flex-1">
+                  <p class="text-xs text-text-muted-light font-semibold mb-1">Nº DO PEDIDO</p>
+                  <p class="text-base font-bold text-text-light">{{ pedido.paymentId }}</p>
+                </div>
+                <span
+                  [ngClass]="{
+                    'bg-green-100 text-green-800': pedido.status === 'approved',
+                    'bg-yellow-100 text-yellow-800': pedido.status === 'pending',
+                    'bg-red-100 text-red-800': pedido.status === 'rejected' || pedido.status === 'cancelled'
+                  }"
+                  class="px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap ml-2">
+                  {{ pedido.status }}
+                </span>
+              </div>
+
+              <!-- Body do Card -->
+              <div class="space-y-3 border-t border-gray-200 pt-3">
+                <!-- Email -->
+                <div>
+                  <p class="text-xs text-text-muted-light font-semibold mb-1">EMAIL</p>
+                  <p class="text-sm text-text-light break-all">{{ pedido.payerEmail }}</p>
+                </div>
+
+                <!-- Valor e Data -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div>
+                    <p class="text-xs text-text-muted-light font-semibold mb-1">VALOR</p>
+                    <p class="text-base font-bold text-text-light">{{ pedido.transaction_amount | currencyformat }}</p>
+                  </div>
+                  <div>
+                    <p class="text-xs text-text-muted-light font-semibold mb-1">DATA</p>
+                    <p class="text-sm text-text-light">{{ pedido.createdAt | firestoreDate: 'dd/MM/yyyy' }}</p>
+                  </div>
+                </div>
+
+                <!-- Botão de Ação -->
+                <button
+                  (click)="verDetalhes(pedido.paymentId)"
+                  class="w-full bg-cyan-500 text-white py-2 rounded font-semibold hover:bg-cyan-600 transition mt-2">
+                  Ver Detalhes
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+        
+        <!-- Paginação -->
+        @if (totalPaginas > 1) {
+          <div class="flex flex-col md:flex-row justify-between items-center mt-6 gap-4">
+            <div class="text-xs md:text-sm text-text-muted-light text-center md:text-left">
+              Mostrando {{ (paginaAtual - 1) * itensPorPagina + 1 }} a {{ Math.min(paginaAtual * itensPorPagina, totalPedidos) }} de {{ totalPedidos }} pedidos
+            </div>
+            
+            <div class="flex gap-1 md:gap-2 items-center flex-wrap justify-center">
+              <button
+                (click)="paginaAnterior()"
+                [disabled]="paginaAtual === 1"
+                class="p-2 md:px-3 md:py-2 rounded border border-gray-300 text-text-light disabled:opacity-50 disabled:cursor-not-allowed hover:bg-surface-light transition"
+                title="Página anterior">
+                <span class="material-icons text-sm">chevron_left</span>
+              </button>
+
+              @for (pagina of obterPaginasDisponiveis(); track pagina) {
+                <button
+                  (click)="irParaPagina(pagina)"
+                  [ngClass]="{
+                    'bg-cyan-500 text-white': paginaAtual === pagina,
+                    'border border-gray-300 text-text-light hover:bg-surface-light': paginaAtual !== pagina
+                  }"
+                  class="px-2 md:px-3 py-1 md:py-2 rounded transition text-sm md:text-base">
+                  {{ pagina }}
+                </button>
+              }
+
+              <button
+                (click)="proximaPagina()"
+                [disabled]="paginaAtual === totalPaginas"
+                class="p-2 md:px-3 md:py-2 rounded border border-gray-300 text-text-light disabled:opacity-50 disabled:cursor-not-allowed hover:bg-surface-light transition"
+                title="Próxima página">
+                <span class="material-icons text-sm">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        }
+      } @else {
+        <div class="text-center py-8 text-text-muted-light">
+          <p>Nenhum pedido encontrado</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

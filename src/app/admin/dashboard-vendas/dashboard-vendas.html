@@ -1,0 +1,210 @@
+<div class="w-full min-h-screen bg-surface-light p-4 md:p-6">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-3xl md:text-4xl font-bold text-light mb-2">Dashboard de Vendas</h1>
+    <p class="text-muted-light">Acompanhe suas métricas de vendas em tempo real</p>
+  </div>
+
+  <!-- Filtros -->
+  <div class="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6">
+    <h2 class="text-lg font-semibold text-light mb-4">Filtros</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+      <!-- Tipo de Filtro -->
+      <div>
+        <label class="block text-sm font-medium text-muted-light mb-2">Período</label>
+        <select 
+          [(ngModel)]="tipoFiltro" 
+          (change)="onTipoFiltroChange()"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        >
+          <option value="dia">Por Dia</option>
+          <option value="mes">Por Mês</option>
+          <option value="ano">Por Ano</option>
+        </select>
+      </div>
+
+      <!-- Ano -->
+      <div>
+        <label class="block text-sm font-medium text-muted-light mb-2">Ano</label>
+        <select 
+          [(ngModel)]="anoSelecionado" 
+          (change)="onFiltroChange()"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        >
+          <option *ngFor="let ano of anos" [value]="ano">{{ ano }}</option>
+        </select>
+      </div>
+
+      <!-- Mês (mostrado se não for por ano) -->
+      <div *ngIf="tipoFiltro !== 'ano'">
+        <label class="block text-sm font-medium text-muted-light mb-2">Mês</label>
+        <select 
+          [(ngModel)]="mesSelecionado" 
+          (change)="onFiltroChange()"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        >
+          <option *ngFor="let mes of meses" [value]="mes.valor">{{ mes.label }}</option>
+        </select>
+      </div>
+
+      <!-- Dia (mostrado apenas se for por dia) -->
+      <div *ngIf="tipoFiltro === 'dia'">
+        <label class="block text-sm font-medium text-muted-light mb-2">Dia</label>
+        <select 
+          [(ngModel)]="diaSelecionado" 
+          (change)="onFiltroChange()"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+        >
+          <option *ngFor="let dia of obterDiasMes()" [value]="dia">{{ dia }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="flex justify-center items-center py-12">
+    <app-loading [message]="'Carregando métricas...'"></app-loading>
+  </div>
+
+  <!-- Métricas -->
+  <div *ngIf="!loading && metricas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6">
+    
+    <!-- Card: Total de Vendas -->
+    <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-lg shadow-md p-4 md:p-6 border-l-4 border-cyan-500">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm md:text-base font-medium text-cyan-700 mb-2">Valor Total de Vendas</p>
+          <p class="text-2xl md:text-3xl font-bold text-cyan-900">{{ metricas.totalVendas | currencyformat }}</p>
+        </div>
+        <div class="text-4xl md:text-5xl text-cyan-300 opacity-50">
+          <i class="material-icons">attach_money</i>
+        </div>
+      </div>
+      <p class="text-xs md:text-sm text-cyan-600 mt-3 flex items-center gap-1">
+        <span class="text-green-600 font-semibold">↑</span>
+        <span *ngIf="tipoFiltro === 'dia'">Hoje</span>
+        <span *ngIf="tipoFiltro === 'mes'">Este mês</span>
+        <span *ngIf="tipoFiltro === 'ano'">Este ano</span>
+      </p>
+    </div>
+
+    <!-- Card: Pedidos Aprovados -->
+    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-md p-4 md:p-6 border-l-4 border-green-500">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm md:text-base font-medium text-green-700 mb-2">Pedidos Aprovados</p>
+          <p class="text-2xl md:text-3xl font-bold text-green-900">{{ metricas.quantidadePedidosAprovados }}</p>
+        </div>
+        <div class="text-4xl md:text-5xl text-green-300 opacity-50">
+          <i class="material-icons">check_circle</i>
+        </div>
+      </div>
+      <p class="text-xs md:text-sm text-green-600 mt-3">Pagamentos confirmados</p>
+    </div>
+
+    <!-- Card: Pedidos Pendentes -->
+    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg shadow-md p-4 md:p-6 border-l-4 border-yellow-500">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm md:text-base font-medium text-yellow-700 mb-2">Pedidos Pendentes</p>
+          <p class="text-2xl md:text-3xl font-bold text-yellow-900">{{ metricas.quantidadePedidosPendentes }}</p>
+        </div>
+        <div class="text-4xl md:text-5xl text-yellow-300 opacity-50">
+          <i class="material-icons">hourglass_empty</i>
+        </div>
+      </div>
+      <p class="text-xs md:text-sm text-yellow-600 mt-3">Aguardando pagamento</p>
+    </div>
+
+    <!-- Card: Total de Tickets -->
+    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md p-4 md:p-6 border-l-4 border-blue-500">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm md:text-base font-medium text-blue-700 mb-2">Tickets Vendidos</p>
+          <p class="text-2xl md:text-3xl font-bold text-blue-900">{{ metricas.quantidadeTickets }}</p>
+          <p class="text-xs text-blue-600 mt-2">
+            <span class="font-semibold text-green-700">{{ metricas.ticketsAtivos }}</span> ativos
+          </p>
+        </div>
+        <div class="text-4xl md:text-5xl text-blue-300 opacity-50">
+          <i class="material-icons">confirmation_number</i>
+        </div>
+      </div>
+      <p class="text-xs md:text-sm text-blue-600 mt-3">Total de ingressos</p>
+    </div>
+  </div>
+
+  <!-- Gráfico de Vendas por Mês (quando filtro é por ano) -->
+  <div *ngIf="!loading && tipoFiltro === 'ano'" class="bg-white rounded-lg shadow-md p-4 md:p-6">
+    <h2 class="text-lg font-semibold text-light mb-4">Vendas por Mês - {{ anoSelecionado }}</h2>
+    
+    <!-- Loading do Gráfico -->
+    <div *ngIf="loadingGrafico" class="flex justify-center items-center py-12">
+      <app-loading [message]="'Carregando gráfico...'"></app-loading>
+    </div>
+
+    <!-- Conteúdo do Gráfico -->
+    <div *ngIf="!loadingGrafico && vendasPorMes && vendasPorMes.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="space-y-3">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-300">
+              <th class="text-left py-2 px-2 font-semibold text-gray-700">Mês</th>
+              <th class="text-right py-2 px-2 font-semibold text-gray-700">Pedidos</th>
+              <th class="text-right py-2 px-2 font-semibold text-gray-700">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mes of vendasPorMes" class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="py-2 px-2 text-gray-800">{{ mes.mes }}</td>
+              <td class="text-right py-2 px-2 text-gray-800">{{ mes.pedidos }}</td>
+              <td class="text-right py-2 px-2 font-semibold text-cyan-700">{{ mes.valor | currencyformat }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Gráfico de barras simplificado -->
+      <div class="bg-gray-50 p-4 rounded-lg flex flex-col">
+        <div class="flex items-end justify-between gap-1 h-64 mb-2">
+          <div class="w-full flex items-end justify-between gap-1 h-full">
+            <div *ngFor="let mes of vendasPorMes" class="flex flex-col items-center gap-2 flex-1">
+              <div 
+                class="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t transition-all hover:from-cyan-600 hover:to-cyan-500"
+                [style.height.px]="(mes.valor / obterMaximoVendas() * 160) || 10"
+                [title]="mes.mes + ': R$ ' + mes.valor"
+              ></div>
+              <span class="text-xs font-semibold text-gray-700 text-center whitespace-nowrap">{{ mes.mes }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-300 pt-2 text-xs text-gray-500 text-center">
+          Vendas por mês (valores em R$)
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensagem de sem dados -->
+    <div *ngIf="!loadingGrafico && (!vendasPorMes || vendasPorMes.length === 0)" class="bg-gray-50 rounded-lg p-8 text-center">
+      <i class="material-icons text-gray-400 text-4xl mb-4">bar_chart</i>
+      <p class="text-gray-600 font-medium">Nenhum dado de vendas disponível para {{ anoSelecionado }}</p>
+    </div>
+
+    <!-- Total acumulado do ano -->
+    <div *ngIf="!loadingGrafico && vendasPorMes && vendasPorMes.length > 0" class="mt-6 p-4 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-lg border border-cyan-200">
+      <div class="flex justify-between items-center">
+        <span class="text-gray-700 font-semibold">Total no ano:</span>
+        <span class="text-2xl font-bold text-cyan-700">
+          {{ getTotalVendasAno() | currencyformat }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensagem quando não há dados -->
+  <div *ngIf="!loading && (!metricas || (metricas.totalVendas === 0 && metricas.quantidadeTickets === 0))" class="bg-gray-50 rounded-lg p-8 text-center">
+    <i class="material-icons text-gray-400 text-5xl mb-4">info</i>
+    <p class="text-gray-600 font-medium">Nenhum dado disponível para o período selecionado</p>
+  </div>
+</div>

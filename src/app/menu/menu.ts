@@ -44,20 +44,24 @@ export class Menu implements OnInit {
   setActiveMenuItemByRoute() {
     const currentRoute = this.router.url;
     
-    if (currentRoute === '/' || currentRoute.includes('/evento')) {
-      this.itemActive = 1; // Eventos
-    } else if (currentRoute.includes('/tickets')) {
-      this.itemActive = 2; // Meus Tickets
-    } else if (
+    if (
       currentRoute.includes('/perfil') ||
       currentRoute.includes('/hostess') ||
       currentRoute.includes('/sobre-nos') ||
       currentRoute.includes('/politica-privacidade') ||
       currentRoute.includes('/termos-servico') ||
       currentRoute.includes('/exclusao-dados') ||
-      currentRoute.includes('/contato')
+      currentRoute.includes('/contato') ||
+      currentRoute.includes('/tickets-admin') ||
+      currentRoute.includes('/scanner') ||
+      currentRoute.includes('/pedidos-compra') ||
+      currentRoute.includes('/dashboard-vendas')
     ) {
       this.itemActive = 3; // Mais
+    } else if (currentRoute === '/' || currentRoute.includes('/evento')) {
+      this.itemActive = 1; // Eventos
+    } else if (currentRoute.includes('/tickets')) {
+      this.itemActive = 2; // Meus Tickets
     } else {
       this.itemActive = 1; // Padrão para Eventos
     }

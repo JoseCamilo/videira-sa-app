@@ -57,7 +57,6 @@ export class DetalhesEvento implements OnInit, OnDestroy {
               total: ingresso.total || 0,
               count: ingresso.count || 0
             }));
-          console.log(this.evento.ingressos);
           this.carregando = false;
         },
         complete: () => this.carregando = false,

@@ -92,9 +92,8 @@
                         <p class="text-text-light text-base font-medium leading-normal">{{ingresso.precoUnitario |
                             currencyformat}}
                         </p>
-                        @if (ingresso.total && (ingresso.total-ingresso.count) < 100 && (ingresso.total-ingresso.count)>
-                            0) {
-                            <p class="text-text-muted-light text-xs font-normal leading-normal mt-1">Somente
+                        @if (ingresso.total && (ingresso.total-ingresso.count) < 100 && (ingresso.total-ingresso.count) > 0) {
+                            <p class="text-text-muted-light text-xs font-normal leading-normal mt-1">Restam somente
                                 {{ingresso.total-ingresso.count}} disponíveis!</p>
                             }
                     </div>

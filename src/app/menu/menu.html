@@ -37,9 +37,23 @@
         @if (isADM) {
         <li>
             <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition"
+                (click)="itemActive=3;openLink('/dashboard-vendas');isShownMoremodal=false">
+                <span class="material-icons gradient-text text-text-muted-light mr-4">analytics</span>
+                <span class="text-text-light font-medium">Dashboard de Vendas</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition"
                 (click)="itemActive=3;openLink('/hostess');isShownMoremodal=false">
                 <span class="material-icons gradient-text text-text-muted-light mr-4">admin_panel_settings</span>
-                <span class="text-text-light font-medium">Hostess (Admin)</span>
+                <span class="text-text-light font-medium">Hostess</span>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center p-3 rounded-lg hover:bg-gray-100 transition"
+                (click)="itemActive=3;openLink('/pedidos-compra');isShownMoremodal=false">
+                <span class="material-icons gradient-text text-text-muted-light mr-4">shopping_cart</span>
+                <span class="text-text-light font-medium">Pedidos de Compra</span>
             </a>
         </li>
         }
@@ -90,9 +104,19 @@
                 </a>
                 @if (isADM) {
                 <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"
+                    (click)="itemActive=3;openLink('/dashboard-vendas')">
+                    <span class="material-icons text-sm mr-2">analytics</span>
+                    <span class="text-sm">Dashboard de Vendas</span>
+                </a>
+                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"
                     (click)="itemActive=3;openLink('/hostess')">
                     <span class="material-icons text-sm mr-2">admin_panel_settings</span>
-                    <span class="text-sm">Hostess (Admin)</span>
+                    <span class="text-sm">Hostess</span>
+                </a>
+                <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"
+                    (click)="itemActive=3;openLink('/pedidos-compra')">
+                    <span class="material-icons text-sm mr-2">shopping_cart</span>
+                    <span class="text-sm">Pedidos de Compra</span>
                 </a>
                 }
                 <a class="flex items-center p-3 hover:bg-gray-100 transition text-text-light"

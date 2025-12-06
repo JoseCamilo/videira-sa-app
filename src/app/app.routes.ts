@@ -66,5 +66,35 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./sobre-nos/sobre-nos').then(c => c.SobreNos),
     },
+    {
+        path: 'pedidos-compra',
+        canActivate: [AuthGuardADM],
+        loadComponent: () =>
+            import('./admin/pedidos-compra/pedidos-compra').then(c => c.PedidosCompraComponent),
+    },
+    {
+        path: 'pedidos-compra/detalhes',
+        canActivate: [AuthGuardADM],
+        loadComponent: () =>
+            import('./admin/pedidos-compra/detalhes-pedido-compra/detalhes-pedido-compra').then(c => c.DetalhesPedidoCompraComponent),
+    },
+    {
+        path: 'tickets-admin',
+        canActivate: [AuthGuardADM],
+        loadComponent: () =>
+            import('./hostess/tickets-admin/tickets-admin').then(c => c.TicketsAdminComponent),
+    },
+    {
+        path: 'tickets-admin/detalhes',
+        canActivate: [AuthGuardADM],
+        loadComponent: () =>
+            import('./hostess/tickets-admin/detalhes-ticket').then(c => c.DetalhesTicketComponent),
+    },
+    {
+        path: 'dashboard-vendas',
+        canActivate: [AuthGuardADM],
+        loadComponent: () =>
+            import('./admin/dashboard-vendas/dashboard-vendas.component').then(c => c.DashboardVendasComponent),
+    },
     { path: '**', redirectTo: '/' }
 ];
