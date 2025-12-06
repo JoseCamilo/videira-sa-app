@@ -23,6 +23,10 @@ export interface Ticket {
   descricao: string;
   status: string;
   paymentStatus: string;
+  dataCriacao: any;
+  igreja: string;
+  funcao: string;
+  pastor: string;
 }
 
 @Component({

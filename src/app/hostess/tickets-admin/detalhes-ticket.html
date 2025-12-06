@@ -31,10 +31,6 @@
               <p class="text-text-light font-medium">{{ ticket.nome }}</p>
             </div>
             <div>
-              <p class="text-xs text-text-muted-light font-semibold mb-1">TÍTULO</p>
-              <p class="text-text-light font-medium">{{ ticket.titulo }}</p>
-            </div>
-            <div>
               <p class="text-xs text-text-muted-light font-semibold mb-1">DESCRIÇÃO</p>
               <p class="text-text-light font-medium">{{ ticket.descricao }}</p>
             </div>
@@ -63,7 +59,7 @@
             </div>
             <div>
               <p class="text-xs text-text-muted-light font-semibold mb-1">DATA DE COMPRA</p>
-              <p class="text-text-light font-medium">{{ ticket.date | firestoreDate : 'dd/MM/yyyy HH:mm:ss' }}</p>
+              <p class="text-text-light font-medium">{{ ticket.dataCriacao | firestoreDate : 'dd/MM/yyyy HH:mm:ss' }} </p>
             </div>
           </div>
         </div>
@@ -75,6 +71,10 @@
             <div>
               <p class="text-xs text-text-muted-light font-semibold mb-1">EVENTO ID</p>
               <p class="text-text-light font-medium break-all">{{ ticket.evento }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">TITULO</p>
+              <p class="text-text-light font-medium break-all">{{ ticket.titulo }}</p>
             </div>
             <div>
               <p class="text-xs text-text-muted-light font-semibold mb-1">LOCAL</p>
@@ -96,12 +96,24 @@
           <h2 class="text-lg font-semibold text-text-light mb-4">Participante</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">NOME</p>
+              <p class="text-text-light font-medium break-all">{{ ticket.nome }}</p>
+            </div>
+            <div>
               <p class="text-xs text-text-muted-light font-semibold mb-1">EMAIL</p>
               <p class="text-text-light font-medium break-all">{{ ticket.email }}</p>
             </div>
             <div>
-              <p class="text-xs text-text-muted-light font-semibold mb-1">TELEFONE</p>
-              <p class="text-text-light font-medium">{{ ticket.telefone }}</p>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">IGREJA</p>
+              <p class="text-text-light font-medium">{{ ticket.igreja }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">PASTOR</p>
+              <p class="text-text-light font-medium">{{ ticket.pastor }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-text-muted-light font-semibold mb-1">FUNÇÃO</p>
+              <p class="text-text-light font-medium">{{ ticket.funcao }}</p>
             </div>
           </div>
         </div>
