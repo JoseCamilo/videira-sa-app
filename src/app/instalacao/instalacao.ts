@@ -14,15 +14,15 @@ export class Instalacao implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // window.addEventListener('beforeinstallprompt', (e) => {
-    //   e.preventDefault();
-    //   this.deferredPrompt = e;
-    //   this.showInstallBanner = true;
-    // });
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      this.deferredPrompt = e;
+      this.showInstallBanner = true;
+    });
 
-    // setTimeout(() => {
-    //   this.closeBanner();
-    // }, 10000);
+    setTimeout(() => {
+      this.closeBanner();
+    }, 10000);
   }
 
   installApp() {

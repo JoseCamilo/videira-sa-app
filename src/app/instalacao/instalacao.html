@@ -1,16 +1,49 @@
 @if (showInstallBanner) {
-  <div class="pwa-banner-wrapper">
-    <div class="pwa-banner">
-      <div class="pwa-header">
-        <img src="/icons/icon-192x192.png" alt="Igreja Videira" class="pwa-icon">
-        <h3 class="pwa-title">Instalar Videira SA</h3>
+  <div class="fixed bottom-24 right-4 z-50 max-w-sm">
+    <div class="bg-gradient-theme text-white rounded-lg shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+      <!-- Conteúdo principal -->
+      <div class="p-4">
+        <div class="flex items-start gap-3">
+          <!-- Ícone -->
+          <div class="flex-shrink-0 mt-0.5">
+            <img src="/icons/icon-192x192.png" alt="Igreja Videira" class="w-8 h-8 rounded-lg">
+          </div>
+
+          <!-- Texto -->
+          <div class="flex-1">
+            <h3 class="font-semibold text-sm">Instalar Videira SA</h3>
+            <p class="text-xs opacity-80 mt-1">Instale agora e fique por dentro das novidades!</p>
+          </div>
+
+          <!-- Botão de fechar -->
+          <button
+            type="button"
+            (click)="closeBanner()"
+            class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
       </div>
-      <p class="pwa-message">
-        Instale agora e fique por dentro das novidades!
-      </p>
-      <div class="pwa-actions">
-        <button class="pwa-button" (click)="installApp()">Instalar</button>
-        <button class="pwa-button" (click)="closeBanner()">Fechar</button>
+
+      <!-- Barra de ações -->
+      <div class="px-4 py-3 flex gap-2 justify-end backdrop-blur-sm" style="background-color: rgba(0, 0, 0, 0.15)">
+        <button
+          type="button"
+          (click)="closeBanner()"
+          class="px-3 py-1 text-xs font-medium opacity-80 hover:opacity-100 transition-opacity"
+        >
+          Depois
+        </button>
+        <button
+          type="button"
+          (click)="installApp()"
+          class="px-3 py-1 text-xs font-semibold bg-white text-gray-900 rounded hover:bg-gray-100 transition-colors"
+        >
+          Instalar
+        </button>
       </div>
     </div>
   </div>

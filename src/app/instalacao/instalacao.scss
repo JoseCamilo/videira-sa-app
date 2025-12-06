@@ -1,77 +1,14 @@
-.pwa-banner-wrapper {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  max-width: 340px;
-  background: linear-gradient(135deg, hsla(187, 49%, 52%, 1) 20%, hsla(267, 36%, 39%, 1) 73%);
-  border-radius: 4px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  font-family: 'Segoe UI', sans-serif;
-  padding: 2px;
-  animation: slideUp 0.5s ease;
-  z-index: 1000;
-}
-
-.pwa-banner {
-  background-color: white;
-  padding: 16px;
-  border-radius: 4px;
-}
-
-.pwa-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.pwa-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-}
-
-.pwa-title {
-  font-size: 16px;
-  color: #604187;
-  margin: 0;
-}
-
-.pwa-message {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 12px;
-}
-
-.pwa-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-.pwa-button {
-  background-color: transparent;
-  border: none;
-  color: #604187;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.pwa-button:hover {
-  background-color: #f2e9ff;
-}
-
-@keyframes slideUp {
+@keyframes slideInFromBottom {
   from {
+    transform: translateY(100%);
     opacity: 0;
-    transform: translateY(30px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
+}
+
+.animate-in {
+  animation: slideInFromBottom 0.3s ease-out;
 }
