@@ -1,20 +1,23 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Menu } from "./menu/menu";
 import { NotificationComponent } from './notification/notification';
 import { Footer } from './footer/footer';
 import { filter } from 'rxjs';
 import { Analytics, logEvent } from '@angular/fire/analytics';
+import { UpdateNotificationComponent } from './update-notification/update-notification.component';
+import { ServiceWorkerUpdateService } from './services/service-worker-update.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Menu, NotificationComponent, Footer],
+  imports: [RouterOutlet, Menu, NotificationComponent, Footer, UpdateNotificationComponent],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   private router = inject(Router);
   private analytics = inject(Analytics);
+  private swUpdateService = inject(ServiceWorkerUpdateService);
 
   constructor() {
     this.setupAnalyticsRouterTracking();

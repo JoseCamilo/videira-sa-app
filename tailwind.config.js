@@ -17,6 +17,9 @@ module.exports = {
         'text-dark': '#E0E0E0',
         'text-muted-light': '#6c757d',
         'text-muted-dark': '#9A9A9A',
+        // Cores do gradiente principal
+        'gradient-cyan': 'hsla(187, 49%, 52%, 1)',
+        'gradient-purple': 'hsla(267, 36%, 39%, 1)',
       },
       fontFamily: {
         display: ['Poppins', 'sans-serif'],
@@ -24,6 +27,9 @@ module.exports = {
       },
       borderRadius: {
         DEFAULT: '1rem',
+      },
+      backgroundImage: {
+        'gradient-theme': 'linear-gradient(135deg, hsla(187, 49%, 52%, 1) 20%, hsla(267, 36%, 39%, 1) 73%)',
       },
     },
   },

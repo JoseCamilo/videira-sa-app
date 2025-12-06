@@ -53,7 +53,7 @@
                 }
               ],
               "outputHashing": "all",
-              "serviceWorker": false,
+              "serviceWorker": "ngsw-config.json",
               "outputPath": "dist/videira-sa-app",
               "optimization": true,
               "sourceMap": false,
