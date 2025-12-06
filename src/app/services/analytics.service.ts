@@ -116,18 +116,4 @@ export class AnalyticsService {
       console.error('Erro ao registrar search:', e);
     }
   }
-
-  /**
-   * Registra acesso ao dashboard
-   */
-  logDashboardAccess(dashboardName: string): void {
-    try {
-      logEvent(this.analytics, 'dashboard_access' as any, {
-        dashboard_name: dashboardName,
-        timestamp: new Date().toISOString()
-      });
-    } catch (e) {
-      console.error('Erro ao registrar dashboard_access:', e);
-    }
-  }
 }
