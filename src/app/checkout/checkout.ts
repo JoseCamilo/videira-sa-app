@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { environment } from '../../environments/environment';
 import { Loading } from "../loading/loading";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
+import { AnalyticsService } from '../services/analytics.service';
 
 declare global {
   interface Window {
@@ -52,6 +53,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
   loading: boolean = true;
   isApproved: boolean = false;
   isPending: boolean = false;
+  analyticsService = inject(AnalyticsService);
 
   ngOnInit() {
     const navigation = history.state;
@@ -148,6 +150,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
                 const tdsResource = response.three_ds_info?.external_resource_url || '';
                 const creq = response.three_ds_info?.creq || '';
                 this.loadStatusScreen(paymentId, tdsResource, creq);
+                this.analyticsService.logTicketPurchase(this.pedido.valorTotal || 0, this.pedido.produtos[0].titulo);
                 resolve({});
               })
               .catch((error) => {

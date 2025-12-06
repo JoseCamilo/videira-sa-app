@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Auth, signInWithPopup, GoogleAuthProvider, signOut, OAuthProvider, linkWithCredential, fetchSignInMethodsForEmail, FacebookAuthProvider } from '@angular/fire/auth';
 import { collection, collectionData, Firestore, query, where } from '@angular/fire/firestore';
 import { BehaviorSubject, catchError, map, Observable, of, take } from 'rxjs';
+import { AnalyticsService } from '../services/analytics.service';
 
 export interface User {
   id: string;
@@ -22,6 +23,7 @@ export class AuthService {
     foto: '',
     adm: false
   };
+  analyticsService = inject(AnalyticsService);
 
   constructor() {
     this.user.nome = this.getNome() || 'Desconectado';
@@ -57,6 +59,7 @@ export class AuthService {
 
         this.loginSubject.next(this.user);
         this.validUserADM();
+        this.analyticsService.logLogin('google');
 
       })
       .catch((error) => {
@@ -83,6 +86,7 @@ export class AuthService {
 
         this.loginSubject.next(this.user);
         this.validUserADM();
+        this.analyticsService.logLogin('facebook');
       });
   }
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { DashboardVendasService, VendasMetricas, VendasPorMes } from './dashboard-vendas.service';
 import { CurrencyFormatPipe } from '../../pipes/currency.pipe';
 import { Loading } from '../../loading/loading';
+import { AnalyticsService } from '../../services/analytics.service';
 
 @Component({
   selector: 'app-dashboard-vendas',
@@ -14,6 +15,7 @@ import { Loading } from '../../loading/loading';
 })
 export class DashboardVendasComponent implements OnInit {
   private dashboardService = inject(DashboardVendasService);
+  private analyticsService = inject(AnalyticsService);
 
   // Filtros
   anoSelecionado: number = new Date().getFullYear();
@@ -45,6 +47,7 @@ export class DashboardVendasComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.analyticsService.logDashboardAccess('dashboard-vendas');
     this.inicializarAnos();
     this.carregarDados();
   }
