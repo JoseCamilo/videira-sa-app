@@ -11,6 +11,9 @@ export interface User {
   email: string;
   foto: string;
   adm: boolean;
+  igreja: string;
+  funcao: string;
+  pastor: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -21,7 +24,10 @@ export class AuthService {
     nome: 'Desconectado',
     email: '',
     foto: '',
-    adm: false
+    adm: false,
+    igreja: '',
+    funcao: '',
+    pastor: ''
   };
   analyticsService = inject(AnalyticsService);
 
@@ -29,6 +35,9 @@ export class AuthService {
     this.user.nome = this.getNome() || 'Desconectado';
     this.user.email = this.getEmail() || '';
     this.user.foto = this.getFoto() || '';
+    this.user.igreja = this.getIgreja() || '';
+    this.user.funcao = this.getFuncao() || '';
+    this.user.pastor = this.getPastor() || '';
 
     this.loginSubject.next(this.user);
     this.validUserADM();
@@ -101,7 +110,10 @@ export class AuthService {
       nome: 'Desconectado',
       email: '',
       foto: '',
-      adm: false
+      adm: false,
+      igreja: '',
+      funcao: '',
+      pastor: ''
     };
 
     this.loginSubject.next(this.user);
@@ -116,6 +128,17 @@ export class AuthService {
   }
   getFoto() {
     return atob(localStorage.getItem(btoa('foto')) || '');
+  }
+  getIgreja() {
+    return this.user.igreja;
+  }
+
+  getFuncao() {
+    return this.user.funcao;
+  }
+
+  getPastor() {
+    return this.user.pastor;
   }
 
   getUserByEmail(email: string): Observable<User | null> {
@@ -140,6 +163,9 @@ export class AuthService {
           .subscribe({
             next: (item) => {
               this.user.adm = item?.adm || false;
+              this.user.igreja = item?.igreja || '';
+              this.user.funcao = item?.funcao || '';
+              this.user.pastor = item?.pastor || '';
               this.admSubject.next(this.user.adm);
               this.loginSubject.next(this.user);
               resolve(this.user.adm);

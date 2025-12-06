@@ -131,7 +131,12 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
                 first_name: this.nome.split(' ')[0] || '',
                 last_name: this.nome.split(' ').slice(1).join(' ') || '',
                 authentication_type: 'Gmail',
-                email: this.authService.getEmail() || '',
+                custom: {
+                  email: this.authService.getEmail() || '',
+                  igreja: this.authService.getIgreja() || '',
+                  funcao: this.authService.getFuncao() || '',
+                  pastor: this.authService.getPastor() || ''
+                }
               }
             }
           };
