@@ -4,10 +4,12 @@ import { Evento, EventoService } from '../evento.service';
 import { take } from 'rxjs';
 import { Loading } from '../../loading/loading';
 import { CurrencyFormatPipe } from "../../pipes/currency.pipe";
+import { PerfilDetalhesComponent } from '../../perfil/perfil-detalhes/perfil-detalhes';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-detalhes-evento',
-  imports: [Loading, CurrencyFormatPipe],
+  imports: [Loading, CurrencyFormatPipe, PerfilDetalhesComponent],
   templateUrl: './detalhes-evento.html',
   styleUrl: './detalhes-evento.scss',
 })
@@ -18,14 +20,18 @@ export class DetalhesEvento implements OnInit, OnDestroy {
   id = this.route.snapshot.paramMap.get('id') || '';
 
   eventoService = inject(EventoService);
+  authService = inject(AuthService);
 
   evento: Evento | any;
+  userEmail: string | undefined;
 
   carregando = true;
   loaded = false;
   verIngressos = false;
+  isValidPerfil = true;
 
   ngOnInit(): void {
+    this.userEmail = this.authService.getEmail();
     this.carregarEvento();
   }
 
@@ -73,5 +79,9 @@ export class DetalhesEvento implements OnInit, OnDestroy {
     this.router.navigate(['/checkout'], {
       state: { produtos: ingressosSelecionados }
     });
+  }
+
+  goPerfil() {
+    this.router.navigate(['/perfil']);
   }
 }

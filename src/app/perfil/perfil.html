@@ -29,7 +29,12 @@
     <div class="px-6 py-4 border-t">
 
         @if (user.email) {
+        
+        <!-- Componente de Detalhes do Perfil -->
+        <app-perfil-detalhes></app-perfil-detalhes>
 
+        <hr class="my-6">
+        
         <button
             class="w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
             (click)="logout()">

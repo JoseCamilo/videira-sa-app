@@ -92,7 +92,8 @@
                         <p class="text-text-light text-base font-medium leading-normal">{{ingresso.precoUnitario |
                             currencyformat}}
                         </p>
-                        @if (ingresso.total && (ingresso.total-ingresso.count) < 100 && (ingresso.total-ingresso.count) > 0) {
+                        @if (ingresso.total && (ingresso.total-ingresso.count) < 100 && (ingresso.total-ingresso.count)>
+                            0) {
                             <p class="text-text-muted-light text-xs font-normal leading-normal mt-1">Restam somente
                                 {{ingresso.total-ingresso.count}} disponíveis!</p>
                             }
@@ -124,13 +125,41 @@
                 <p class="text-lg font-bold text-text-light">{{ totalIngressos | currencyformat }}</p>
             </div>
         </div>
+
         @if (totalIngressos > 0) {
-        <div class="p-4 pt-4">
-            <button
-                class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
-                (click)="goCheckout()">
-                Ir para o Pagamento
-            </button>
+        <div class="border-t border-gray-200 mt-4">
+            @if (userEmail) {
+            <div class="p-4">
+
+                <!-- Componente de Detalhes do Perfil -->
+                <app-perfil-detalhes (isReady)="isValidPerfil = $event"></app-perfil-detalhes>
+
+                @if (!isValidPerfil) {
+                <p class="text-red-600 text-sm mt-2">Por favor, complete seus dados para prosseguir com a compra.</p>
+                }
+
+                <hr class="my-6">
+            </div>
+            } @else {
+            <div class="p-4">
+                <p class="text-text-muted-light text-sm mb-2">Para prosseguir com a compra, por favor faça login.</p>
+                <button
+                    class="flex items-center justify-center gap-2 w-full border border-gray-300 text-text-muted-light font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                    (click)="goPerfil()">
+                    <span class="material-icons"> login </span>
+                    <span class="text-gray-700 font-medium">Fazer Login</span>
+                </button>
+            </div>
+            }
+            @if (isValidPerfil) {
+            <div class="p-4">
+                <button
+                    class="w-full gradient-bg text-white font-bold py-3 px-4 rounded-lg hover:opacity-90 transition shadow-md"
+                    (click)="goCheckout()">
+                    Ir para o Pagamento
+                </button>
+            </div>
+            }
         </div>
         }
         }@else {

@@ -15,8 +15,9 @@ export class NotificationService {
   private notifications$ = new BehaviorSubject<Notification[]>([]);
   public notifications: Observable<Notification[]> = this.notifications$.asObservable();
   private notificationId = 0;
+  private readonly DEFAULT_DURATION = 7000;
 
-  show(message: string, type: 'success' | 'warning' | 'error' = 'success', duration: number = 8000) {
+  show(message: string, type: 'success' | 'warning' | 'error' = 'success', duration: number = this.DEFAULT_DURATION) {
     const id = `notification-${this.notificationId++}`;
     const notification: Notification = {
       id,
@@ -35,15 +36,15 @@ export class NotificationService {
     }
   }
 
-  success(message: string, duration?: number) {
+  success(message: string, duration: number = this.DEFAULT_DURATION) {
     this.show(message, 'success', duration);
   }
 
-  warning(message: string, duration?: number) {
+  warning(message: string, duration: number = this.DEFAULT_DURATION) {
     this.show(message, 'warning', duration);
   }
 
-  error(message: string, duration?: number) {
+  error(message: string, duration: number = this.DEFAULT_DURATION) {
     this.show(message, 'error', duration);
   }
 
