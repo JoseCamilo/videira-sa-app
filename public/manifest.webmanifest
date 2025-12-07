@@ -1,7 +1,7 @@
 {
-  "name": "Videira SA",
-  "short_name": "Videira SA",
-  "description": "Aplicativo da Igreja Videira SA",
+  "name": "Videira ABCM",
+  "short_name": "Videira ABCM",
+  "description": "Aplicativo da Igreja Videira ABCM",
   "theme_color": "#FFF",
   "background_color": "#FFF",
   "display": "standalone",
