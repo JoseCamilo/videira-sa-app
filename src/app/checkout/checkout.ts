@@ -48,6 +48,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
   };
   statusScreen: boolean = false;
   nome: string = '';
+  email: string = '';
 
   authService = inject(AuthService);
   loading: boolean = true;
@@ -60,7 +61,8 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
     if (navigation?.produtos) {
       this.pedido.produtos = navigation.produtos;
     }
-    this.nome = this.authService.getNome();
+    this.nome = this.authService.user.nome;
+    this.email = this.authService.user.email;
     this.pedido.valorTotal = Math.round(this.pedido.produtos.reduce((total, item) => total + item.precoUnitario * item.quantidade, 0) * 100) / 100;
   }
 
@@ -89,7 +91,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
         payer: {
           firstName: this.nome.split(' ')[0] || '',
           lastName: this.nome.split(' ').slice(1).join(' ') || '',
-          email: this.authService.getEmail() || '',
+          email: this.email || '',
         }
       },
       customization: {
@@ -132,7 +134,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
                 last_name: this.nome.split(' ').slice(1).join(' ') || '',
                 authentication_type: 'Gmail',
                 custom: {
-                  email: this.authService.getEmail() || '',
+                  email: this.email || '',
                   igreja: this.authService.getIgreja() || '',
                   funcao: this.authService.getFuncao() || '',
                   pastor: this.authService.getPastor() || ''
