@@ -58,6 +58,7 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
   loading: boolean = true;
   isApproved: boolean = false;
   isPending: boolean = false;
+  paymentBrickReady: boolean = false;
   analyticsService = inject(AnalyticsService);
 
   ngOnInit() {
@@ -65,16 +66,27 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
     if (navigation?.produtos) {
       this.pedido.produtos = navigation.produtos;
     }
+
+    this.authService.login$.subscribe(l => {
+      this.nome = l.nome;
+      this.email = l.email;
+      this.igreja = l.igreja;
+      this.funcao = l.funcao;
+      this.pastor = l.pastor;
+      this.onRenderedPaymentBrick();
+    });
+
     this.nome = this.authService.getNome();
     this.email = this.authService.getEmail();
     this.igreja = this.authService.getIgreja();
     this.funcao = this.authService.getFuncao();
     this.pastor = this.authService.getPastor();
+
     this.pedido.valorTotal = Math.round(this.pedido.produtos.reduce((total, item) => total + item.precoUnitario * item.quantidade, 0) * 100) / 100;
   }
 
   ngAfterViewInit() {
-    this.renderPaymentBrick();
+    this.onRenderedPaymentBrick();
   }
 
   ngOnDestroy() {
@@ -83,6 +95,13 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
     }
     if ((window as any).statusScreenBrickController) {
       (window as any).statusScreenBrickController.unmount();
+    }
+  }
+
+  onRenderedPaymentBrick() {
+    if (!this.paymentBrickReady && this.nome && this.email && this.igreja && this.funcao && this.pastor) {
+      this.renderPaymentBrick();
+      this.paymentBrickReady = true;
     }
   }
 
