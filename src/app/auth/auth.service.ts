@@ -21,7 +21,7 @@ export class AuthService {
 
   user: User = {
     id: '',
-    nome: 'Desconectado',
+    nome: '',
     email: '',
     foto: '',
     adm: false,
@@ -40,7 +40,7 @@ export class AuthService {
     this.user.pastor = this.getPastor() || '';
 
     this.loginSubject.next(this.user);
-    this.validUserADM();
+    this.validUserADM().then(() => this.loginSubject.next(this.user));
   }
 
   auth = inject(Auth);
@@ -163,6 +163,7 @@ export class AuthService {
           .subscribe({
             next: (item) => {
               this.user.adm = item?.adm || false;
+              this.user.nome = item?.nome || '';
               this.user.igreja = item?.igreja || '';
               this.user.funcao = item?.funcao || '';
               this.user.pastor = item?.pastor || '';
