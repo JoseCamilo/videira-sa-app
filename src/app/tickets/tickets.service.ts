@@ -183,7 +183,7 @@ export class TicketService {
                       <p>Acreditamos que Deus tem algo especial reservado para você neste evento. Que seja um tempo de profunda edificação e graça!</p>
 
                       <div class="footer">
-                        Igreja Videira Santo André
+                        Igreja Videira ABCM
                       </div>
                     </div>
                   </body>
