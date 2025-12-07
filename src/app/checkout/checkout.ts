@@ -61,8 +61,8 @@ export class Checkout implements OnInit, AfterViewInit, OnDestroy {
     if (navigation?.produtos) {
       this.pedido.produtos = navigation.produtos;
     }
-    this.nome = this.authService.user.nome;
-    this.email = this.authService.user.email;
+    this.nome = this.authService.getNome();
+    this.email = this.authService.getEmail();
     this.pedido.valorTotal = Math.round(this.pedido.produtos.reduce((total, item) => total + item.precoUnitario * item.quantidade, 0) * 100) / 100;
   }
 

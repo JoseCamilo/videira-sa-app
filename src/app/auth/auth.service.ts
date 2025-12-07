@@ -121,13 +121,13 @@ export class AuthService {
   }
 
   getNome() {
-    return atob(localStorage.getItem(btoa('nome')) || '');
+    return this.user.nome || atob(localStorage.getItem(btoa('nome')) || '');
   }
   getEmail() {
-    return atob(localStorage.getItem(btoa('email')) || '');
+    return this.user.email || atob(localStorage.getItem(btoa('email')) || '');
   }
   getFoto() {
-    return atob(localStorage.getItem(btoa('foto')) || '');
+    return this.user.foto || atob(localStorage.getItem(btoa('foto')) || '');
   }
   getIgreja() {
     return this.user.igreja;

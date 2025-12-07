@@ -77,7 +77,7 @@ export class Scanner implements OnInit, OnDestroy {
     this.ticketService.confirmTicketAcesso(this.scannedResult.id)
       .then(() => {
 
-        this.eventoService.confirmConvidadoPresenteInEvento(this.scannedResult.evento, this.authService.user.email, new Date().toLocaleDateString('pt-BR'))
+        this.eventoService.confirmConvidadoPresenteInEvento(this.scannedResult.evento, this.authService.getEmail(), new Date().toLocaleDateString('pt-BR'))
           .then(() => {
             this.isShowResultModal = false;
             this.confirmando = false;
