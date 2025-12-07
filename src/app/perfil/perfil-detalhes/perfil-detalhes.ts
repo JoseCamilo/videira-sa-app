@@ -171,6 +171,9 @@ export class PerfilDetalhesComponent implements OnInit {
       this.perfilAnterior = null;
       this.salvando = false;
       this.emitirStatusValidacao();
+      this.authService.setIgreja(this.perfil.igreja || '');
+      this.authService.setFuncao(this.perfil.funcao || '');
+      this.authService.setPastor(this.perfil.pastor || '');
     } catch (error) {
       console.error('Erro ao salvar perfil:', error);
       this.salvando = false;

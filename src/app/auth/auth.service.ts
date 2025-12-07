@@ -180,4 +180,16 @@ export class AuthService {
     });
   }
 
+  // Setters
+  setIgreja(igreja: string) {
+    this.user.igreja = igreja;
+  }
+  setFuncao(funcao: string) {
+    this.user.funcao = funcao;
+  }
+  setPastor(pastor: string) {
+    this.user.pastor = pastor;
+  }
+
+
 }
