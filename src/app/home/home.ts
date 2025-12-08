@@ -15,7 +15,7 @@ export class Home implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   nome = '';
-  foto = 'imagens/icon.png';
+  foto = '';
 
   ngOnInit() {
     this.nome = this.authService.getNome();

@@ -22,7 +22,7 @@ export class Menu implements OnInit {
   isADM = false;
 
   nome = '';
-  foto = 'imagens/icon.png';
+  foto = '';
 
   ngOnInit(): void {
     this.authService.adm$.subscribe(b => this.isADM = b);
