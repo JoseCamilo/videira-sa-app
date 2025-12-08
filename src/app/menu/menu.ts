@@ -26,6 +26,10 @@ export class Menu implements OnInit {
 
   ngOnInit(): void {
     this.authService.adm$.subscribe(b => this.isADM = b);
+    this.authService.login$.subscribe(l => {
+      this.nome = l.nome;
+      this.foto = l.foto;
+    });
     this.authService.validUserADM();
     this.nome = this.authService.getNome();
     this.foto = this.authService.getFoto();

@@ -18,6 +18,10 @@ export class Home implements OnInit {
   foto = '';
 
   ngOnInit() {
+    this.authService.login$.subscribe(l => {
+      this.nome = l.nome;
+      this.foto = l.foto;
+    });
     this.nome = this.authService.getNome();
     this.foto = this.authService.getFoto();
   }
